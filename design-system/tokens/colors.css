@@ -1,0 +1,42 @@
+/* Color tokens - generates Tailwind utilities */
+@theme {
+  --color-primary-50: oklch(0.8026 0.0678 231.06);
+  --color-primary-100: oklch(0.7026 0.0678 231.06);
+  --color-primary-200: oklch(0.6026 0.0678 231.06);
+  --color-primary-300: oklch(0.5026 0.0678 231.06);
+  --color-primary-400: oklch(0.4026 0.0678 231.06);
+  --color-primary-500: oklch(0.3526 0.0678 231.06);
+  --color-primary-600: oklch(0.3026 0.0678 231.06);
+  --color-primary-700: oklch(0.2526 0.0678 231.06);
+  --color-primary-800: oklch(0.2026 0.0678 231.06);
+  --color-primary-900: oklch(0.1526 0.0678 231.06);
+  --color-primary-950: oklch(0.1026 0.0678 231.06);
+
+  --color-neutral-50: var(--color-slate-50);
+  --color-neutral-100: var(--color-slate-100);
+  --color-neutral-200: var(--color-slate-200);
+  --color-neutral-300: var(--color-slate-300);
+  --color-neutral-400: var(--color-slate-400);
+  --color-neutral-500: var(--color-slate-500);
+  --color-neutral-600: var(--color-slate-600);
+  --color-neutral-700: var(--color-slate-700);
+  --color-neutral-800: var(--color-slate-800);
+  --color-neutral-900: var(--color-slate-900);
+  --color-neutral-950: var(--color-slate-950);
+
+  --color-success-50: var(--color-green-50);
+  --color-success-100: var(--color-green-100);
+  --color-success-600: var(--color-green-600);
+  --color-success-700: var(--color-green-700);
+  --color-success-800: var(--color-green-800);
+  --color-success-900: var(--color-green-900);
+
+  --color-warning-50: var(--color-orange-50);
+  --color-warning-100: var(--color-orange-100);
+  --color-warning-900: var(--color-orange-900);
+
+  --color-error-50: var(--color-red-50);
+  --color-error-100: var(--color-red-100);
+  --color-error-600: var(--color-red-600);
+  --color-error-900: var(--color-red-900);
+}

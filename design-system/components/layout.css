@@ -1,0 +1,93 @@
+/* ============================================
+   LAYOUT COMPONENTS
+   ============================================ */
+@layer components {
+  /* Container - uses Tailwind's responsive container with padding */
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg {
+    @apply container px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Size variants override max-width */
+  .container-sm {
+    @apply max-w-2xl;
+  }
+
+  .container-md {
+    @apply max-w-4xl;
+  }
+
+  .container-lg {
+    @apply max-w-6xl;
+  }
+
+  /* Section - vertical spacing wrapper */
+  .section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .section-sm {
+    @apply py-12 sm:py-16;
+  }
+
+  .section-lg {
+    @apply py-20 sm:py-24 lg:py-32;
+  }
+
+  /* Typography */
+  .title-hero {
+    @apply text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-neutral-950 mb-6 font-serif;
+  }
+
+  .title-section {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-neutral-950 mb-4 font-serif;
+  }
+
+  .title-subsection {
+    @apply text-2xl sm:text-3xl font-bold text-neutral-950 mb-3 font-serif;
+  }
+
+  .subtitle {
+    @apply text-xs sm:text-sm uppercase tracking-wider font-medium text-primary-500 mb-2 font-sans;
+  }
+
+  .text-body {
+    @apply text-base sm:text-lg leading-relaxed text-neutral-600 mb-4 font-sans;
+  }
+
+  /* Footer Typography */
+  .footer-brand {
+    @apply text-xl sm:text-2xl font-bold text-primary-500 mb-3 font-serif;
+  }
+
+  .footer-title {
+    @apply text-xl sm:text-2xl font-bold text-neutral-950 mb-3 font-serif;
+  }
+
+  .footer-text {
+    @apply text-sm sm:text-base leading-relaxed text-neutral-600 font-sans;
+  }
+
+  .footer-link {
+    @apply text-sm sm:text-base leading-relaxed text-neutral-600 hover:text-neutral-950 transition-colors font-sans;
+  }
+
+  .footer-icon {
+    @apply text-neutral-600 hover:text-neutral-950 transition-colors;
+  }
+
+  /* Borders */
+  .border-default {
+    @apply border border-neutral-300;
+  }
+
+  .border-subtle {
+    @apply border border-neutral-200;
+  }
+
+  .border-strong {
+    @apply border border-neutral-400;
+  }
+}
