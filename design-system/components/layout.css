@@ -7,7 +7,7 @@
   .container-sm,
   .container-md,
   .container-lg {
-    @apply container px-4 sm:px-6 lg:px-8;
+    @apply container px-4 sm:px-6 lg:px-8 mx-auto;
   }
 
   /* Size variants override max-width */

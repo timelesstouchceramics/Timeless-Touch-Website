@@ -46,7 +46,7 @@ export default function QuickViewModal({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <AspectRatio ratio={1} className="relative overflow-hidden rounded-md">
             <Image
-              src={product.image}
+              src={product.images[0]}
               alt={product.name}
               fill
               className="object-cover"

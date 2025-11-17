@@ -19,8 +19,8 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="bg-primary-500 border-t border-neutral-800 border-b border-neutral-50">
-      <div className="container">
+    <nav className="bg-primary-500 border-t border-neutral-500 border-b">
+      <div className="container mx-auto">
         <div className="flex items-center justify-between py-4">
           <Logo variant="light" />
 

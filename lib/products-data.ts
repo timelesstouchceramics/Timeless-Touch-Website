@@ -9,8 +9,11 @@ export const products: Product[] = [
     finish: "polished",
     price: 10,
     unit: "sqft",
-    image:
+    images: [
       "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
+      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
+      "/images/sansam-mobile-slider2.jpg",
+    ],
   },
   {
     id: 2,
@@ -20,7 +23,11 @@ export const products: Product[] = [
     finish: "polished",
     price: 10,
     unit: "sqft",
-    image: "/images/lava-blue.jpg",
+    images: [
+      "/images/lava-blue.jpg",
+      "/images/slider-lava-blue.jpg",
+      "/images/Prong-768x1024.webp",
+    ],
   },
   {
     id: 3,
@@ -30,7 +37,11 @@ export const products: Product[] = [
     finish: "honed",
     price: 10,
     unit: "sqft",
-    image: "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
+    images: [
+      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
+      "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
+      "/images/cottage-tile.jpg",
+    ],
   },
   {
     id: 4,
@@ -40,7 +51,11 @@ export const products: Product[] = [
     finish: "polished",
     price: 10,
     unit: "sqft",
-    image: "/images/slider-lava-blue.jpg",
+    images: [
+      "/images/slider-lava-blue.jpg",
+      "/images/lava-blue.jpg",
+      "/images/concept-light-gray-.jpg",
+    ],
   },
   {
     id: 5,
@@ -50,7 +65,11 @@ export const products: Product[] = [
     finish: "polished",
     price: 10,
     unit: "sqft",
-    image: "/images/sansam-mobile-slider.jpg",
+    images: [
+      "/images/sansam-mobile-slider.jpg",
+      "/images/sansam-mobile-slider2.jpg",
+      "/images/cottage-tile.jpg",
+    ],
   },
   {
     id: 6,
@@ -60,7 +79,11 @@ export const products: Product[] = [
     finish: "leather",
     price: 20,
     unit: "sqft",
-    image: "/images/Prong-768x1024.webp",
+    images: [
+      "/images/Prong-768x1024.webp",
+      "/images/lava-blue.jpg",
+      "/images/slider-lava-blue.jpg",
+    ],
   },
   {
     id: 7,
@@ -70,7 +93,11 @@ export const products: Product[] = [
     finish: "matte",
     price: 30,
     unit: "sqft",
-    image: "/images/concept-light-gray-.jpg",
+    images: [
+      "/images/concept-light-gray-.jpg",
+      "/images/cottage.jpg",
+      "/images/cottage-tile.jpg",
+    ],
   },
   {
     id: 8,
@@ -80,7 +107,11 @@ export const products: Product[] = [
     finish: "honed",
     price: 30,
     unit: "sqft",
-    image: "/images/cottage-tile.jpg",
+    images: [
+      "/images/cottage-tile.jpg",
+      "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
+      "/images/sansam-mobile-slider.jpg",
+    ],
   },
   {
     id: 9,
@@ -90,7 +121,11 @@ export const products: Product[] = [
     finish: "textured",
     price: 30,
     unit: "sqft",
-    image: "/images/cottage.jpg",
+    images: [
+      "/images/cottage.jpg",
+      "/images/cottage-tile.jpg",
+      "/images/concept-light-gray-.jpg",
+    ],
   },
   {
     id: 10,
@@ -100,7 +135,11 @@ export const products: Product[] = [
     finish: "polished",
     price: 30,
     unit: "sqft",
-    image: "/images/sansam-mobile-slider2.jpg",
+    images: [
+      "/images/sansam-mobile-slider2.jpg",
+      "/images/sansam-mobile-slider.jpg",
+      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
+    ],
   },
   {
     id: 11,
@@ -110,7 +149,11 @@ export const products: Product[] = [
     finish: "polished",
     price: 30,
     unit: "sqft",
-    image: "/images/lava-blue.jpg",
+    images: [
+      "/images/lava-blue.jpg",
+      "/images/Prong-768x1024.webp",
+      "/images/slider-lava-blue.jpg",
+    ],
   },
   {
     id: 12,
@@ -120,7 +163,11 @@ export const products: Product[] = [
     finish: "matte",
     price: 40,
     unit: "sqft",
-    image: "/images/concept-light-gray-.jpg",
+    images: [
+      "/images/concept-light-gray-.jpg",
+      "/images/cottage.jpg",
+      "/images/Prong-768x1024.webp",
+    ],
   },
 ];
 

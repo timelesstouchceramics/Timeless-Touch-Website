@@ -9,8 +9,6 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Award, Users, Globe, Heart } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 
 export default function About() {
   const values = [
@@ -55,8 +53,6 @@ export default function About() {
 
   return (
     <div className="bg-neutral-50">
-      <Navigation />
-
       <section className="section bg-neutral-200">
         <div className="container text-center">
           <h1 className="title-hero">About Timeless Touch Ceramics</h1>
@@ -152,8 +148,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }

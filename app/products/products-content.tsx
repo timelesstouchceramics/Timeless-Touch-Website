@@ -20,8 +20,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { SlidersHorizontal } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 import ProductCardSkeleton from "@/components/ProductCardSkeleton";
 import QuickViewModal from "@/components/QuickViewModal";
@@ -165,14 +163,6 @@ export default function ProductsContent() {
     setSelectedFinishes([]);
   };
 
-  const removeCategory = (category: string) => {
-    setSelectedCategories((prev) => prev.filter((c) => c !== category));
-  };
-
-  const removeFinish = (finish: string) => {
-    setSelectedFinishes((prev) => prev.filter((f) => f !== finish));
-  };
-
   const goToPage = (page: number) => {
     startTransition(() => {
       setCurrentPage(page);
@@ -191,8 +181,6 @@ export default function ProductsContent() {
 
   return (
     <div className="bg-neutral-50">
-      <Navigation />
-
       <section className="section">
         <div className="container">
           <Breadcrumb items={[{ label: "Products" }]} />
@@ -207,8 +195,8 @@ export default function ProductsContent() {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Desktop Filter Sidebar */}
             <div className="hidden lg:block">
-              <Card className="sticky top-24 border-0">
-                <CardContent>
+              <Card className="border-0">
+                <CardContent className="p-0 pr-6">
                   <CardTitle className="mb-4">Filters</CardTitle>
                   <FilterControls
                     selectedCategories={selectedCategories}
@@ -349,8 +337,6 @@ export default function ProductsContent() {
         open={quickViewOpen}
         onOpenChange={setQuickViewOpen}
       />
-
-      <Footer />
     </div>
   );
 }

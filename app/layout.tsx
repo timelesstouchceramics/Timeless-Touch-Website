@@ -1,9 +1,11 @@
+import Navigation from "@/components/Navigation";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Metadata } from "next";
 
 import { Inter, Krub } from "next/font/google";
+import Footer from "@/components/Footer";
 
 const fontPrimary = Inter({
   subsets: ["latin"],
@@ -30,8 +32,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased ${fontPrimary.variable} ${fontSecondary.variable}`}>
+      <body
+        className={`antialiased ${fontPrimary.variable} ${fontSecondary.variable}`}
+      >
+        <Navigation />
         <Providers>{children}</Providers>
+        <Footer />
         <ScrollToTop />
       </body>
     </html>

@@ -6,7 +6,7 @@ export interface Product {
   finish: string;
   price: number;
   unit: string;
-  image: string;
+  images: string[];
 }
 
 export type SortOption = "name" | "name-desc" | "newest" | "price-asc" | "price-desc";

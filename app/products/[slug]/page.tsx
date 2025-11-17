@@ -1,89 +1,54 @@
 "use client";
 
-import { useParams } from "next/navigation";
-import Link from "next/link";
+import { useState, useEffect } from "react";
+import { useParams, notFound } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardTitle,
-} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 import { MessageCircle } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import Breadcrumb from "@/components/Breadcrumb";
+import ProductCard from "@/components/products/ProductCard";
+import { products } from "@/lib/products-data";
+
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 export default function ProductDetail() {
   const params = useParams();
   const slug = params.slug as string;
+  const [api, setApi] = useState<CarouselApi>();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Mock product data - In production, fetch based on slug
-  const productImages = [
-    "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
-    "/images/lava-blue.jpg",
-    "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-    "/images/slider-lava-blue.jpg",
-  ];
+  const product = products.find((p) => p.slug === slug);
 
-  const product = {
-    slug: slug || "carrara-white-marble",
-    name: "Carrara White Marble",
-    category: "marble",
-    finish: "polished",
-    price: "$$$$",
-    description:
-      "Carrara White Marble is a timeless classic featuring soft white backgrounds with elegant grey veining. This premium natural stone brings sophistication and luxury to any space.",
-    specs: {
-      origin: "Carrara, Italy",
-      thickness: "2cm, 3cm",
-      size: "Various slabs and tiles",
-      finish: "Polished, Honed, Brushed",
-      application: "Indoor & Outdoor",
-    },
-    features: [
-      "Natural marble with unique veining patterns",
-      "Heat resistant and durable",
-      "Ideal for countertops, flooring, and walls",
-      "Professional installation recommended",
-    ],
-    images: productImages,
-  };
+  if (!product) {
+    notFound();
+  }
 
-  const similarProducts = [
-    {
-      slug: "calacatta-gold-marble",
-      name: "Calacatta Gold Marble",
-      category: "marble",
-      price: "$$$$",
-      image: "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-    },
-    {
-      slug: "statuario-marble",
-      name: "Statuario Marble",
-      category: "marble",
-      price: "$$$$",
-      image: "/images/sansam-mobile-slider2.jpg",
-    },
-    {
-      slug: "travertine-beige",
-      name: "Travertine Beige",
-      category: "marble",
-      price: "$$$",
-      image: "/images/cottage-tile.jpg",
-    },
-  ];
+  // Get similar products (same category, excluding current)
+  const similarProducts = products
+    .filter((p) => p.category === product.category && p.slug !== product.slug)
+    .slice(0, 3);
+
+  // Sync carousel state with thumbnail selection
+  useEffect(() => {
+    if (!api) return;
+
+    api.on("select", () => {
+      setCurrentImageIndex(api.selectedScrollSnap());
+    });
+  }, [api]);
 
   const handleWhatsAppContact = () => {
     const message = encodeURIComponent(
@@ -94,124 +59,169 @@ export default function ProductDetail() {
 
   return (
     <div className="bg-neutral-50">
-      <Navigation />
-
       <section className="section-sm">
         <div className="container">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/products">Products</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{product.name}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          <Breadcrumb
+            items={[
+              { label: "Products", href: "/products" },
+              { label: product.name },
+            ]}
+          />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            <div>
-              <AspectRatio ratio={1} className="relative overflow-hidden">
-                <Image
-                  src={product.images[0]}
-                  alt={product.name}
-                  fill
-                  className="object-cover"
-                />
-              </AspectRatio>
-              <div className="grid grid-cols-4 gap-3 mt-3">
-                {product.images.slice(1).map((img, index) => (
-                  <AspectRatio key={index} ratio={1} className="relative overflow-hidden">
-                    <Image
-                      src={img}
-                      alt={`${product.name} ${index + 2}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </AspectRatio>
+            <div className="space-y-4">
+              <Carousel
+                setApi={setApi}
+                className="w-full"
+                opts={{ loop: true }}
+              >
+                <CarouselContent>
+                  {product.images.map((image, index) => (
+                    <CarouselItem key={index}>
+                      <AspectRatio ratio={1} className="relative overflow-hidden rounded-lg">
+                        <Image
+                          src={image}
+                          alt={`${product.name} - Image ${index + 1}`}
+                          fill
+                          className="object-cover"
+                        />
+                      </AspectRatio>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="left-4" />
+                <CarouselNext className="right-4" />
+              </Carousel>
+
+              {/* Thumbnail navigation */}
+              <div className="grid grid-cols-4 gap-2">
+                {product.images.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => api?.scrollTo(index)}
+                    className={`relative overflow-hidden rounded-md transition-all ${
+                      currentImageIndex === index
+                        ? "ring-2 ring-primary-600"
+                        : "opacity-70 hover:opacity-100"
+                    }`}
+                  >
+                    <AspectRatio ratio={1}>
+                      <Image
+                        src={image}
+                        alt={`${product.name} thumbnail ${index + 1}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </AspectRatio>
+                  </button>
                 ))}
               </div>
             </div>
 
-            <div>
-              <h1 className="title-section">{product.name}</h1>
+            <div className="space-y-6">
+              <div>
+                <h1 className="title-section">{product.name}</h1>
+                <div className="flex gap-2 mt-2">
+                  <Badge variant="secondary">{capitalize(product.category)}</Badge>
+                  <Badge variant="secondary">{capitalize(product.finish)}</Badge>
+                </div>
+              </div>
+
+              <div>
+                <p className="text-2xl font-semibold text-neutral-950">
+                  AED {product.price}{" "}
+                  <span className="text-base font-normal text-neutral-600">
+                    / {product.unit}
+                  </span>
+                </p>
+              </div>
+
               <p className="text-body">
-                {product.category} • {product.finish} finish
-              </p>
-              <div>{product.price}</div>
-              <p className="text-body">{product.description}</p>
-              <Button onClick={handleWhatsAppContact}>
-                <MessageCircle />
-                Contact Us to Buy
-              </Button>
-              <p className="text-body">
-                Get a personalized quote and expert advice
+                Premium quality {product.category} with {product.finish} finish.
+                Perfect for interior and exterior applications.
               </p>
 
-              <Tabs defaultValue="specs">
+              <div className="space-y-3">
+                <Button onClick={handleWhatsAppContact} size="lg" className="w-full sm:w-auto">
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  Contact Us to Buy
+                </Button>
+                <p className="text-sm text-neutral-600">
+                  Get a personalized quote and expert advice
+                </p>
+              </div>
+
+              <Separator />
+
+              <Tabs defaultValue="features">
                 <TabsList>
-                  <TabsTrigger value="specs">Specifications</TabsTrigger>
                   <TabsTrigger value="features">Features</TabsTrigger>
+                  <TabsTrigger value="specs">Specifications</TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="specs">
+                <TabsContent value="specs" className="mt-4">
                   <Table>
                     <TableBody>
-                      {Object.entries(product.specs).map(([key, value]) => (
-                        <TableRow key={key}>
-                          <TableCell>{key}</TableCell>
-                          <TableCell>{value}</TableCell>
-                        </TableRow>
-                      ))}
+                      <TableRow>
+                        <TableCell className="font-medium">Category</TableCell>
+                        <TableCell>{capitalize(product.category)}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">Finish</TableCell>
+                        <TableCell>{capitalize(product.finish)}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">Price</TableCell>
+                        <TableCell>AED {product.price} / {product.unit}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">Application</TableCell>
+                        <TableCell>Indoor & Outdoor</TableCell>
+                      </TableRow>
                     </TableBody>
                   </Table>
                 </TabsContent>
 
-                <TabsContent value="features">
+                <TabsContent value="features" className="mt-4">
                   <ul className="flex flex-col gap-3">
-                    {product.features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <span>•</span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
+                    <li className="flex items-start gap-2">
+                      <span>•</span>
+                      <span>Natural {product.category} with unique patterns</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span>•</span>
+                      <span>Heat resistant and durable</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span>•</span>
+                      <span>Ideal for countertops, flooring, and walls</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span>•</span>
+                      <span>Professional installation recommended</span>
+                    </li>
                   </ul>
                 </TabsContent>
               </Tabs>
             </div>
           </div>
 
-          <div>
-            <h2 className="title-subsection mb-8">Similar Products</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {similarProducts.map((item) => (
-                <Link key={item.slug} href={`/products/${item.slug}`}>
-                  <Card>
-                    <AspectRatio ratio={1} className="relative overflow-hidden">
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </AspectRatio>
-                    <CardContent>
-                      <CardTitle>{item.name}</CardTitle>
-                      <CardDescription>{item.category}</CardDescription>
-                      <p>{item.price}</p>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
+          {similarProducts.length > 0 && (
+            <div>
+              <h2 className="title-subsection mb-8">Similar Products</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {similarProducts.map((item) => (
+                  <ProductCard
+                    key={item.slug}
+                    product={item}
+                    showActions={false}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }
