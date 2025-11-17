@@ -4,15 +4,15 @@ import ScrollToTop from "@/components/ScrollToTop";
 
 import { Inter, Krub } from "next/font/google";
 
-const inter = Inter({
+const fontPrimary = Inter({
   subsets: ["latin"],
   weight: ["400", "600"],
-  variable: "--font-inter",
+  variable: "--font-primary",
 });
 
-const krub = Krub({
+const fontSecondary = Krub({
   subsets: ["latin"],
-  variable: "--font-krub",
+  variable: "--font-secondary",
   weight: ["500", "700"],
 });
 
@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased ${inter.variable} ${krub.variable}`}>
+      <body className={`antialiased ${fontPrimary.variable} ${fontSecondary.variable}`}>
         <Providers>{children}</Providers>
         <ScrollToTop />
       </body>
