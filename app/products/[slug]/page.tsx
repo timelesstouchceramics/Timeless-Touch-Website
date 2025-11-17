@@ -27,9 +27,9 @@ import Footer from "@/components/Footer";
 
 export default function ProductDetail() {
   const params = useParams();
-  const id = params.id as string;
+  const slug = params.slug as string;
 
-  // Mock product data
+  // Mock product data - In production, fetch based on slug
   const productImages = [
     "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
     "/images/lava-blue.jpg",
@@ -38,7 +38,7 @@ export default function ProductDetail() {
   ];
 
   const product = {
-    id: parseInt(id || "1"),
+    slug: slug || "carrara-white-marble",
     name: "Carrara White Marble",
     category: "marble",
     finish: "polished",
@@ -63,21 +63,21 @@ export default function ProductDetail() {
 
   const similarProducts = [
     {
-      id: 3,
+      slug: "calacatta-gold-marble",
       name: "Calacatta Gold Marble",
       category: "marble",
       price: "$$$$",
       image: "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
     },
     {
-      id: 10,
+      slug: "statuario-marble",
       name: "Statuario Marble",
       category: "marble",
       price: "$$$$",
       image: "/images/sansam-mobile-slider2.jpg",
     },
     {
-      id: 8,
+      slug: "travertine-beige",
       name: "Travertine Beige",
       category: "marble",
       price: "$$$",
@@ -188,7 +188,7 @@ export default function ProductDetail() {
             <h2 className="title-subsection mb-8">Similar Products</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {similarProducts.map((item) => (
-                <Link key={item.id} href={`/products/${item.id}`}>
+                <Link key={item.slug} href={`/products/${item.slug}`}>
                   <Card>
                     <AspectRatio ratio={1} className="relative overflow-hidden">
                       <Image

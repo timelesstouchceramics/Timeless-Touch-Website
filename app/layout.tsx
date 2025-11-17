@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import ScrollToTop from "@/components/ScrollToTop";
+import { Metadata } from "next";
 
 import { Inter, Krub } from "next/font/google";
 
@@ -15,6 +16,12 @@ const fontSecondary = Krub({
   variable: "--font-secondary",
   weight: ["500", "700"],
 });
+
+export const metadata: Metadata = {
+  title: "Timeless Touch Ceramics - Premium Tiles and Natural Stones",
+  description:
+    "Premium tiles and natural stones for spaces that inspire. Quality craftsmanship since 2023.",
+};
 
 export default function RootLayout({
   children,
