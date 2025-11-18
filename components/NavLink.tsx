@@ -6,6 +6,8 @@ interface NavLinkProps {
   children: ReactNode;
   variant?: "desktop" | "mobile";
   onClick?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
   className?: string;
 }
 
@@ -14,6 +16,8 @@ const NavLink = ({
   children,
   variant = "desktop",
   onClick,
+  onMouseEnter,
+  onMouseLeave,
   className = "",
 }: NavLinkProps) => {
   const baseStyles =
@@ -25,6 +29,8 @@ const NavLink = ({
     <Link
       href={href}
       onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       className={`${baseStyles} ${className}`}
     >
       {children}

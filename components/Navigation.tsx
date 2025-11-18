@@ -1,21 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, Search } from "lucide-react";
+import { Menu, Search, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SearchDialog } from "@/components/ui/search-dialog";
 import Logo from "@/components/Logo";
 import NavLink from "@/components/NavLink";
 import { usePathname } from "next/navigation";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
 import {
   Sheet,
   SheetContent,
@@ -27,6 +20,10 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const navLinksRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +32,58 @@ const Navigation = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node) &&
+        navLinksRef.current &&
+        !navLinksRef.current.contains(event.target as Node)
+      ) {
+        setIsProductsOpen(false);
+      }
+    };
+
+    if (isProductsOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [isProductsOpen]);
+
+  const handleProductsMouseEnter = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setIsProductsOpen(true);
+  };
+
+  const handleProductsMouseLeave = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsProductsOpen(false);
+    }, 150); // Small delay to allow moving to dropdown
+  };
+
+  const handleDropdownMouseEnter = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  };
+
+  const handleDropdownMouseLeave = () => {
+    setIsProductsOpen(false);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
   }, []);
 
   const path = usePathname();
@@ -81,60 +130,76 @@ const Navigation = () => {
         <div className="flex items-center justify-between py-4">
           <Logo variant="light" />
 
-          <div className="hidden md:flex items-center gap-6 flex-1 justify-center">
+          <div
+            className="hidden md:flex items-center gap-6 flex-1 justify-center relative"
+            ref={navLinksRef}
+          >
             <NavLink href="/">HOME</NavLink>
-
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger>PRODUCTS</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="w-[600px] p-6">
-                      <div className="grid grid-cols-2 gap-4">
-                        {productCategories.map((category) => (
-                          <Link
-                            key={category.slug}
-                            href={`/products?category=${category.slug}`}
-                            className="group relative block rounded-lg overflow-hidden border border-neutral-200 hover:border-neutral-300 transition-all hover:shadow-lg"
-                          >
-                            <div className="relative h-32 w-full">
-                              <Image
-                                src={category.image}
-                                alt={category.name}
-                                fill
-                                className="object-cover transition-transform duration-300 group-hover:scale-105"
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                            </div>
-                            <div className="p-4 bg-neutral-50">
-                              <h3 className="font-semibold text-neutral-900 mb-1">
-                                {category.name}
-                              </h3>
-                              <p className="text-xs text-neutral-600">
-                                {category.description}
-                              </p>
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
-                      <div className="mt-4 pt-4 border-t border-neutral-200">
-                        <Link
-                          href="/products"
-                          className="text-sm font-medium text-neutral-900 hover:text-neutral-700 transition-colors"
-                        >
-                          View All Products →
-                        </Link>
-                      </div>
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
+            <NavLink
+              href="/products"
+              className="flex items-center gap-1"
+              onMouseEnter={handleProductsMouseEnter}
+              onMouseLeave={handleProductsMouseLeave}
+            >
+              <ChevronDown
+                className={`h-3 w-3 transition-transform duration-200 ${
+                  isProductsOpen ? "rotate-180" : ""
+                }`}
+              />
+              PRODUCTS
+            </NavLink>
 
             <NavLink href="/projects">PROJECTS</NavLink>
 
             <NavLink href="/about">ABOUT US</NavLink>
             <NavLink href="/contact">CONTACT US</NavLink>
+
+            {isProductsOpen && (
+              <div
+                ref={dropdownRef}
+                onMouseEnter={handleDropdownMouseEnter}
+                onMouseLeave={handleDropdownMouseLeave}
+                className="absolute left-1/2 top-full -translate-x-1/2 mt-3 w-[600px] p-6 bg-neutral-50 border border-neutral-300 rounded-md shadow-lg z-50 animate-in fade-in-0 zoom-in-95 duration-200"
+              >
+                <div className="grid grid-cols-2 gap-4">
+                  {productCategories.map((category) => (
+                    <Link
+                      key={category.slug}
+                      href={`/products?category=${category.slug}`}
+                      onClick={() => setIsProductsOpen(false)}
+                      className="group relative block rounded-lg overflow-hidden border border-neutral-200 transition-all hover:shadow-sm"
+                    >
+                      <div className="relative h-32 w-full">
+                        <Image
+                          src={category.image}
+                          alt={category.name}
+                          fill
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-transform duration-300 hover:scale-105" />
+                      </div>
+                      <div className="p-4 bg-neutral-50">
+                        <h3 className="font-semibold text-neutral-900 mb-1">
+                          {category.name}
+                        </h3>
+                        <p className="text-xs text-neutral-600">
+                          {category.description}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+                <Link
+                  href="/products"
+                  onClick={() => setIsProductsOpen(false)}
+                  className=""
+                >
+                  <div className="mt-8 p-3 rounded-lg flex justify-center bg-neutral-200/60 hover:bg-neutral-200/80 transition-all duration-200 ease-in-out text-sm font-medium text-neutral-900">
+                    View All Products →
+                  </div>
+                </Link>
+              </div>
+            )}
           </div>
 
           <div className="hidden md:flex items-center gap-6">
