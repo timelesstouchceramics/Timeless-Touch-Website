@@ -6,8 +6,8 @@ export default function CTA() {
   return (
     <section className="section">
       <div className="container">
-        <Card>
-          <CardContent>
+        <Card className="border-0">
+          <CardContent className="py-0">
             <div className="bg-primary-500 text-neutral-50 text-center p-12">
               <h2 className="title-section text-neutral-50">
                 Ready to Start Your Project?
@@ -31,4 +31,3 @@ export default function CTA() {
     </section>
   );
 }
-

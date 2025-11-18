@@ -1,7 +1,6 @@
 /* Color tokens - generates Tailwind utilities */
 
 @theme {
-
   --color-gold-50: oklch(0.966 0.011 54.55);
   --color-gold-100: oklch(0.925 0.026 54.57);
   --color-gold-200: oklch(0.849 0.06 56.1);
@@ -15,7 +14,7 @@
   --color-gold-950: oklch(0.19 0.025 60.16);
 
   --color-primary-50: var(--color-gold-50);
-  --color-primary-100:var(--color-gold-100);
+  --color-primary-100: var(--color-gold-100);
   --color-primary-200: var(--color-gold-200);
   --color-primary-300: var(--color-gold-300);
   --color-primary-400: var(--color-gold-400);
@@ -53,5 +52,4 @@
   --color-error-100: var(--color-red-100);
   --color-error-600: var(--color-red-600);
   --color-error-900: var(--color-red-900);
-
 }
