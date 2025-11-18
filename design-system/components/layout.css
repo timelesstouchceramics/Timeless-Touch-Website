@@ -38,40 +38,40 @@
 
   /* Typography */
   .title-hero {
-    @apply text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-neutral-950 mb-6 font-serif;
+    @apply text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-neutral-950 mb-6;
   }
 
   .title-section {
-    @apply text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-neutral-950 mb-4 font-serif;
+    @apply text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-neutral-950 mb-4;
   }
 
   .title-subsection {
-    @apply text-2xl sm:text-3xl font-bold text-neutral-950 mb-3 font-serif;
+    @apply text-2xl sm:text-3xl font-bold text-neutral-950 mb-3;
   }
 
   .subtitle {
-    @apply text-xs sm:text-sm uppercase tracking-wider font-medium text-primary-500 mb-2 font-sans;
+    @apply text-xs sm:text-sm uppercase tracking-wider font-medium text-primary-500 mb-2;
   }
 
   .text-body {
-    @apply text-base sm:text-lg leading-relaxed text-neutral-600 mb-4 font-sans;
+    @apply text-base sm:text-lg leading-relaxed text-neutral-600 mb-4;
   }
 
   /* Footer Typography */
   .footer-brand {
-    @apply text-xl sm:text-2xl font-bold text-primary-500 mb-3 font-serif;
+    @apply text-xl sm:text-2xl font-bold text-primary-500 mb-3;
   }
 
   .footer-title {
-    @apply text-xl sm:text-2xl font-bold text-neutral-950 mb-3 font-serif;
+    @apply text-xl sm:text-2xl font-bold text-neutral-950 mb-3;
   }
 
   .footer-text {
-    @apply text-sm sm:text-base leading-relaxed text-neutral-600 font-sans;
+    @apply text-sm sm:text-base leading-relaxed text-neutral-600;
   }
 
   .footer-link {
-    @apply text-sm sm:text-base leading-relaxed text-neutral-600 hover:text-neutral-950 transition-colors font-sans;
+    @apply text-sm sm:text-base leading-relaxed text-neutral-600 hover:text-neutral-950 transition-colors;
   }
 
   .footer-icon {
