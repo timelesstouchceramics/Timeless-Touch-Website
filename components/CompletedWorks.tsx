@@ -9,6 +9,9 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { SliderNav } from "@/components/ui/slider-nav";
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 
 const projects = [
   {
@@ -45,6 +48,8 @@ const projects = [
 
 export function CompletedWorks() {
   const [api, setApi] = useState<CarouselApi>();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const scrollPrev = () => {
     api?.scrollPrev();
@@ -55,14 +60,19 @@ export function CompletedWorks() {
   };
 
   return (
-    <section className="section">
+    <section className="section" ref={ref}>
       <div className="container mb-12">
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.9, ease: [0, 0, 0.58, 1] as const }}
+        >
           <h2 className="title-section">Our Completed Projects</h2>
           <p className="text-body">
             Discover the spaces we&apos;ve transformed with premium materials
           </p>
-        </div>
+        </motion.div>
       </div>
 
       <div className="w-full">

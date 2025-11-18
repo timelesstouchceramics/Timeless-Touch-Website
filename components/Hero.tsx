@@ -1,11 +1,37 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 const heroSlide = {
   image: "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
   title: "Transform Your Space",
   description: "Premium tiles and natural stones for spaces that inspire",
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.9,
+      ease: [0, 0, 0.58, 1] as const,
+    },
+  },
 };
 
 export default function Hero() {
@@ -24,23 +50,32 @@ export default function Hero() {
       <div className="absolute inset-0 z-10 bg-neutral-950/40" />
       {/* Content */}
       <div className="container relative z-20 h-full flex items-center justify-center">
-        <div className="w-full max-w-4xl text-center py-16 lg:py-24 px-4">
-          <h1 className="title-hero">{heroSlide.title}</h1>
-          <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-10 max-w-2xl mx-auto font-sans">
-            {heroSlide.description}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button asChild size="lg">
-              <Link href="/products">
-                Explore Products
-                <span className="ml-2">→</span>
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/contact">Get Consultation</Link>
-            </Button>
-          </div>
-        </div>
+        <motion.div
+          className="w-full max-w-4xl text-center py-16 lg:py-24 px-4"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.h1 className="title-hero" variants={itemVariants}>
+            {heroSlide.title}
+          </motion.h1>
+          <motion.div variants={itemVariants}>
+            <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-10 max-w-2xl mx-auto font-sans">
+              {heroSlide.description}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button asChild size="lg">
+                <Link href="/products">
+                  Explore Products
+                  <span className="ml-2">→</span>
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href="/contact">Get Consultation</Link>
+              </Button>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

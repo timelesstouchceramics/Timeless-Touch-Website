@@ -1,5 +1,10 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 
 export default function MapSection() {
   // Google Maps embed URL for Dubai
@@ -10,25 +15,64 @@ export default function MapSection() {
   const directionsUrl =
     "https://www.google.com/maps/dir/?api=1&destination=Dubai,+United+Arab+Emirates";
 
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.25,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.9,
+        ease: [0, 0, 0.58, 1] as const,
+      },
+    },
+  };
+
   return (
-    <section className="section">
+    <section className="section" ref={ref}>
       <div className="container px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Column - Content */}
-          <div className="flex flex-col gap-6">
-            <h2 className="title-section">Visit Our Showroom in Dubai</h2>
+          <motion.div
+            className="flex flex-col gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
+            <motion.h2 className="title-section" variants={itemVariants}>
+              Visit Our Showroom in Dubai
+            </motion.h2>
 
             {/* Teal separator line */}
-            <div className="h-0.5 w-[80%] bg-primary-500" />
+            <motion.div
+              className="h-0.5 w-[80%] bg-primary-500"
+              variants={itemVariants}
+            />
 
             {/* Location details */}
-            <div className="flex flex-col gap-2 text-neutral-600 font-sans">
+            <motion.div
+              className="flex flex-col gap-2 text-neutral-600 font-sans"
+              variants={itemVariants}
+            >
               <p className="text-base">1234 Garden Boulevard</p>
               <p className="text-base">Dubai, UAE 12345</p>
-            </div>
+            </motion.div>
 
             {/* CTA Button */}
-            <div className="mt-4">
+            <motion.div className="mt-4" variants={itemVariants}>
               <Button variant="dark" className="rounded-md" asChild>
                 <a
                   href={directionsUrl}
@@ -38,11 +82,16 @@ export default function MapSection() {
                   Get Directions →
                 </a>
               </Button>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Right Column - Map with light blue background */}
-          <div className="relative w-full overflow-hidden">
+          <motion.div
+            className="relative w-full overflow-hidden"
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+            transition={{ duration: 1.0, ease: [0.4, 0, 0.2, 1] as const, delay: 0.3 }}
+          >
             <AspectRatio ratio={16 / 9} className="relative">
               <iframe
                 src={dubaiMapUrl}
@@ -56,7 +105,7 @@ export default function MapSection() {
                 title="Dubai Location Map"
               />
             </AspectRatio>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

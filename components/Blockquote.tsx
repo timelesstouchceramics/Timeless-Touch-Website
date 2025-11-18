@@ -1,14 +1,55 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+
 export default function Blockquote() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.9,
+        ease: [0, 0, 0.58, 1] as const,
+      },
+    },
+  };
+
   return (
-    <section className="section">
+    <section className="section" ref={ref}>
       <div className="container px-12">
-        <blockquote className="relative pl-8">
+        <motion.blockquote
+          className="relative pl-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-500" />
-        
-          <p className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-neutral-950 leading-tight mb-4">
-            &ldquo;We bring beauty into every space through quality craftsmanship and uncompromising excellence.&rdquo;
-          </p>
-          <div className="mt-6">
+
+          <motion.p
+            className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-neutral-950 leading-tight mb-4"
+            variants={itemVariants}
+          >
+            &ldquo;We bring beauty into every space through quality craftsmanship
+            and uncompromising excellence.&rdquo;
+          </motion.p>
+          <motion.div className="mt-6" variants={itemVariants}>
             <cite>
               <span className="block font-serif text-base text-neutral-950">
                 John Doe
@@ -17,8 +58,8 @@ export default function Blockquote() {
                 CEO at Timeless Beauty
               </span>
             </cite>
-          </div>
-        </blockquote>
+          </motion.div>
+        </motion.blockquote>
       </div>
     </section>
   );
