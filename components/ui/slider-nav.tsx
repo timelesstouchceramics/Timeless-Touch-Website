@@ -1,6 +1,6 @@
+import { forwardRef, type ButtonHTMLAttributes } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 
 interface SliderNavProps {
   onPrevious: () => void;
@@ -11,6 +11,23 @@ interface SliderNavProps {
   nextClassName?: string;
 }
 
+type SliderButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+
+const SliderButton = forwardRef<HTMLButtonElement, SliderButtonProps>(
+  ({ className, type = "button", ...props }, ref) => (
+    <button
+      ref={ref}
+      type={type}
+      className={cn(
+        "inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-neutral-900 cursor-pointer shadow-md hover:shadow-lg hover:bg-neutral-200 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white [&_svg]:size-5",
+        className
+      )}
+      {...props}
+    />
+  )
+);
+SliderButton.displayName = "SliderButton";
+
 export function SliderNav({
   onPrevious,
   onNext,
@@ -20,27 +37,23 @@ export function SliderNav({
   nextClassName,
 }: SliderNavProps) {
   const prevButton = (
-    <Button
-      variant="dark"
-      size="icon"
+    <SliderButton
       onClick={onPrevious}
-      className={cn("rounded-none [&_svg]:size-5", prevClassName)}
+      className={prevClassName}
       aria-label="Previous slide"
     >
       <ChevronLeft />
-    </Button>
+    </SliderButton>
   );
 
   const nextButton = (
-    <Button
-      variant="dark"
-      size="icon"
+    <SliderButton
       onClick={onNext}
-      className={cn("rounded-none [&_svg]:size-5", nextClassName)}
+      className={nextClassName}
       aria-label="Next slide"
     >
       <ChevronRight />
-    </Button>
+    </SliderButton>
   );
 
   if (separated) {

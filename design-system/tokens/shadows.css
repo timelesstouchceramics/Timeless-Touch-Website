@@ -1,8 +1,8 @@
 /* Shadow tokens - generates Tailwind utilities */
 @theme {
-  --shadow-sm: 0 4px 14px 0 oklch(from var(--color-neutral-500) l c h / 0.1);
-  --shadow-md: 0 8px 20px 0 oklch(from var(--color-neutral-500) l c h / 0.15);
-  --shadow-lg: 0 12px 28px 0 oklch(from var(--color-neutral-500) l c h / 0.2);
-  --shadow-xl: 0 16px 40px 0 oklch(from var(--color-neutral-500) l c h / 0.25);
-  --shadow-2xl: 0 24px 60px 0 oklch(from var(--color-neutral-500) l c h / 0.3);
+  --shadow-sm: 0 4px 14px 0 oklch(from var(--color-neutral-500) l c h / 0.2);
+  --shadow-md: 0 8px 20px 0 oklch(from var(--color-neutral-500) l c h / 0.3);
+  --shadow-lg: 0 12px 28px 0 oklch(from var(--color-neutral-500) l c h / 0.4);
+  --shadow-xl: 0 16px 40px 0 oklch(from var(--color-neutral-500) l c h / 0.5);
+  --shadow-2xl: 0 24px 60px 0 oklch(from var(--color-neutral-500) l c h / 0.6);
 }
