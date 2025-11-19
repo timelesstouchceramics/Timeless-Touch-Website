@@ -51,12 +51,6 @@ export default function ProductCard({
             <CardDescription>
               {capitalize(product.category)} • {capitalize(product.finish)}
             </CardDescription>
-            <p className="font-semibold mt-2">
-              AED {product.price}{" "}
-              <span className="text-sm font-normal text-neutral-600">
-                / {product.unit}
-              </span>
-            </p>
             <Button
               variant="outline"
               size="sm"

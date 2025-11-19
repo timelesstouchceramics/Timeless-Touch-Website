@@ -229,7 +229,7 @@ export default function ProductsClient({
 
   return (
     <div ref={scrollTargetRef} className="bg-neutral-50">
-      <section className="section">
+      <section className="section pt-12">
         <div className="container">
           <Breadcrumb items={[{ label: "Products" }]} />
 
@@ -329,12 +329,6 @@ export default function ProductsClient({
                       <SelectItem value="name">Name (A-Z)</SelectItem>
                       <SelectItem value="name-desc">Name (Z-A)</SelectItem>
                       <SelectItem value="newest">Newest</SelectItem>
-                      <SelectItem value="price-asc">
-                        Price: Low to High
-                      </SelectItem>
-                      <SelectItem value="price-desc">
-                        Price: High to Low
-                      </SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

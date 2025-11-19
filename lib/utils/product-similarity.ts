@@ -4,9 +4,8 @@ import { Product } from "@/lib/types";
  * Calculate similarity score between two products using weighted multi-factor approach
  *
  * Scoring breakdown:
- * - Category match: 40 points (most important - customers browsing marble want marble)
+ * - Category match: 60 points (most important - customers browsing marble want marble)
  * - Finish match: 30 points (visual consistency matters for tiles/stone)
- * - Price range: 20 points (within ±20% helps customers stay in budget)
  * - Random factor: 10 points (adds variety to recommendations)
  *
  * @param product - The current product being viewed
@@ -16,26 +15,14 @@ import { Product } from "@/lib/types";
 function calculateSimilarity(product: Product, candidate: Product): number {
   let score = 0;
 
-  // Category match (40 points)
+  // Category match (60 points)
   if (product.category === candidate.category) {
-    score += 40;
+    score += 60;
   }
 
   // Finish match (30 points)
   if (product.finish === candidate.finish) {
     score += 30;
-  }
-
-  // Price range match (20 points)
-  // Within ±20% of original price
-  const priceThreshold = 0.2;
-  const priceDifference = Math.abs(product.price - candidate.price);
-  const priceRange = product.price * priceThreshold;
-
-  if (priceDifference <= priceRange) {
-    // Scale points based on how close the price is
-    const priceProximity = 1 - priceDifference / priceRange;
-    score += 20 * priceProximity;
   }
 
   // Random factor (10 points) for variety

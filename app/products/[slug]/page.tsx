@@ -126,15 +126,6 @@ export default function ProductDetail() {
                 </div>
               </div>
 
-              <div>
-                <p className="text-2xl font-semibold text-neutral-950">
-                  AED {product.price}{" "}
-                  <span className="text-base font-normal text-neutral-600">
-                    / {product.unit}
-                  </span>
-                </p>
-              </div>
-
               <p className="text-body">
                 Premium quality {product.category} with {product.finish} finish.
                 Perfect for interior and exterior applications.
@@ -168,10 +159,6 @@ export default function ProductDetail() {
                       <TableRow>
                         <TableCell className="font-medium">Finish</TableCell>
                         <TableCell>{capitalize(product.finish)}</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium">Price</TableCell>
-                        <TableCell>AED {product.price} / {product.unit}</TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell className="font-medium">Application</TableCell>

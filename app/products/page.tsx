@@ -7,7 +7,7 @@ import ProductCardSkeleton from "@/components/ProductCardSkeleton";
 function ProductsPageSkeleton() {
   return (
     <div className="bg-neutral-50">
-      <section className="section">
+      <section className="section pt-12">
         <div className="container">
           {/* Breadcrumb skeleton */}
           <div className="mb-6">
