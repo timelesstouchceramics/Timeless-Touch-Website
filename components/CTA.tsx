@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { Calendar1 } from "lucide-react";
 
 export default function CTA() {
   const ref = useRef(null);
@@ -16,19 +16,19 @@ export default function CTA() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
       },
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+  const glassVariants = {
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.9,
+        duration: 0.8,
         ease: [0, 0, 0.58, 1] as const,
       },
     },
@@ -36,42 +36,37 @@ export default function CTA() {
 
   return (
     <section className="section pt-28 pb-8" ref={ref}>
-      <div className="container">
-        <Card className="border-0">
-          <CardContent className="p-0 ">
-            <motion.div
-              className="bg-primary-500 text-neutral-50 text-center p-12"
-              variants={containerVariants}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
-            >
-              <motion.h2
-                className="title-section text-neutral-50"
-                variants={itemVariants}
-              >
-                Let’s Talk About Your Timeless Touch
-              </motion.h2>
-              <motion.p
-                className="text-body text-neutral-50/90"
-                variants={itemVariants}
-              >
-                Work with our team to choose materials and finishes that feel
-                personal, balanced, and meant for your space.
-              </motion.p>
-              <motion.div
-                className="flex gap-4 flex-col sm:flex-row justify-center"
-                variants={itemVariants}
-              >
-                <Button asChild variant="secondary">
-                  <Link href="/products">Browse Products</Link>
+      <div className="container-lg relative overflow-hidden w-full">
+        <motion.div
+          className="relative z-10 h-full"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          <motion.div
+            className="relative flex items-center justify-center py-16 px-6 md:px-12 rounded-[10px] overflow-hidden bg-cover bg-center"
+            style={{ backgroundImage: "url('/cta-bg.jpg')" }}
+            variants={glassVariants}
+          >
+            <div className="absolute inset-0 bg-primary-500/60" />
+            {/* Background Lines */}
+            <div className="relative z-10 w-full text-center">
+              <h2 className="title-section text-neutral-50">
+                We Will Transform Your Space
+              </h2>
+              <p className="text-body text-neutral-50/90">
+                Premium tiles and natural stone for spaces that inspire
+              </p>
+              <div className="flex gap-4 justify-center mt-12">
+                <Button asChild variant="secondary" size="lg">
+                  <Link href="/contact">
+                    Schedule Consultation <Calendar1 className="ml-2 h-4 w-4" />
+                  </Link>
                 </Button>
-                <Button asChild variant="outline">
-                  <Link href="/contact">Schedule Consultation</Link>
-                </Button>
-              </motion.div>
-            </motion.div>
-          </CardContent>
-        </Card>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
