@@ -20,9 +20,9 @@ const fontSecondary = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Timeless Touch Ceramics - Premium Tiles and Natural Stones",
+  title: "Timeless Touch Ceramics - Grace Your Space",
   description:
-    "Premium tiles and natural stones for spaces that inspire. Quality craftsmanship since 2023.",
+    "Elegant Porcelain Surfaces. Premium manufacturer of ISO 10545 certified porcelain slabs and tiles. Quality craftsmanship since 2023.",
 };
 
 export default function RootLayout({

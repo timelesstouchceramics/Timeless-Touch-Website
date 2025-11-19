@@ -17,7 +17,7 @@ export default function ServiceProcess() {
       number: "02",
       title: "Design & Planning",
       description:
-        "Our design team creates detailed plans and material recommendations tailored to your space.",
+        "Our design team creates detailed plans and porcelain material recommendations from our comprehensive collections tailored to your space.",
     },
     {
       number: "03",

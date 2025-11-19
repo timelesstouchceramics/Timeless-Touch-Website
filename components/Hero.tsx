@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 
 const heroSlide = {
   image: "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-  title: "Transform Your Space",
-  description: "Premium tiles and natural stones for spaces that inspire",
+  title: "Grace Your Space With Top-Notch Products",
+  description: "Elegant Porcelain Surfaces for spaces that inspire",
 };
 
 const containerVariants = {

@@ -7,6 +7,18 @@ export interface Product {
   price: number;
   unit: string;
   images: string[];
+  code?: string;
+  size?: string;
+  thickness?: string;
+  bookmatch?: boolean;
+  sixFace?: boolean;
+  applications?: string[];
+  description?: string;
 }
 
-export type SortOption = "name" | "name-desc" | "newest" | "price-asc" | "price-desc";
+export type SortOption =
+  | "name"
+  | "name-desc"
+  | "newest"
+  | "price-asc"
+  | "price-desc";

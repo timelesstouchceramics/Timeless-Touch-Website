@@ -77,7 +77,10 @@ export default function ProductDetail() {
                 <CarouselContent>
                   {product.images.map((image, index) => (
                     <CarouselItem key={index}>
-                      <AspectRatio ratio={1} className="relative overflow-hidden rounded-lg">
+                      <AspectRatio
+                        ratio={1}
+                        className="relative overflow-hidden rounded-lg"
+                      >
                         <Image
                           src={image}
                           alt={`${product.name} - Image ${index + 1}`}
@@ -120,19 +123,42 @@ export default function ProductDetail() {
             <div className="space-y-6">
               <div>
                 <h1 className="title-section">{product.name}</h1>
-                <div className="flex gap-2 mt-2">
-                  <Badge variant="secondary">{capitalize(product.category)}</Badge>
-                  <Badge variant="secondary">{capitalize(product.finish)}</Badge>
+                <div className="flex gap-2 mt-2 flex-wrap">
+                  <Badge variant="secondary">
+                    {capitalize(product.category)}
+                  </Badge>
+                  <Badge variant="secondary">
+                    {capitalize(product.finish)}
+                  </Badge>
+                  {product.bookmatch && (
+                    <Badge variant="outline">Bookmatch Available</Badge>
+                  )}
+                  {product.sixFace && (
+                    <Badge variant="outline">6-Face Design</Badge>
+                  )}
                 </div>
+                {product.code && (
+                  <p className="text-sm text-neutral-500 mt-2">
+                    Product Code: {product.code}
+                  </p>
+                )}
               </div>
 
-              <p className="text-body">
-                Premium quality {product.category} with {product.finish} finish.
-                Perfect for interior and exterior applications.
-              </p>
+              {product.description ? (
+                <p className="text-body">{product.description}</p>
+              ) : (
+                <p className="text-body">
+                  Premium quality {product.category} with {product.finish}{" "}
+                  finish. Perfect for interior and exterior applications.
+                </p>
+              )}
 
               <div className="space-y-3">
-                <Button onClick={handleWhatsAppContact} size="lg" className="w-full sm:w-auto">
+                <Button
+                  onClick={handleWhatsAppContact}
+                  size="lg"
+                  className="w-full sm:w-auto"
+                >
                   <MessageCircle className="h-4 w-4 mr-2" />
                   Contact Us to Buy
                 </Button>
@@ -152,6 +178,14 @@ export default function ProductDetail() {
                 <TabsContent value="specs" className="mt-4">
                   <Table>
                     <TableBody>
+                      {product.code && (
+                        <TableRow>
+                          <TableCell className="font-medium">
+                            Product Code
+                          </TableCell>
+                          <TableCell>{product.code}</TableCell>
+                        </TableRow>
+                      )}
                       <TableRow>
                         <TableCell className="font-medium">Category</TableCell>
                         <TableCell>{capitalize(product.category)}</TableCell>
@@ -160,9 +194,42 @@ export default function ProductDetail() {
                         <TableCell className="font-medium">Finish</TableCell>
                         <TableCell>{capitalize(product.finish)}</TableCell>
                       </TableRow>
+                      {product.size && (
+                        <TableRow>
+                          <TableCell className="font-medium">Size</TableCell>
+                          <TableCell>{product.size}</TableCell>
+                        </TableRow>
+                      )}
+                      {product.thickness && (
+                        <TableRow>
+                          <TableCell className="font-medium">
+                            Thickness
+                          </TableCell>
+                          <TableCell>{product.thickness}</TableCell>
+                        </TableRow>
+                      )}
+                      {(product.bookmatch || product.sixFace) && (
+                        <TableRow>
+                          <TableCell className="font-medium">
+                            Special Features
+                          </TableCell>
+                          <TableCell>
+                            {product.bookmatch && "Bookmatch Available"}
+                            {product.bookmatch && product.sixFace && ", "}
+                            {product.sixFace && "6-Face Design"}
+                          </TableCell>
+                        </TableRow>
+                      )}
                       <TableRow>
-                        <TableCell className="font-medium">Application</TableCell>
-                        <TableCell>Indoor & Outdoor</TableCell>
+                        <TableCell className="font-medium">
+                          Applications
+                        </TableCell>
+                        <TableCell>
+                          {product.applications &&
+                          product.applications.length > 0
+                            ? product.applications.join(", ")
+                            : "Indoor & Outdoor"}
+                        </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
@@ -170,21 +237,95 @@ export default function ProductDetail() {
 
                 <TabsContent value="features" className="mt-4">
                   <ul className="flex flex-col gap-3">
+                    {product.category === "pool" && (
+                      <>
+                        <li className="flex items-start gap-2">
+                          <span>•</span>
+                          <span>
+                            Crystalline Glazed Porcelain capturing starlight and
+                            ocean waves
+                          </span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span>•</span>
+                          <span>
+                            Varying shades of blue reflecting shimmering light
+                            on sea
+                          </span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span>•</span>
+                          <span>
+                            Expresses harmony between nature&apos;s calm and
+                            movement
+                          </span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span>•</span>
+                          <span>
+                            Perfect for indoor and outdoor pool applications
+                          </span>
+                        </li>
+                      </>
+                    )}
+                    {product.category !== "pool" && (
+                      <>
+                        <li className="flex items-start gap-2">
+                          <span>•</span>
+                          <span>
+                            ISO 10545 certified quality with superior technical
+                            performance
+                          </span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span>•</span>
+                          <span>
+                            Full Body Technology for consistent color throughout
+                            thickness
+                          </span>
+                        </li>
+                        {product.bookmatch && (
+                          <li className="flex items-start gap-2">
+                            <span>•</span>
+                            <span>
+                              Bookmatch pattern available for dramatic feature
+                              wall installations
+                            </span>
+                          </li>
+                        )}
+                        {product.sixFace && (
+                          <li className="flex items-start gap-2">
+                            <span>•</span>
+                            <span>
+                              6-Face design for versatile installation and
+                              creative applications
+                            </span>
+                          </li>
+                        )}
+                        <li className="flex items-start gap-2">
+                          <span>•</span>
+                          <span>
+                            Ultra-low water absorption (0.044%) for easy
+                            maintenance
+                          </span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span>•</span>
+                          <span>
+                            High breaking strength (7194.95 N) and scratch
+                            resistance (5 Moh&apos;s)
+                          </span>
+                        </li>
+                      </>
+                    )}
                     <li className="flex items-start gap-2">
                       <span>•</span>
-                      <span>Natural {product.category} with unique patterns</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span>•</span>
-                      <span>Heat resistant and durable</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span>•</span>
-                      <span>Ideal for countertops, flooring, and walls</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span>•</span>
-                      <span>Professional installation recommended</span>
+                      <span>
+                        Ideal for{" "}
+                        {product.applications && product.applications.length > 0
+                          ? product.applications.join(", ").toLowerCase()
+                          : "countertops, flooring, and walls"}
+                      </span>
                     </li>
                   </ul>
                 </TabsContent>
@@ -212,8 +353,16 @@ export default function ProductDetail() {
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious variant="light" size="lg" className="-left-4 shadow-sm shadow-primary-700" />
-                <CarouselNext variant="light" size="lg" className="-right-4 shadow-sm shadow-primary-700"  />
+                <CarouselPrevious
+                  variant="light"
+                  size="lg"
+                  className="-left-4 shadow-sm shadow-primary-700"
+                />
+                <CarouselNext
+                  variant="light"
+                  size="lg"
+                  className="-right-4 shadow-sm shadow-primary-700"
+                />
               </Carousel>
             </div>
           )}

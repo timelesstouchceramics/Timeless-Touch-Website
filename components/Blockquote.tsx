@@ -46,16 +46,17 @@ export default function Blockquote() {
             className="text-3xl md:text-4xl sm:font-semibold text-neutral-950 leading-tight mb-4"
             variants={itemVariants}
           >
-            &ldquo;We bring beauty into every space through quality
-            craftsmanship and uncompromising excellence.&rdquo;
+            &ldquo;We manufacture elegant porcelain surfaces that transform
+            spaces through certified quality and manufacturing
+            excellence.&rdquo;
           </motion.p>
           <motion.div className="mt-6" variants={itemVariants}>
             <cite>
               <span className="block font-serif text-base text-neutral-950">
-                John Doe
+                Timeless Touch Ceramics
               </span>
               <span className="block font-serif text-base text-neutral-500 mt-1">
-                CEO at Timeless Beauty
+                Premium Porcelain Manufacturer
               </span>
             </cite>
           </motion.div>

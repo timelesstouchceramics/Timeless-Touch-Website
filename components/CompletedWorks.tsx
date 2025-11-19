@@ -11,31 +11,31 @@ const projects = [
   {
     title: "Modern Kitchen Renovation",
     description:
-      "A stunning transformation featuring premium marble countertops and ceramic tile flooring. This contemporary kitchen combines elegance with functionality, showcasing our finest materials in a residential setting.",
+      "A stunning transformation featuring premium Statuario porcelain countertops and Concept Light Gray tile flooring from our Modern Look Collection. This contemporary kitchen combines elegance with functionality, showcasing our Full Body Technology in a residential setting.",
     image: "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
   },
   {
     title: "Luxury Hotel Lobby",
     description:
-      "An impressive commercial space featuring exotic travertine and granite surfaces. The grand entrance creates a lasting first impression with natural stone that speaks to timeless sophistication.",
+      "An impressive commercial space featuring Exotic Travertine Ivory Stripe and Lava Blue porcelain surfaces from our Stone Look and Marble Look Collections. The grand entrance creates a lasting first impression with Bookmatch patterns that speak to timeless sophistication.",
     image: "/images/cottage.jpg",
   },
   {
     title: "Contemporary Bathroom Design",
     description:
-      "A serene bathroom retreat showcasing our premium tile collections. The carefully selected materials create a spa-like atmosphere, blending modern aesthetics with natural beauty.",
+      "A serene bathroom retreat showcasing our premium porcelain collections including Black Marquina feature walls and Emerald series accents. The carefully selected materials create a spa-like atmosphere, blending modern aesthetics with natural beauty.",
     image: "/images/cottage-tile.jpg",
   },
   {
     title: "Residential Living Space",
     description:
-      "An open-plan living area featuring our signature large slab installations. The seamless integration of natural stone creates a cohesive and luxurious environment for modern living.",
+      "An open-plan living area featuring our signature large format slab installations up to 800x2400mm. The seamless integration of Calacatta Gold and Carrara porcelain from our Marble Look Collection creates a cohesive and luxurious environment for modern living.",
     image: "/images/slider-lava-blue.jpg",
   },
   {
     title: "Commercial Excellence",
     description:
-      "A high-end retail space demonstrating the versatility of our ceramic tile collections. The design showcases how premium materials can elevate any commercial environment.",
+      "A high-end retail space demonstrating the versatility of our porcelain collections. The design showcases Monocolor and Concept series tiles, highlighting how premium Full Body Technology materials can elevate any commercial environment with elegance and durability.",
     image: "/images/concept-light-gray-.jpg",
   },
 ];
@@ -64,7 +64,8 @@ export function CompletedWorks() {
         >
           <h2 className="title-section">Our Completed Projects</h2>
           <p className="text-body">
-            Discover the spaces we&apos;ve transformed with premium materials
+            Discover the spaces we&apos;ve transformed with elegant porcelain
+            surfaces from our comprehensive collections
           </p>
         </motion.div>
       </div>

@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Separator } from "@/components/ui/separator";
-import { Award, Users, Globe, Heart } from "lucide-react";
+import { Award, Users, Factory, Heart } from "lucide-react";
 import Breadcrumb from "@/components/Breadcrumb";
 import FeaturesCard from "@/components/FeaturesCard";
 import FAQ from "@/components/FAQ";
+import TechnicalSpecs from "@/components/TechnicalSpecs";
 
 export default function About() {
   const values = [
@@ -12,25 +13,25 @@ export default function About() {
       icon: Award,
       title: "Quality Excellence",
       description:
-        "We source only the finest materials from trusted quarries worldwide.",
+        "ISO 10545 certified products exceeding industry standards. Premium quality porcelain manufactured with uncompromising precision.",
     },
     {
       icon: Users,
       title: "Expert Team",
       description:
-        "Our experienced professionals guide you through every step of your project.",
+        "Our experienced professionals guide you through every step of your project, from design consultation to installation.",
     },
     {
-      icon: Globe,
-      title: "Global Sourcing",
+      icon: Factory,
+      title: "Manufacturing Excellence",
       description:
-        "Direct partnerships with manufacturers ensure authenticity and value.",
+        "Full Body Technology with superior durability and color consistency throughout. Large format innovation up to 800x2400mm.",
     },
     {
       icon: Heart,
       title: "Customer First",
       description:
-        "Your satisfaction is our priority, from selection to installation.",
+        "Your satisfaction is our priority, from material selection to final installation and project completion.",
     },
   ];
 
@@ -45,29 +46,34 @@ export default function About() {
 
   const faqItems = [
     {
-      question: "What types of materials do you offer?",
+      question: "What types of porcelain products do you manufacture?",
       answer:
-        "We offer a wide range of premium natural stones including marble, granite, travertine, limestone, and quartzite, as well as high-quality ceramic and porcelain tiles. All materials are sourced directly from trusted quarries and manufacturers worldwide.",
+        "We manufacture a comprehensive range of elegant porcelain surfaces including Stone Look Collection (Travertine, Rockstone, Ceppo), Marble Look Collection (Black Collection, Luxury Range, Classic Marbles), Modern Look Collection (Emerald, Monocolor, Tattoo, Concept), Decorative Designs with Evo Dry Technology, Wood Look Tiles, Standard Tiles, and specialized Swimming Pool Tiles. All products feature Full Body Technology and ISO 10545 certification.",
     },
     {
-      question: "Do you provide installation services?",
+      question: "What are the technical specifications of your products?",
       answer:
-        "Yes, we work with a network of certified installers who specialize in natural stone and tile installation. We can connect you with experienced professionals in your area to ensure your project is completed to the highest standards.",
+        "Our porcelain surfaces exceed industry standards with ultra-low water absorption (0.044%), high breaking strength (7194.95 N), and superior scratch resistance (5 Moh's scale). We offer large format slabs up to 800x2400mm in 15mm thickness with Full Body Technology for consistent color throughout.",
     },
     {
-      question: "Can I visit your showroom to see samples?",
+      question: "Do you offer Bookmatch patterns?",
       answer:
-        "Absolutely! We have multiple showrooms across the region where you can view our extensive collection of materials in person. Our showrooms feature full-size displays and sample areas to help you visualize your project. Please contact us to schedule a visit.",
+        "Yes, we offer Bookmatch options for our Marble Look Collection, creating dramatic and symmetrical patterns perfect for feature walls. Our 6-Face designs ensure seamless continuity across multiple surfaces. Please contact us for custom Bookmatch solutions tailored to your project.",
     },
     {
-      question: "What is your return policy?",
+      question: "What finishes are available?",
       answer:
-        "We offer a flexible return policy on unused materials within 30 days of purchase, provided they are in their original packaging and condition. Custom orders and cut materials are non-returnable. Please contact our customer service team for specific return arrangements.",
+        "We offer both Polished and Matt finishes across our collections. Our Designer Finishes maintain the premium quality and aesthetic appeal of our porcelain surfaces, suitable for various applications including residential, commercial, indoor, outdoor, pool areas, kitchens, and bathrooms.",
     },
     {
-      question: "How do I calculate how much material I need?",
+      question: "Can I get samples of your products?",
       answer:
-        "Our team can help you calculate the exact amount of material needed for your project. Simply provide us with your room dimensions and layout, and we'll provide a detailed quote including recommended quantities with a small buffer for cuts and waste. We also offer free consultations for larger projects.",
+        "Absolutely! We provide samples of our porcelain collections to help you visualize your project. Our samples showcase the authentic appearance, texture, and finish of our products. Please contact us to request samples or schedule a consultation to view our full-size displays and collection catalogues.",
+    },
+    {
+      question: "Do you provide design consultation services?",
+      answer:
+        "Yes, we offer expert design consultation services to guide you through material selection and application. Our experienced team helps with everything from choosing the right collection for your space to planning custom solutions, Bookmatch patterns, and bespoke layouts. We provide free consultations for larger projects.",
     },
   ];
 
@@ -82,8 +88,8 @@ export default function About() {
             About Timeless Touch Ceramics
           </h1>
           <p className="text-body">
-            3 years of excellence in providing premium tiles and natural stones
-            for spaces that inspire.
+            3 years of excellence in manufacturing elegant porcelain surfaces
+            that grace spaces with timeless sophistication.
           </p>
         </div>
       </section>
@@ -103,21 +109,23 @@ export default function About() {
               <h2 className="title-section">Our Story</h2>
               <p className="text-body">
                 Timeless Touch Ceramics was founded in 2023 with a simple
-                mission: to bring the world&apos;s finest natural stones and
-                tiles to homes and businesses across the country. What started
-                as a small showroom has grown into a trusted name in the
+                mission: to manufacture elegant porcelain surfaces that grace
+                spaces with timeless sophistication. What started as a vision
+                for quality has grown into a trusted manufacturer in the
                 industry.
               </p>
               <p className="text-body">
                 We believe that the right materials can transform any space into
-                something extraordinary. That&apos;s why we personally visit
-                quarries, inspect materials, and build lasting relationships
-                with manufacturers worldwide.
+                something extraordinary. That&apos;s why we focus on
+                manufacturing excellence, using Full Body Technology to create
+                premium porcelain surfaces.
               </p>
               <p className="text-body">
                 Today, we&apos;re proud to serve thousands of satisfied
                 customers, from homeowners creating their dream kitchens to
-                architects designing landmark commercial spaces.
+                architects designing landmark commercial spaces, with our
+                comprehensive range of stone look, marble look, and modern look
+                collections.
               </p>
             </div>
           </div>
@@ -169,6 +177,8 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      <TechnicalSpecs />
 
       <FAQ items={faqItems} />
     </div>

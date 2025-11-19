@@ -14,58 +14,65 @@ export default function Projects() {
     {
       id: 1,
       title: "Modern Luxury Villa",
-      location: "Beverly Hills, CA",
+      location: "Dubai, UAE",
       category: "Residential",
       description:
-        "Complete marble flooring and granite countertops installation",
-      materials: ["Carrara Marble", "Black Galaxy Granite"],
+        "Complete porcelain flooring featuring Marble Look Collection with Calacatta Gold and Carrara slabs, complemented by Black Marquina accents",
+      materials: ["Calacatta Gold", "Carrara", "Black Marquina"],
       image: "/images/cottage.jpg",
     },
     {
       id: 2,
       title: "Downtown Hotel Lobby",
-      location: "New York, NY",
+      location: "Dubai, UAE",
       category: "Commercial",
       description:
-        "Large-scale porcelain tile installation with custom patterns",
-      materials: ["Porcelain Tiles", "Travertine"],
+        "Large-scale porcelain installation with custom Bookmatch patterns from our Marble Look Collection, creating dramatic feature walls",
+      materials: ["Lava Blue", "Statuario", "Exotic Travertine"],
       image: "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
     },
     {
       id: 3,
       title: "Spa & Wellness Center",
-      location: "Miami, FL",
+      location: "Dubai, UAE",
       category: "Commercial",
-      description: "Luxury spa featuring natural stone throughout",
-      materials: ["Calacatta Gold", "Emperador Brown"],
+      description:
+        "Luxury spa featuring Stone Look Collection throughout, creating a serene environment with Exotic Travertine Ivory Stripe and Rockstone series",
+      materials: ["Exotic Travertine Ivory", "Rockstone Ivory", "Lava Blue"],
       image: "/images/slider-lava-blue.jpg",
     },
     {
       id: 4,
       title: "Contemporary Kitchen",
-      location: "San Francisco, CA",
+      location: "Dubai, UAE",
       category: "Residential",
       description:
-        "Custom kitchen with marble countertops and ceramic backsplash",
-      materials: ["Statuario Marble", "Ceramic Tiles"],
+        "Custom kitchen with Statuario countertops and Concept Light Gray backsplash from our Modern Look Collection",
+      materials: ["Statuario", "Concept Light Gray", "Monocolor White"],
       image: "/images/cottage-tile.jpg",
     },
     {
       id: 5,
       title: "Corporate Office",
-      location: "Chicago, IL",
+      location: "Dubai, UAE",
       category: "Commercial",
-      description: "Modern office space with polished granite flooring",
-      materials: ["Kashmir White", "Absolute Black"],
+      description:
+        "Modern office space with polished porcelain flooring from Monocolor and Concept series, showcasing contemporary sophistication",
+      materials: [
+        "Monocolor Light Gray",
+        "Concept Dark Gray",
+        "Monocolor White",
+      ],
       image: "/images/concept-light-gray-.jpg",
     },
     {
       id: 6,
-      title: "Outdoor Patio Paradise",
-      location: "Austin, TX",
+      title: "Luxury Pool & Outdoor Area",
+      location: "Dubai, UAE",
       category: "Residential",
-      description: "Weather-resistant porcelain tiles for outdoor living",
-      materials: ["Porcelain Pavers", "Natural Stone"],
+      description:
+        "Stunning outdoor pool area featuring Starwave Series swimming pool tiles with Cottage Walnut porcelain for surrounding areas",
+      materials: ["Starwave Series", "Cottage Walnut", "Slate Ivory"],
       image: "/images/sansam-mobile-slider.jpg",
     },
   ];
@@ -80,8 +87,10 @@ export default function Projects() {
           <div className="text-center mb-12">
             <h1 className="title-section">Our Projects</h1>
             <p className="text-body">
-              Explore our portfolio of completed installations. From residential
-              homes to commercial spaces, we bring visions to life.
+              Explore our portfolio of completed installations featuring elegant
+              porcelain surfaces. From residential homes to commercial spaces,
+              we bring visions to life with Full Body Technology and ISO 10545
+              certified quality.
             </p>
           </div>
 

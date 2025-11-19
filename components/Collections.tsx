@@ -9,20 +9,23 @@ import { useRef } from "react";
 export default function Collections() {
   const categories = [
     {
-      name: "Marble",
+      name: "Stone Look Collection",
+      slug: "stone-look",
       image:
         "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
+      description: "Natural stone aesthetics",
+    },
+    {
+      name: "Marble Look Collection",
+      slug: "marble-look",
+      image: "/images/blac-marquina-1.jpg",
       description: "Timeless elegance",
     },
     {
-      name: "Granite",
-      image: "/images/lava-blue.jpg",
-      description: "Natural strength",
-    },
-    {
-      name: "Ceramic Tiles",
+      name: "Modern Look Collection",
+      slug: "modern-look",
       image: "/images/concept-light-gray-.jpg",
-      description: "Versatile beauty",
+      description: "Contemporary sophistication",
     },
   ];
 
@@ -63,7 +66,7 @@ export default function Collections() {
         >
           <h2 className="title-section">Our Collections</h2>
           <p className="text-body">
-            Discover our curated selection of premium materials
+            Discover our elegant porcelain collections crafted with Full Body Technology
           </p>
         </motion.div>
       </div>
@@ -76,7 +79,7 @@ export default function Collections() {
         {categories.map((category) => (
           <motion.div key={category.name} variants={itemVariants}>
             <Link
-              href={`/products?category=${category.name.toLowerCase()}`}
+              href={`/products?categories=${category.slug}`}
               className="relative group overflow-hidden block h-full"
             >
               <Image
@@ -89,7 +92,7 @@ export default function Collections() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent lg:bg-black/20" />
               <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                 <p className="text-white text-2xl md:text-3xl font-light tracking-wide uppercase">
-                  LARGE SLABS
+                  {category.name.toUpperCase()}
                 </p>
               </div>
             </Link>

@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import {
-  CheckCircle2,
-  Wrench,
+  Home,
+  Building2,
+  Waves,
   Palette,
-  Truck,
-  Shield,
   Users,
+  Layout,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
@@ -17,39 +17,40 @@ import FeaturesCard from "@/components/FeaturesCard";
 export default function ServiceFeatures() {
   const services = [
     {
-      icon: Wrench,
-      title: "Expert Installation",
+      icon: Home,
+      title: "Residential Projects",
       description:
-        "Professional installation by certified technicians with years of experience",
+        "Flooring, walls, countertops, bathrooms, and kitchens with elegant porcelain surfaces for your home",
+    },
+    {
+      icon: Building2,
+      title: "Commercial Applications",
+      description:
+        "Hotels, offices, retail spaces, and restaurants featuring premium porcelain installations",
+    },
+    {
+      icon: Waves,
+      title: "Pool & Outdoor Areas",
+      description:
+        "Specialized swimming pool tiles including Starwave Series and outdoor porcelain solutions",
     },
     {
       icon: Palette,
-      title: "Custom Design",
+      title: "Custom Solutions",
       description:
-        "Tailored design solutions to match your vision and space requirements",
-    },
-    {
-      icon: Truck,
-      title: "Delivery & Logistics",
-      description:
-        "Reliable delivery service ensuring your materials arrive safely and on time",
-    },
-    {
-      icon: Shield,
-      title: "Quality Guarantee",
-      description: "Comprehensive warranty on all installations and materials",
+        "Bookmatch patterns, decorative designs, and bespoke layouts tailored to your vision",
     },
     {
       icon: Users,
-      title: "Consultation Services",
+      title: "Design Consultation",
       description:
-        "Expert advice from our design team to help you make the right choices",
+        "Expert guidance on material selection and application from our experienced design team",
     },
     {
-      icon: CheckCircle2,
-      title: "Project Management",
+      icon: Layout,
+      title: "Material Selection",
       description:
-        "End-to-end project coordination ensuring smooth execution from start to finish",
+        "Comprehensive range from Stone Look and Marble Look to Modern Look collections with expert recommendations",
     },
   ];
 
@@ -107,7 +108,7 @@ export default function ServiceFeatures() {
         >
           <h2 className="title-section">Our Services</h2>
           <p className="text-body">
-            Comprehensive solutions for all your tile and natural stone needs
+            Comprehensive porcelain solutions for residential, commercial, and specialized applications
           </p>
         </motion.div>
 
