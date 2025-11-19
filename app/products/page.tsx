@@ -95,9 +95,16 @@ function ProductsPageSkeleton() {
   );
 }
 
-export default function Products() {
+export default async function Products({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await searchParams;
+  const paramsKey = JSON.stringify(params);
+
   return (
-    <Suspense fallback={<ProductsPageSkeleton />}>
+    <Suspense key={paramsKey} fallback={<ProductsPageSkeleton />}>
       <ProductsServer />
     </Suspense>
   );
