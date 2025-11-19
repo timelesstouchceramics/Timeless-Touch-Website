@@ -123,7 +123,7 @@ const Navigation = () => {
         path === "/" ? "fixed" : "sticky"
       } top-0  left-0 right-0 transition-all duration-300 ease-in-out border-b will-change-[background-color,border-color] ${
         isScrolled || path !== "/"
-          ? "bg-primary-500/95 backdrop-blur-md border-neutral-800"
+          ? "bg-primary-500/85 backdrop-blur-sm border-neutral-800"
           : "bg-transparent border-transparent"
       }`}
     >
