@@ -49,14 +49,14 @@ export default function CTA() {
                 className="title-section text-neutral-50"
                 variants={itemVariants}
               >
-                Ready to Start Your Project?
+                Let’s Talk About Your Timeless Touch
               </motion.h2>
               <motion.p
                 className="text-body text-neutral-50/90"
                 variants={itemVariants}
               >
-                Let our experts help you choose the perfect materials for your
-                space
+                Work with our team to choose materials and finishes that feel
+                personal, balanced, and meant for your space.
               </motion.p>
               <motion.div
                 className="flex gap-4 flex-col sm:flex-row justify-center"

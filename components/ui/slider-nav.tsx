@@ -6,29 +6,56 @@ interface SliderNavProps {
   onPrevious: () => void;
   onNext: () => void;
   className?: string;
+  separated?: boolean;
+  prevClassName?: string;
+  nextClassName?: string;
 }
 
-export function SliderNav({ onPrevious, onNext, className }: SliderNavProps) {
+export function SliderNav({
+  onPrevious,
+  onNext,
+  className,
+  separated = false,
+  prevClassName,
+  nextClassName,
+}: SliderNavProps) {
+  const prevButton = (
+    <Button
+      variant="dark"
+      size="icon"
+      onClick={onPrevious}
+      className={cn("rounded-none [&_svg]:size-5", prevClassName)}
+      aria-label="Previous slide"
+    >
+      <ChevronLeft />
+    </Button>
+  );
+
+  const nextButton = (
+    <Button
+      variant="dark"
+      size="icon"
+      onClick={onNext}
+      className={cn("rounded-none [&_svg]:size-5", nextClassName)}
+      aria-label="Next slide"
+    >
+      <ChevronRight />
+    </Button>
+  );
+
+  if (separated) {
+    return (
+      <>
+        {prevButton}
+        {nextButton}
+      </>
+    );
+  }
+
   return (
     <div className={cn("flex", className)}>
-      <Button
-        variant="dark"
-        size="icon"
-        onClick={onPrevious}
-        className="rounded-none [&_svg]:size-5"
-        aria-label="Previous slide"
-      >
-        <ChevronLeft />
-      </Button>
-      <Button
-        variant="dark"
-        size="icon"
-        onClick={onNext}
-        className="rounded-none [&_svg]:size-5"
-        aria-label="Next slide"
-      >
-        <ChevronRight />
-      </Button>
+      {prevButton}
+      {nextButton}
     </div>
   );
 }

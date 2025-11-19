@@ -100,7 +100,7 @@ export function CompletedWorks() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="absolute inset-0"
               >
                 <Image
@@ -112,9 +112,13 @@ export function CompletedWorks() {
                 />
               </motion.div>
             </AnimatePresence>
-            <div className="absolute top-4 right-4 z-10">
-              <SliderNav onPrevious={scrollPrev} onNext={scrollNext} />
-            </div>
+            <SliderNav
+              onPrevious={scrollPrev}
+              onNext={scrollNext}
+              separated
+              prevClassName="absolute top-1/2 -translate-y-1/2 left-4 z-10"
+              nextClassName="absolute top-1/2 -translate-y-1/2 right-4 z-10"
+            />
           </div>
         </div>
       </div>

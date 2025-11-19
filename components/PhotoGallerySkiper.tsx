@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { ScrollEncourager } from "./ScrollEncourager";
 
 const images = [
   "/images/cottage.jpg",
@@ -119,7 +119,6 @@ const PhotoGallerySkiper = () => {
           </>
         )}
       </div>
-      <ScrollEncourager targetRef={gallery} />
     </main>
   );
 };
@@ -148,9 +147,11 @@ const Column = ({ images, y, x, isMobile }: ColumnProps) => {
             isMobile ? "h-full w-[250px] min-w-[250px]" : "h-full w-full"
           }`}
         >
-          <img
-            src={`${src}`}
-            alt="image"
+          <Image
+            src={src}
+            alt="Gallery image"
+            fill
+            sizes={isMobile ? "250px" : "25vw"}
             className="pointer-events-none h-full w-full object-cover"
           />
         </div>

@@ -68,7 +68,7 @@ export default function Collections() {
         </motion.div>
       </div>
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-4 h-[550px] sm:px-4 md:px-12"
+        className="container grid grid-cols-1 md:grid-cols-3 gap-4 h-[550px] sm:px-4 md:px-12"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
