@@ -10,8 +10,6 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Contact() {
@@ -69,8 +67,6 @@ export default function Contact() {
 
   return (
     <div className="bg-neutral-50">
-      <Navigation />
-
       <section className="section">
         <div className="container">
           <div className="text-center mb-12">
@@ -180,8 +176,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }

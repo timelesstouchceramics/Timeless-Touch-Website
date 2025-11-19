@@ -7,8 +7,6 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 
 export default function Projects() {
   const projects = [
@@ -73,8 +71,6 @@ export default function Projects() {
 
   return (
     <div className="bg-neutral-50">
-      <Navigation />
-
       <section className="section">
         <div className="container">
           <div className="text-center mb-12">
@@ -118,8 +114,6 @@ export default function Projects() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }

@@ -166,7 +166,7 @@ const Navigation = () => {
                   {productCategories.map((category) => (
                     <Link
                       key={category.slug}
-                      href={`/products?category=${category.slug}`}
+                      href={`/products?categories=${category.slug}`}
                       onClick={() => setIsProductsOpen(false)}
                       className="group relative block rounded-lg overflow-hidden border border-neutral-200 transition-all hover:shadow-sm"
                     >
