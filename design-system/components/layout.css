@@ -1,13 +1,18 @@
 /* ============================================
-   LAYOUT COMPONENTS
+   LAYOUT UTILITIES & COMPONENTS
    ============================================ */
-@layer components {
-  /* Container - uses Tailwind's responsive container with padding */
+
+@layer utilities {
+  /* Container - manual implementation to override Tailwind's default container */
   .container,
   .container-sm,
   .container-md,
   .container-lg {
-    @apply container px-4 sm:px-6 lg:px-8;
+    @apply w-full px-4 sm:px-6 lg:px-8 mx-auto;
+  }
+
+  .container {
+    @apply max-w-7xl;
   }
 
   /* Size variants override max-width */
@@ -22,7 +27,9 @@
   .container-lg {
     @apply max-w-6xl;
   }
+}
 
+@layer components {
   /* Section - vertical spacing wrapper */
   .section {
     @apply py-16 sm:py-20 lg:py-24;
@@ -38,7 +45,7 @@
 
   /* Typography */
   .title-hero {
-    @apply text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-white mb-6 font-serif;
+    @apply text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-white mb-6 font-serif;
   }
 
   .title-section {

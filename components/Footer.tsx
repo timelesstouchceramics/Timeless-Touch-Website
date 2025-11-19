@@ -11,7 +11,7 @@ import Logo from "@/components/Logo";
 
 const Footer = () => {
   return (
-    <footer className="bg-neutral-200 border-t border-neutral-300">
+    <footer className="bg-neutral-200 border-t border-neutral-300 overflow-x-hidden">
       <div className="container section-sm">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>

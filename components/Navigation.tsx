@@ -29,6 +29,7 @@ const Navigation = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
+    handleScroll();
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -211,7 +212,7 @@ const Navigation = () => {
               <Search className="h-4 w-4" />
               Search
             </button>
-            <Button asChild variant="light">
+            <Button asChild variant="light" className="hidden lg:block">
               <Link href="/contact">Get in touch</Link>
             </Button>
           </div>

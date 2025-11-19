@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
@@ -72,8 +71,8 @@ export default function AboutStory() {
           }}
         />
       </div>
-      <div className="container px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      <div className="container md:px-4 lg:px-12 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
@@ -81,8 +80,9 @@ export default function AboutStory() {
               duration: 1.0,
               ease: [0, 0, 0.58, 1] as const,
             }}
+            className="w-full mx-auto"
           >
-            <AspectRatio ratio={1} className="relative overflow-hidden">
+            <div className="relative overflow-hidden w-full aspect-square max-h-[280px] md:h-[500px] md:max-h-full">
               <Image
                 src="/images/blac-marquina-1.jpg"
                 alt="Our story"
@@ -90,7 +90,7 @@ export default function AboutStory() {
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-black/5" />
-            </AspectRatio>
+            </div>
           </motion.div>
           <motion.div
             variants={containerVariants}

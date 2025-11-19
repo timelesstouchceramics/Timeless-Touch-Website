@@ -2,14 +2,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  type CarouselApi,
-} from "@/components/ui/carousel";
 import { SliderNav } from "@/components/ui/slider-nav";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 
@@ -47,16 +41,16 @@ const projects = [
 ];
 
 export function CompletedWorks() {
-  const [api, setApi] = useState<CarouselApi>();
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const scrollPrev = () => {
-    api?.scrollPrev();
+    setSelectedIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
   };
 
   const scrollNext = () => {
-    api?.scrollNext();
+    setSelectedIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
   };
 
   return (
@@ -76,46 +70,53 @@ export function CompletedWorks() {
       </div>
 
       <div className="w-full">
-        <Carousel
-          setApi={setApi}
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          className="w-full"
-        >
-          <CarouselContent className="-ml-0">
-            {projects.map((project, index) => (
-              <CarouselItem key={index} className="pl-0">
-                <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] h-[600px] lg:h-[700px]">
-                  {/* Left Panel - Text Content */}
-                  <div className="bg-neutral-950 text-white flex flex-col justify-center p-8 lg:p-12 xl:p-16">
-                    <h3 className="text-3xl lg:text-4xl xl:text-5xl font-serif font-bold mb-6 leading-tight">
-                      {project.title}
-                    </h3>
-                    <p className="text-base lg:text-lg text-white/90 leading-relaxed font-sans">
-                      {project.description}
-                    </p>
-                  </div>
+        <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] h-[700px]">
+          {/* Left Panel - Text Content */}
+          <div className="bg-neutral-950 text-white flex flex-col justify-center p-8 lg:p-12 xl:p-16 relative overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="absolute inset-0 flex flex-col justify-center p-6 lg:p-12 xl:p-16"
+              >
+                <h3 className="text-3xl lg:text-4xl xl:text-5xl font-serif font-bold mb-6 leading-tight">
+                  {projects[selectedIndex].title}
+                </h3>
+                <p className="text-base lg:text-lg text-white/90 leading-relaxed font-sans">
+                  {projects[selectedIndex].description}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-                  {/* Right Panel - Image */}
-                  <div className="relative overflow-hidden">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 60vw"
-                    />
-                    <div className="absolute top-4 right-4 z-10">
-                      <SliderNav onPrevious={scrollPrev} onNext={scrollNext} />
-                    </div>
-                  </div>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+          {/* Right Panel - Image */}
+          <div className="relative overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedIndex}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={projects[selectedIndex].image}
+                  alt={projects[selectedIndex].title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                />
+              </motion.div>
+            </AnimatePresence>
+            <div className="absolute top-4 right-4 z-10">
+              <SliderNav onPrevious={scrollPrev} onNext={scrollNext} />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

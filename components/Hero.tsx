@@ -60,7 +60,7 @@ export default function Hero() {
             {heroSlide.title}
           </motion.h1>
           <motion.div variants={itemVariants}>
-            <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-10 max-w-2xl mx-auto font-sans">
+            <p className="text-xl lg:text-2xl text-white/90 mb-10 max-w-2xl mx-auto font-sans">
               {heroSlide.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

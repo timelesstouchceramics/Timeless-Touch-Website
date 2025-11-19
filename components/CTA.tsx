@@ -35,10 +35,10 @@ export default function CTA() {
   };
 
   return (
-    <section className="section" ref={ref}>
+    <section className="section pt-28 pb-8" ref={ref}>
       <div className="container">
         <Card className="border-0">
-          <CardContent className="py-0">
+          <CardContent className="p-0 ">
             <motion.div
               className="bg-primary-500 text-neutral-50 text-center p-12"
               variants={containerVariants}
@@ -59,7 +59,7 @@ export default function CTA() {
                 space
               </motion.p>
               <motion.div
-                className="flex gap-4 justify-center"
+                className="flex gap-4 flex-col sm:flex-row justify-center"
                 variants={itemVariants}
               >
                 <Button asChild variant="secondary">

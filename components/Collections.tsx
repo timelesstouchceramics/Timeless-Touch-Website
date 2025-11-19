@@ -68,7 +68,7 @@ export default function Collections() {
         </motion.div>
       </div>
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-12 h-[550px] px-12"
+        className="grid grid-cols-1 md:grid-cols-3 gap-4 h-[550px] sm:px-4 md:px-12"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
@@ -86,7 +86,7 @@ export default function Collections() {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 33vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t bg-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent lg:bg-black/20" />
               <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                 <p className="text-white text-2xl md:text-3xl font-light tracking-wide uppercase">
                   LARGE SLABS

@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
@@ -43,8 +42,8 @@ export default function MapSection() {
 
   return (
     <section className="section" ref={ref}>
-      <div className="container px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="container lg:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Column - Content */}
           <motion.div
             className="flex flex-col gap-6"
@@ -52,13 +51,13 @@ export default function MapSection() {
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
           >
-            <motion.h2 className="title-section" variants={itemVariants}>
+            <motion.h2 className="title-section mb-0" variants={itemVariants}>
               Visit Our Showroom in Dubai
             </motion.h2>
 
-            {/* Teal separator line */}
+            {/* separator line */}
             <motion.div
-              className="h-0.5 w-[80%] bg-primary-500"
+              className="h-0.5 lg:w-[80%] bg-primary-500"
               variants={itemVariants}
             />
 
@@ -73,7 +72,7 @@ export default function MapSection() {
 
             {/* CTA Button */}
             <motion.div className="mt-4" variants={itemVariants}>
-              <Button variant="dark" className="rounded-md" asChild>
+              <Button className="rounded-md" asChild>
                 <a
                   href={directionsUrl}
                   target="_blank"
@@ -85,14 +84,18 @@ export default function MapSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Map with light blue background */}
+          {/* Right Column - Map */}
           <motion.div
             className="relative w-full overflow-hidden"
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ duration: 1.0, ease: [0.4, 0, 0.2, 1] as const, delay: 0.3 }}
+            transition={{
+              duration: 1.0,
+              ease: [0.4, 0, 0.2, 1] as const,
+              delay: 0.3,
+            }}
           >
-            <AspectRatio ratio={16 / 9} className="relative">
+            <div className="relative w-full aspect-[4/3] xl:aspect-video">
               <iframe
                 src={dubaiMapUrl}
                 width="100%"
@@ -104,7 +107,7 @@ export default function MapSection() {
                 className="absolute inset-0 w-full h-full"
                 title="Dubai Location Map"
               />
-            </AspectRatio>
+            </div>
           </motion.div>
         </div>
       </div>

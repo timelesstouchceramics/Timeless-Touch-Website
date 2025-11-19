@@ -32,8 +32,8 @@ export default function Blockquote() {
   };
 
   return (
-    <section className="section" ref={ref}>
-      <div className="container px-12">
+    <section className="section pt-12 pb-32" ref={ref}>
+      <div className="container md:px-12">
         <motion.blockquote
           className="relative pl-8"
           variants={containerVariants}
@@ -43,11 +43,11 @@ export default function Blockquote() {
           <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-500" />
 
           <motion.p
-            className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-neutral-950 leading-tight mb-4"
+            className="text-3xl md:text-4xl sm:font-semibold text-neutral-950 leading-tight mb-4"
             variants={itemVariants}
           >
-            &ldquo;We bring beauty into every space through quality craftsmanship
-            and uncompromising excellence.&rdquo;
+            &ldquo;We bring beauty into every space through quality
+            craftsmanship and uncompromising excellence.&rdquo;
           </motion.p>
           <motion.div className="mt-6" variants={itemVariants}>
             <cite>
@@ -64,4 +64,3 @@ export default function Blockquote() {
     </section>
   );
 }
-
