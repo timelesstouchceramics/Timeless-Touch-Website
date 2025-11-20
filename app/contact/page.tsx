@@ -50,7 +50,7 @@ export default function Contact() {
     {
       icon: Phone,
       title: "Call Us",
-      details: ["+971 4 XXX XXXX", "+971 50 XXX XXXX"],
+      details: ["+971 54 713 9032"],
     },
     {
       icon: Mail,
@@ -210,7 +210,7 @@ export default function Contact() {
                         type="tel"
                         value={formData.phone}
                         onChange={handleChange}
-                        placeholder="+971 50 XXX XXXX"
+                        placeholder="+971 54 713 9032"
                       />
                     </div>
 

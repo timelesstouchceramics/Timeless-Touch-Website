@@ -65,7 +65,7 @@ export default function ServiceCTA() {
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outlineLight">
-                  <Link href="tel:+9714XXXXXXX">
+                  <Link href="tel:+971547139032">
                     Call Us Now <Phone className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
