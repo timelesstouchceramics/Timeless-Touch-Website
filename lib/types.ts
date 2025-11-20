@@ -16,6 +16,13 @@ export interface Product {
   description?: string;
 }
 
+export interface Category {
+  name: string;
+  slug: string;
+  image: string;
+  description: string;
+}
+
 export type SortOption =
   | "name"
   | "name-desc"

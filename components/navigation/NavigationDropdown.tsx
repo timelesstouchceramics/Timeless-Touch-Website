@@ -5,13 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import NavLink from "@/components/NavLink";
-
-export interface Category {
-  name: string;
-  slug: string;
-  image: string;
-  description: string;
-}
+import { Category } from "@/lib/types";
 
 interface NavigationDropdownProps {
   navLinksRef: React.RefObject<HTMLDivElement | null>;
