@@ -6,8 +6,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 const serviceHero = {
-  image:
-    "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
+  image: "/images/services-hero-bg.jpg",
   title: "Our Premium Services",
   description:
     "Comprehensive porcelain solutions for residential, commercial, pool & outdoor applications with expert design consultation",

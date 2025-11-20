@@ -161,7 +161,7 @@ export default function NavigationDropdown({
           <div className="relative">
             <div
               ref={scrollContainerRef}
-              className="grid grid-cols-2 gap-4 max-h-[460px] overflow-y-auto pr-2 dropdown-scroll-hide"
+              className="grid grid-cols-2 gap-4 max-h-[455px] overflow-y-auto pr-2 dropdown-scroll-hide"
             >
               {categories.map((category) => (
                 <Link

@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Separator } from "@/components/ui/separator";
@@ -6,6 +8,9 @@ import Breadcrumb from "@/components/Breadcrumb";
 import FeaturesCard from "@/components/FeaturesCard";
 import FAQ from "@/components/FAQ";
 import TechnicalSpecs from "@/components/TechnicalSpecs";
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 
 export default function About() {
   const values = [
@@ -77,104 +82,235 @@ export default function About() {
     },
   ];
 
+  // Refs for scroll animations
+  const heroRef = useRef(null);
+  const storyRef = useRef(null);
+  const valuesRef = useRef(null);
+  const timelineRef = useRef(null);
+
+  const heroInView = useInView(heroRef, { once: true, margin: "-100px" });
+  const storyInView = useInView(storyRef, { once: true, margin: "-100px" });
+  const valuesInView = useInView(valuesRef, { once: true, margin: "-100px" });
+  const timelineInView = useInView(timelineRef, {
+    once: true,
+    margin: "-100px",
+  });
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.9,
+        ease: [0, 0, 0.58, 1] as const,
+      },
+    },
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 1.0,
+        ease: [0, 0, 0.58, 1] as const,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0, 0, 0.58, 1] as const,
+      },
+    },
+  };
+
+  const timelineItemVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0, 0, 0.58, 1] as const,
+      },
+    },
+  };
+
   return (
     <div className="bg-neutral-50">
       <div className="container pt-8">
         <Breadcrumb items={[{ label: "About Us" }]} />
       </div>
-      <section className="section-darker">
+      <section className="section-darker" ref={heroRef}>
         <div className="container text-center">
-          <h1 className="title-hero text-neutral-950">
+          <motion.h1
+            className="title-hero text-neutral-950"
+            initial={{ opacity: 0, y: 20 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.9, ease: [0, 0, 0.58, 1] as const }}
+          >
             About Timeless Touch Ceramics
-          </h1>
-          <p className="text-body">
+          </motion.h1>
+          <motion.p
+            className="text-body"
+            initial={{ opacity: 0, y: 20 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{
+              duration: 0.9,
+              delay: 0.2,
+              ease: [0, 0, 0.58, 1] as const,
+            }}
+          >
             3 years of excellence in manufacturing elegant porcelain surfaces
             that grace spaces with timeless sophistication.
-          </p>
+          </motion.p>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" ref={storyRef}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <AspectRatio ratio={1} className="relative overflow-hidden">
-              <Image
-                src="/images/cottage.jpg"
-                alt="Our story"
-                fill
-                className="object-cover"
-              />
-            </AspectRatio>
-            <div>
-              <h2 className="title-section">Our Story</h2>
-              <p className="text-body">
+            <motion.div
+              variants={imageVariants}
+              initial="hidden"
+              animate={storyInView ? "visible" : "hidden"}
+            >
+              <AspectRatio ratio={1} className="relative overflow-hidden">
+                <Image
+                  src="/images/story-section-pic.jpeg"
+                  alt="Our story"
+                  fill
+                  className="object-cover"
+                />
+              </AspectRatio>
+            </motion.div>
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate={storyInView ? "visible" : "hidden"}
+            >
+              <motion.h2 className="title-section" variants={itemVariants}>
+                Our Story
+              </motion.h2>
+              <motion.p className="text-body" variants={itemVariants}>
                 Timeless Touch Ceramics was founded in 2023 with a simple
                 mission: to manufacture elegant porcelain surfaces that grace
                 spaces with timeless sophistication. What started as a vision
                 for quality has grown into a trusted manufacturer in the
                 industry.
-              </p>
-              <p className="text-body">
+              </motion.p>
+              <motion.p className="text-body" variants={itemVariants}>
                 We believe that the right materials can transform any space into
                 something extraordinary. That&apos;s why we focus on
                 manufacturing excellence, using Full Body Technology to create
                 premium porcelain surfaces.
-              </p>
-              <p className="text-body">
+              </motion.p>
+              <motion.p className="text-body" variants={itemVariants}>
                 Today, we&apos;re proud to serve thousands of satisfied
                 customers, from homeowners creating their dream kitchens to
                 architects designing landmark commercial spaces, with our
                 comprehensive range of stone look, marble look, and modern look
                 collections.
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      <section className="section-darker">
+      <section className="section-darker" ref={valuesRef}>
         <div className="container">
-          <div className="text-center mb-12">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={
+              valuesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+            }
+            transition={{ duration: 0.9, ease: [0, 0, 0.58, 1] as const }}
+          >
             <h2 className="title-section">Our Values</h2>
             <p className="text-body">
               The principles that guide everything we do
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            animate={valuesInView ? "visible" : "hidden"}
+          >
             {values.map((value) => (
-              <FeaturesCard
-                key={value.title}
-                icon={value.icon}
-                title={value.title}
-                variant="vertical"
-                description={value.description}
-              />
+              <motion.div key={value.title} variants={cardVariants}>
+                <FeaturesCard
+                  icon={value.icon}
+                  title={value.title}
+                  variant="vertical"
+                  description={value.description}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <div className="text-center mb-12">
+      <section className="section" ref={timelineRef}>
+        <div className="container flex flex-col items-center justify-center">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={
+              timelineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+            }
+            transition={{ duration: 0.9, ease: [0, 0, 0.58, 1] as const }}
+          >
             <h2 className="title-section">Our Journey</h2>
             <p className="text-body">Milestones that shaped our story</p>
-          </div>
+          </motion.div>
 
-          <div className="flex flex-col gap-8">
+          <motion.div
+            className="flex flex-col gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate={timelineInView ? "visible" : "hidden"}
+          >
             {timeline.map((item) => (
-              <div key={item.year} className="flex gap-6 items-start">
+              <motion.div
+                key={item.year}
+                className="flex gap-6 items-start"
+                variants={timelineItemVariants}
+              >
                 <div className="flex-shrink-0">
-                  <span className="text-primary-500">{item.year}</span>
+                  <span className="bg-primary-500 rounded-full text-neutral-50 p-4">
+                    {item.year}
+                  </span>
                 </div>
                 <Separator orientation="vertical" />
                 <div>
                   <p className="text-body">{item.event}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 

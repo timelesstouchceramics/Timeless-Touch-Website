@@ -3,7 +3,7 @@ import ServiceFeatures from "@/components/services/ServiceFeatures";
 import ServiceProcess from "@/components/services/ServiceProcess";
 import ServiceCTA from "@/components/services/ServiceCTA";
 import Blockquote from "@/components/Blockquote";
-import { CompletedWorks } from "@/components/CompletedWorks";
+import { Showcase } from "@/components/Showcase";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export default function Services() {
@@ -15,7 +15,7 @@ export default function Services() {
       <ServiceHero />
       <ServiceFeatures />
       <ServiceProcess />
-      <CompletedWorks />
+      <Showcase />
       <Blockquote />
       <ServiceCTA />
     </div>

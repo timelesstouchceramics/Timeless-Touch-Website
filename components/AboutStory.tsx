@@ -84,7 +84,7 @@ export default function AboutStory() {
           >
             <div className="relative overflow-hidden w-full aspect-square max-h-[280px] md:h-[500px] md:max-h-full">
               <Image
-                src="/images/blac-marquina-1.jpg"
+                src="/images/story-section-pic.jpeg"
                 alt="Our story"
                 fill
                 className="object-cover"

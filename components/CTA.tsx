@@ -36,7 +36,7 @@ export default function CTA() {
   };
 
   return (
-    <section className="section " ref={ref}>
+    <section className="section pb-0" ref={ref}>
       <div className="relative overflow-hidden w-full">
         <motion.div
           className="relative z-10 h-full"
@@ -45,21 +45,26 @@ export default function CTA() {
           animate={isInView ? "visible" : "hidden"}
         >
           <motion.div
-            className="relative flex items-center justify-center py-40 px-6 md:px-12 overflow-hidden bg-cover bg-center"
-            style={{ backgroundImage: "url('/cta-bg.jpg')" }}
+            className="relative flex items-center justify-center py-20 px-6 md:px-12 overflow-hidden bg-cover bg-center"
+            style={{ backgroundImage: "url('/cta-bg.png')" }}
             variants={glassVariants}
           >
-            <div className="absolute inset-0 bg-neutral-900/50" />
+            <div className="absolute inset-0 bg-neutral-900/20" />
             {/* Background Lines */}
             <div className="relative z-10 w-full text-center">
-              <h2 className="title-section text-neutral-50">
+              <h2 className="title-section text-white">
                 We Will Transform Your Space
               </h2>
-              <p className="text-body text-neutral-50/90">
+              <p className="text-body text-white/90">
                 Premium tiles and natural stone for spaces that inspire
               </p>
               <div className="flex gap-4 justify-center mt-12">
-                <Button asChild size="lg" variant="secondary">
+                <Button
+                  asChild
+                  size="lg"
+                  variant="secondary"
+                  className="bg-neutral-50 hover:bg-white hover:shadow-xl transition-all duration-300"
+                >
                   <Link href="/contact">
                     Schedule Consultation <Calendar1 className="ml-2 h-4 w-4" />
                   </Link>

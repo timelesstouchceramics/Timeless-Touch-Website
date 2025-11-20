@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 const heroSlide = {
-  image: "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
+  image: "/hero-bg.jpg",
   title: "Grace Your Space With Top-Notch Products",
   description: "Elegant Porcelain Surfaces for spaces that inspire",
 };
@@ -47,7 +47,7 @@ export default function Hero() {
         />
       </div>
       {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 z-10 bg-neutral-950/40" />
+      <div className="absolute inset-0 z-10 bg-neutral-950/30" />
       {/* Content */}
       <div className="container relative z-20 h-full flex items-center justify-center">
         <motion.div

@@ -45,10 +45,10 @@ export default function ServiceCTA() {
         >
           <motion.div
             className="relative flex items-center justify-center py-40 px-6 md:px-12 overflow-hidden bg-cover bg-center"
-            style={{ backgroundImage: "url('/cta-bg.jpg')" }}
+            style={{ backgroundImage: "url('/cta-bg.png')" }}
             variants={glassVariants}
           >
-            <div className="absolute inset-0 bg-neutral-900/60" />
+            <div className="absolute inset-0 bg-neutral-900/50" />
             <div className="relative z-10 w-full text-center max-w-3xl mx-auto">
               <h2 className="title-section text-neutral-50 mb-4">
                 Ready to Transform Your Space?

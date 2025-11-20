@@ -1,37 +1,22 @@
 "use client";
 
-import NavigationDropdown, { Category } from "./NavigationDropdown";
+import NavigationDropdown from "./NavigationDropdown";
+import { Category } from "@/lib/types";
+import { catalogues } from "@/lib/catalogues-data";
 
 interface CataloguesDropdownProps {
   navLinksRef: React.RefObject<HTMLDivElement | null>;
 }
 
-const catalogueCategories: Category[] = [
-  {
-    name: "Large Format Tiles",
-    slug: "large-format",
-    image: "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-    description: "120x240, 800x2400, 1200x3200mm",
-  },
-  {
-    name: "Standard Tiles",
-    slug: "standard",
-    image: "/images/cottage-tile.jpg",
-    description: "60x120, 60x60cm collections",
-  },
-  {
-    name: "Premium Collections",
-    slug: "premium",
-    image: "/images/concept-light-gray-.jpg",
-    description: "Sintered stone & specialty tiles",
-  },
-  {
-    name: "Swimming Pool Tiles",
-    slug: "pool",
-    image: "/images/slider-lava-blue.jpg",
-    description: "Specialized pool tile collections",
-  },
-];
+// Convert catalogues to Category format and show only first 4
+const catalogueCategories: Category[] = catalogues
+  .slice(0, 4)
+  .map((catalogue) => ({
+    name: catalogue.title,
+    slug: catalogue.slug,
+    image: catalogue.thumbnail,
+    description: catalogue.fileSize,
+  }));
 
 export default function CataloguesDropdown({
   navLinksRef,
@@ -47,4 +32,3 @@ export default function CataloguesDropdown({
     />
   );
 }
-
