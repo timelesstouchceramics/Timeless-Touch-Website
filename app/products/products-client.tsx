@@ -230,7 +230,8 @@ export default function ProductsClient({
           selectedApplications.length === 0 ||
           (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
         const matchesSize =
-          selectedSizes.length === 0 || (p.size && selectedSizes.includes(p.size));
+          selectedSizes.length === 0 ||
+          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
         const matchesThickness =
           selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
         const matchesSpecialFeatures =
@@ -271,7 +272,8 @@ export default function ProductsClient({
           selectedApplications.length === 0 ||
           (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
         const matchesSize =
-          selectedSizes.length === 0 || (p.size && selectedSizes.includes(p.size));
+          selectedSizes.length === 0 ||
+          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
         const matchesThickness =
           selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
         const matchesSpecialFeatures =
@@ -313,7 +315,8 @@ export default function ProductsClient({
           selectedApplications.length === 0 ||
           (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
         const matchesSize =
-          selectedSizes.length === 0 || (p.size && selectedSizes.includes(p.size));
+          selectedSizes.length === 0 ||
+          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
         const matchesThickness =
           selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
         const matchesSpecialFeatures =
@@ -355,7 +358,8 @@ export default function ProductsClient({
         const matchesFinish =
           selectedFinishes.length === 0 || selectedFinishes.includes(p.finish);
         const matchesSize =
-          selectedSizes.length === 0 || (p.size && selectedSizes.includes(p.size));
+          selectedSizes.length === 0 ||
+          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
         const matchesThickness =
           selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
         const matchesSpecialFeatures =
@@ -386,7 +390,7 @@ export default function ProductsClient({
   const getSizeCount = useCallback(
     (size: string) => {
       return initialProducts.filter((p) => {
-        const matchesSize = p.size === size;
+        const matchesSize = p.sizes && p.sizes.includes(size);
         const matchesMainCategory =
           selectedMainCategories.length === 0 ||
           selectedMainCategories.includes(p.mainCategory);
@@ -441,7 +445,8 @@ export default function ProductsClient({
           selectedApplications.length === 0 ||
           (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
         const matchesSize =
-          selectedSizes.length === 0 || (p.size && selectedSizes.includes(p.size));
+          selectedSizes.length === 0 ||
+          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
         const matchesSpecialFeatures =
           selectedSpecialFeatures.length === 0 ||
           selectedSpecialFeatures.every((feat) => p[feat as keyof Product] === true);
@@ -483,7 +488,8 @@ export default function ProductsClient({
           selectedApplications.length === 0 ||
           (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
         const matchesSize =
-          selectedSizes.length === 0 || (p.size && selectedSizes.includes(p.size));
+          selectedSizes.length === 0 ||
+          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
         const matchesThickness =
           selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
         return (
@@ -535,7 +541,12 @@ export default function ProductsClient({
     }
 
     if (selectedSizes.length > 0) {
-      filtered = filtered.filter((p) => p.size && selectedSizes.includes(p.size));
+      filtered = filtered.filter(
+        (p) =>
+          p.sizes &&
+          p.sizes.length > 0 &&
+          p.sizes.some((size) => selectedSizes.includes(size))
+      );
     }
 
     if (selectedThicknesses.length > 0) {

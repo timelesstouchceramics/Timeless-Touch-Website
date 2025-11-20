@@ -38,7 +38,7 @@ interface ContentfulProductFields {
   images: ContentfulAsset[];
   description?: string;
   code?: string;
-  size?: any; // Reference - will be resolved from includes
+  sizes?: any[]; // References - will be resolved from includes
   thickness?: any; // Reference - will be resolved from includes
   bookmatch?: boolean;
   sixFace?: boolean;
@@ -246,13 +246,19 @@ function transformContentfulProduct(
   const mainCategoryRef = resolveReference(fields.mainCategory, includes);
   const designStyleRef = resolveReference(fields.designStyle, includes);
   const finishRef = resolveReference(fields.finish, includes);
-  const sizeRef = resolveReference(fields.size, includes);
   const thicknessRef = resolveReference(fields.thickness, includes);
 
   // Resolve applications array
   const applicationsRefs = Array.isArray(fields.applications)
     ? fields.applications
         .map((app) => resolveReference(app, includes))
+        .filter(Boolean)
+    : [];
+
+  // Resolve sizes array
+  const sizesRefs = Array.isArray(fields.sizes)
+    ? fields.sizes
+        .map((size) => resolveReference(size, includes))
         .filter(Boolean)
     : [];
 
@@ -285,7 +291,7 @@ function transformContentfulProduct(
     unit: fields.unit,
     images,
     code: fields.code,
-    size: sizeRef?.fields?.slug,
+    sizes: sizesRefs.map((size) => size.fields?.slug || "").filter(Boolean),
     thickness: thicknessRef?.fields?.slug,
     bookmatch: fields.bookmatch ?? false,
     sixFace: fields.sixFace ?? false,
@@ -464,7 +470,9 @@ export async function getSizes(): Promise<string[]> {
     const products = await getProducts();
     const sizes = [
       ...new Set(
-        products.map((p) => p.size).filter((s): s is string => !!s && s !== "")
+        products
+          .flatMap((p) => p.sizes || [])
+          .filter((s): s is string => !!s && s !== "")
       ),
     ];
     return sizes.sort();
@@ -570,10 +578,13 @@ export async function getFilteredProducts(options?: {
     );
   }
 
-  // Apply size filter
+  // Apply sizes filter
   if (options?.sizes && options.sizes.length > 0) {
     filtered = filtered.filter(
-      (p) => p.size && options.sizes!.includes(p.size)
+      (p) =>
+        p.sizes &&
+        p.sizes.length > 0 &&
+        p.sizes.some((size) => options.sizes!.includes(size))
     );
   }
 

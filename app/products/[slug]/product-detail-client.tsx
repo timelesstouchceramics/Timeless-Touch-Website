@@ -44,10 +44,10 @@ export default function ProductDetailClient({
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Memoize similar products so they don't change when clicking images
-  // Only recalculate when the product slug changes
+  // Only recalculate when the product or allProducts changes
   const similarProducts = useMemo(
     () => getSimilarProducts(product, allProducts, 6),
-    [product.slug, allProducts]
+    [product, allProducts]
   );
 
   // Sync carousel state with thumbnail selection
@@ -77,7 +77,7 @@ export default function ProductDetailClient({
             ]}
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 mb-16">
             <div className="space-y-4">
               <Carousel
                 setApi={setApi}
@@ -134,15 +134,21 @@ export default function ProductDetailClient({
               <div>
                 <h1 className="title-section">{product.name}</h1>
                 <div className="flex gap-2 mt-2 flex-wrap">
-                  <Badge variant="secondary">
-                    {formatLabel(product.mainCategory)}
-                  </Badge>
-                  <Badge variant="secondary">
-                    {formatLabel(product.designStyle)}
-                  </Badge>
-                  <Badge variant="secondary">
-                    {capitalize(product.finish)}
-                  </Badge>
+                  {product.mainCategory && (
+                    <Badge variant="secondary">
+                      {formatLabel(product.mainCategory)}
+                    </Badge>
+                  )}
+                  {product.designStyle && (
+                    <Badge variant="secondary">
+                      {formatLabel(product.designStyle)}
+                    </Badge>
+                  )}
+                  {product.finish && (
+                    <Badge variant="secondary">
+                      {capitalize(product.finish)}
+                    </Badge>
+                  )}
                   {product.bookmatch && (
                     <Badge variant="outline">Bookmatch Available</Badge>
                   )}
@@ -164,7 +170,8 @@ export default function ProductDetailClient({
                 <p className="text-body">{product.description}</p>
               ) : (
                 <p className="text-body">
-                  Premium quality {formatLabel(product.designStyle)} {formatLabel(product.mainCategory)} with {product.finish}{" "}
+                  Premium quality {formatLabel(product.designStyle)}{" "}
+                  {formatLabel(product.mainCategory)} with {product.finish}{" "}
                   finish. Perfect for interior and exterior applications.
                 </p>
               )}
@@ -203,21 +210,29 @@ export default function ProductDetailClient({
                         </TableRow>
                       )}
                       <TableRow>
-                        <TableCell className="font-medium">Product Type</TableCell>
-                        <TableCell>{formatLabel(product.mainCategory)}</TableCell>
+                        <TableCell className="font-medium">
+                          Product Type
+                        </TableCell>
+                        <TableCell>
+                          {formatLabel(product.mainCategory)}
+                        </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell className="font-medium">Design Style</TableCell>
-                        <TableCell>{formatLabel(product.designStyle)}</TableCell>
+                        <TableCell className="font-medium">
+                          Design Style
+                        </TableCell>
+                        <TableCell>
+                          {formatLabel(product.designStyle)}
+                        </TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell className="font-medium">Finish</TableCell>
                         <TableCell>{capitalize(product.finish)}</TableCell>
                       </TableRow>
-                      {product.size && (
+                      {product.sizes && product.sizes.length > 0 && (
                         <TableRow>
-                          <TableCell className="font-medium">Size</TableCell>
-                          <TableCell>{product.size}</TableCell>
+                          <TableCell className="font-medium">Sizes</TableCell>
+                          <TableCell>{product.sizes.join(", ")}</TableCell>
                         </TableRow>
                       )}
                       {product.thickness && (
@@ -228,14 +243,18 @@ export default function ProductDetailClient({
                           <TableCell>{product.thickness}</TableCell>
                         </TableRow>
                       )}
-                      {(product.bookmatch || product.sixFace || product.fullBody) && (
+                      {(product.bookmatch ||
+                        product.sixFace ||
+                        product.fullBody) && (
                         <TableRow>
                           <TableCell className="font-medium">
                             Special Features
                           </TableCell>
                           <TableCell>
                             {product.bookmatch && "Bookmatch Available"}
-                            {product.bookmatch && (product.sixFace || product.fullBody) && ", "}
+                            {product.bookmatch &&
+                              (product.sixFace || product.fullBody) &&
+                              ", "}
                             {product.sixFace && "6-Face Design"}
                             {product.sixFace && product.fullBody && ", "}
                             {product.fullBody && "Full Body Construction"}
@@ -303,8 +322,8 @@ export default function ProductDetailClient({
                           <li className="flex items-start gap-2">
                             <span>•</span>
                             <span>
-                              Full Body Technology for consistent color throughout
-                              thickness
+                              Full Body Technology for consistent color
+                              throughout thickness
                             </span>
                           </li>
                         )}
@@ -313,7 +332,7 @@ export default function ProductDetailClient({
                             <span>•</span>
                             <span>
                               Bookmatch pattern available for dramatic feature
-                              wall installations
+                              wall applications
                             </span>
                           </li>
                         )}
@@ -321,8 +340,8 @@ export default function ProductDetailClient({
                           <li className="flex items-start gap-2">
                             <span>•</span>
                             <span>
-                              6-Face design for versatile installation and
-                              creative applications
+                              6-Face design for versatile applications and
+                              creative design possibilities
                             </span>
                           </li>
                         )}
@@ -371,7 +390,7 @@ export default function ProductDetailClient({
                   {similarProducts.map((item) => (
                     <CarouselItem
                       key={item.slug}
-                      className="pl-4 basis-1/2 sm:basis-1/3 lg:basis-1/4"
+                      className="full-h pl-4 basis-1/2 sm:basis-1/3 lg:basis-1/4"
                     >
                       <ProductCard product={item} showActions={false} />
                     </CarouselItem>
@@ -395,4 +414,3 @@ export default function ProductDetailClient({
     </div>
   );
 }
-

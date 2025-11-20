@@ -9,27 +9,27 @@ export default function ServiceProcess() {
   const steps = [
     {
       number: "01",
-      title: "Consultation",
+      title: "Product Inquiry",
       description:
-        "Schedule a free consultation to discuss your project needs, budget, and vision with our experts.",
+        "Browse our collections or contact us to discuss your project needs and explore our comprehensive porcelain range.",
     },
     {
       number: "02",
-      title: "Design & Planning",
+      title: "Product Selection",
       description:
-        "Our design team creates detailed plans and porcelain material recommendations from our comprehensive collections tailored to your space.",
+        "Our team provides detailed product information and recommendations from our collections tailored to your space and requirements.",
     },
     {
       number: "03",
-      title: "Quote & Approval",
+      title: "Quote & Order",
       description:
-        "Receive a comprehensive quote with transparent pricing. Approve the plan and we proceed.",
+        "Receive a comprehensive quote with transparent pricing. Confirm your order and we prepare your materials.",
     },
     {
       number: "04",
-      title: "Installation & Completion",
+      title: "Delivery & Support",
       description:
-        "Professional installation by certified technicians, followed by final inspection and handover.",
+        "Reliable delivery of your porcelain products with ongoing support and guidance for your project.",
     },
   ];
 
@@ -70,7 +70,8 @@ export default function ServiceProcess() {
         >
           <h2 className="title-section">Our Process</h2>
           <p className="text-body">
-            A streamlined approach to transforming your space
+            A straightforward approach to finding the perfect porcelain products
+            for your project
           </p>
         </motion.div>
 

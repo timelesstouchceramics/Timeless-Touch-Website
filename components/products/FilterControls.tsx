@@ -151,22 +151,39 @@ export default function FilterControls({
                     ? "opacity-50"
                     : "hover:bg-neutral-100 cursor-pointer"
                 }`}
-                onClick={() => !isDisabled && onToggleMainCategory(mainCategory)}
+                onClick={(e) => {
+                  if (
+                    e.target === e.currentTarget ||
+                    (e.target as HTMLElement).tagName === "SPAN"
+                  ) {
+                    !isDisabled && onToggleMainCategory(mainCategory);
+                  }
+                }}
               >
                 <Checkbox
                   id={`${isMobile ? "mobile-" : ""}main-${mainCategory}`}
                   checked={selectedMainCategories.includes(mainCategory)}
-                  onCheckedChange={() => onToggleMainCategory(mainCategory)}
+                  onCheckedChange={(checked) => {
+                    if (!isDisabled) {
+                      onToggleMainCategory(mainCategory);
+                    }
+                  }}
+                  onClick={(e) => e.stopPropagation()}
                   disabled={isDisabled}
                 />
                 <Label
                   htmlFor={`${isMobile ? "mobile-" : ""}main-${mainCategory}`}
-                  className={`flex-1 cursor-pointer ${isDisabled ? "text-neutral-400 cursor-not-allowed" : ""}`}
+                  className={`flex-1 cursor-pointer ${
+                    isDisabled ? "text-neutral-400 cursor-not-allowed" : ""
+                  }`}
+                  onClick={(e) => e.stopPropagation()}
                 >
                   {formatLabel(mainCategory)}
                 </Label>
                 <span
-                  className={`text-sm ${isDisabled ? "text-neutral-400" : "text-neutral-500"}`}
+                  className={`text-sm ${
+                    isDisabled ? "text-neutral-400" : "text-neutral-500"
+                  }`}
                 >
                   ({count})
                 </span>
@@ -206,22 +223,39 @@ export default function FilterControls({
                     ? "opacity-50"
                     : "hover:bg-neutral-100 cursor-pointer"
                 }`}
-                onClick={() => !isDisabled && onToggleDesignStyle(designStyle)}
+                onClick={(e) => {
+                  if (
+                    e.target === e.currentTarget ||
+                    (e.target as HTMLElement).tagName === "SPAN"
+                  ) {
+                    !isDisabled && onToggleDesignStyle(designStyle);
+                  }
+                }}
               >
                 <Checkbox
                   id={`${isMobile ? "mobile-" : ""}style-${designStyle}`}
                   checked={selectedDesignStyles.includes(designStyle)}
-                  onCheckedChange={() => onToggleDesignStyle(designStyle)}
+                  onCheckedChange={(checked) => {
+                    if (!isDisabled) {
+                      onToggleDesignStyle(designStyle);
+                    }
+                  }}
+                  onClick={(e) => e.stopPropagation()}
                   disabled={isDisabled}
                 />
                 <Label
                   htmlFor={`${isMobile ? "mobile-" : ""}style-${designStyle}`}
-                  className={`flex-1 cursor-pointer ${isDisabled ? "text-neutral-400 cursor-not-allowed" : ""}`}
+                  className={`flex-1 cursor-pointer ${
+                    isDisabled ? "text-neutral-400 cursor-not-allowed" : ""
+                  }`}
+                  onClick={(e) => e.stopPropagation()}
                 >
                   {formatLabel(designStyle)}
                 </Label>
                 <span
-                  className={`text-sm ${isDisabled ? "text-neutral-400" : "text-neutral-500"}`}
+                  className={`text-sm ${
+                    isDisabled ? "text-neutral-400" : "text-neutral-500"
+                  }`}
                 >
                   ({count})
                 </span>
@@ -256,22 +290,39 @@ export default function FilterControls({
                     ? "opacity-50"
                     : "hover:bg-neutral-100 cursor-pointer"
                 }`}
-                onClick={() => !isDisabled && onToggleFinish(finish)}
+                onClick={(e) => {
+                  if (
+                    e.target === e.currentTarget ||
+                    (e.target as HTMLElement).tagName === "SPAN"
+                  ) {
+                    !isDisabled && onToggleFinish(finish);
+                  }
+                }}
               >
                 <Checkbox
                   id={`${isMobile ? "mobile-" : ""}${finish}`}
                   checked={selectedFinishes.includes(finish)}
-                  onCheckedChange={() => onToggleFinish(finish)}
+                  onCheckedChange={(checked) => {
+                    if (!isDisabled) {
+                      onToggleFinish(finish);
+                    }
+                  }}
+                  onClick={(e) => e.stopPropagation()}
                   disabled={isDisabled}
                 />
                 <Label
                   htmlFor={`${isMobile ? "mobile-" : ""}${finish}`}
-                  className={`flex-1 cursor-pointer ${isDisabled ? "text-neutral-400 cursor-not-allowed" : ""}`}
+                  className={`flex-1 cursor-pointer ${
+                    isDisabled ? "text-neutral-400 cursor-not-allowed" : ""
+                  }`}
+                  onClick={(e) => e.stopPropagation()}
                 >
                   {capitalize(finish)}
                 </Label>
                 <span
-                  className={`text-sm ${isDisabled ? "text-neutral-400" : "text-neutral-500"}`}
+                  className={`text-sm ${
+                    isDisabled ? "text-neutral-400" : "text-neutral-500"
+                  }`}
                 >
                   ({count})
                 </span>
@@ -284,9 +335,14 @@ export default function FilterControls({
       <Separator />
 
       {/* Applications Filter */}
-      <Collapsible open={applicationsOpen} onOpenChange={onApplicationsOpenChange}>
+      <Collapsible
+        open={applicationsOpen}
+        onOpenChange={onApplicationsOpenChange}
+      >
         <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100">
-          <h4 className="text-base font-semibold text-neutral-950">Applications</h4>
+          <h4 className="text-base font-semibold text-neutral-950">
+            Applications
+          </h4>
           <ChevronDown
             className={`h-4 w-4 transition-transform duration-200 ${
               applicationsOpen ? "rotate-180" : ""
@@ -306,22 +362,39 @@ export default function FilterControls({
                     ? "opacity-50"
                     : "hover:bg-neutral-100 cursor-pointer"
                 }`}
-                onClick={() => !isDisabled && onToggleApplication(application)}
+                onClick={(e) => {
+                  if (
+                    e.target === e.currentTarget ||
+                    (e.target as HTMLElement).tagName === "SPAN"
+                  ) {
+                    !isDisabled && onToggleApplication(application);
+                  }
+                }}
               >
                 <Checkbox
                   id={`${isMobile ? "mobile-" : ""}app-${application}`}
                   checked={selectedApplications.includes(application)}
-                  onCheckedChange={() => onToggleApplication(application)}
+                  onCheckedChange={(checked) => {
+                    if (!isDisabled) {
+                      onToggleApplication(application);
+                    }
+                  }}
+                  onClick={(e) => e.stopPropagation()}
                   disabled={isDisabled}
                 />
                 <Label
                   htmlFor={`${isMobile ? "mobile-" : ""}app-${application}`}
-                  className={`flex-1 cursor-pointer ${isDisabled ? "text-neutral-400 cursor-not-allowed" : ""}`}
+                  className={`flex-1 cursor-pointer ${
+                    isDisabled ? "text-neutral-400 cursor-not-allowed" : ""
+                  }`}
+                  onClick={(e) => e.stopPropagation()}
                 >
                   {application}
                 </Label>
                 <span
-                  className={`text-sm ${isDisabled ? "text-neutral-400" : "text-neutral-500"}`}
+                  className={`text-sm ${
+                    isDisabled ? "text-neutral-400" : "text-neutral-500"
+                  }`}
                 >
                   ({count})
                 </span>
@@ -346,8 +419,7 @@ export default function FilterControls({
         <CollapsibleContent className="space-y-2 pt-2">
           {sizes.map((size) => {
             const count = getSizeCount(size);
-            const isDisabled =
-              count === 0 && !selectedSizes.includes(size);
+            const isDisabled = count === 0 && !selectedSizes.includes(size);
             return (
               <div
                 key={size}
@@ -356,22 +428,39 @@ export default function FilterControls({
                     ? "opacity-50"
                     : "hover:bg-neutral-100 cursor-pointer"
                 }`}
-                onClick={() => !isDisabled && onToggleSize(size)}
+                onClick={(e) => {
+                  if (
+                    e.target === e.currentTarget ||
+                    (e.target as HTMLElement).tagName === "SPAN"
+                  ) {
+                    !isDisabled && onToggleSize(size);
+                  }
+                }}
               >
                 <Checkbox
                   id={`${isMobile ? "mobile-" : ""}size-${size}`}
                   checked={selectedSizes.includes(size)}
-                  onCheckedChange={() => onToggleSize(size)}
+                  onCheckedChange={(checked) => {
+                    if (!isDisabled) {
+                      onToggleSize(size);
+                    }
+                  }}
+                  onClick={(e) => e.stopPropagation()}
                   disabled={isDisabled}
                 />
                 <Label
                   htmlFor={`${isMobile ? "mobile-" : ""}size-${size}`}
-                  className={`flex-1 cursor-pointer ${isDisabled ? "text-neutral-400 cursor-not-allowed" : ""}`}
+                  className={`flex-1 cursor-pointer ${
+                    isDisabled ? "text-neutral-400 cursor-not-allowed" : ""
+                  }`}
+                  onClick={(e) => e.stopPropagation()}
                 >
                   {size}
                 </Label>
                 <span
-                  className={`text-sm ${isDisabled ? "text-neutral-400" : "text-neutral-500"}`}
+                  className={`text-sm ${
+                    isDisabled ? "text-neutral-400" : "text-neutral-500"
+                  }`}
                 >
                   ({count})
                 </span>
@@ -384,9 +473,14 @@ export default function FilterControls({
       <Separator />
 
       {/* Thickness Filter */}
-      <Collapsible open={thicknessesOpen} onOpenChange={onThicknessesOpenChange}>
+      <Collapsible
+        open={thicknessesOpen}
+        onOpenChange={onThicknessesOpenChange}
+      >
         <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100">
-          <h4 className="text-base font-semibold text-neutral-950">Thickness</h4>
+          <h4 className="text-base font-semibold text-neutral-950">
+            Thickness
+          </h4>
           <ChevronDown
             className={`h-4 w-4 transition-transform duration-200 ${
               thicknessesOpen ? "rotate-180" : ""
@@ -406,22 +500,39 @@ export default function FilterControls({
                     ? "opacity-50"
                     : "hover:bg-neutral-100 cursor-pointer"
                 }`}
-                onClick={() => !isDisabled && onToggleThickness(thickness)}
+                onClick={(e) => {
+                  if (
+                    e.target === e.currentTarget ||
+                    (e.target as HTMLElement).tagName === "SPAN"
+                  ) {
+                    !isDisabled && onToggleThickness(thickness);
+                  }
+                }}
               >
                 <Checkbox
                   id={`${isMobile ? "mobile-" : ""}thickness-${thickness}`}
                   checked={selectedThicknesses.includes(thickness)}
-                  onCheckedChange={() => onToggleThickness(thickness)}
+                  onCheckedChange={(checked) => {
+                    if (!isDisabled) {
+                      onToggleThickness(thickness);
+                    }
+                  }}
+                  onClick={(e) => e.stopPropagation()}
                   disabled={isDisabled}
                 />
                 <Label
                   htmlFor={`${isMobile ? "mobile-" : ""}thickness-${thickness}`}
-                  className={`flex-1 cursor-pointer ${isDisabled ? "text-neutral-400 cursor-not-allowed" : ""}`}
+                  className={`flex-1 cursor-pointer ${
+                    isDisabled ? "text-neutral-400 cursor-not-allowed" : ""
+                  }`}
+                  onClick={(e) => e.stopPropagation()}
                 >
                   {thickness}
                 </Label>
                 <span
-                  className={`text-sm ${isDisabled ? "text-neutral-400" : "text-neutral-500"}`}
+                  className={`text-sm ${
+                    isDisabled ? "text-neutral-400" : "text-neutral-500"
+                  }`}
                 >
                   ({count})
                 </span>
@@ -434,9 +545,14 @@ export default function FilterControls({
       <Separator />
 
       {/* Special Features Filter */}
-      <Collapsible open={specialFeaturesOpen} onOpenChange={onSpecialFeaturesOpenChange}>
+      <Collapsible
+        open={specialFeaturesOpen}
+        onOpenChange={onSpecialFeaturesOpenChange}
+      >
         <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100">
-          <h4 className="text-base font-semibold text-neutral-950">Special Features</h4>
+          <h4 className="text-base font-semibold text-neutral-950">
+            Special Features
+          </h4>
           <ChevronDown
             className={`h-4 w-4 transition-transform duration-200 ${
               specialFeaturesOpen ? "rotate-180" : ""
@@ -456,22 +572,39 @@ export default function FilterControls({
                     ? "opacity-50"
                     : "hover:bg-neutral-100 cursor-pointer"
                 }`}
-                onClick={() => !isDisabled && onToggleSpecialFeature(feature)}
+                onClick={(e) => {
+                  if (
+                    e.target === e.currentTarget ||
+                    (e.target as HTMLElement).tagName === "SPAN"
+                  ) {
+                    !isDisabled && onToggleSpecialFeature(feature);
+                  }
+                }}
               >
                 <Checkbox
                   id={`${isMobile ? "mobile-" : ""}feature-${feature}`}
                   checked={selectedSpecialFeatures.includes(feature)}
-                  onCheckedChange={() => onToggleSpecialFeature(feature)}
+                  onCheckedChange={(checked) => {
+                    if (!isDisabled) {
+                      onToggleSpecialFeature(feature);
+                    }
+                  }}
+                  onClick={(e) => e.stopPropagation()}
                   disabled={isDisabled}
                 />
                 <Label
                   htmlFor={`${isMobile ? "mobile-" : ""}feature-${feature}`}
-                  className={`flex-1 cursor-pointer ${isDisabled ? "text-neutral-400 cursor-not-allowed" : ""}`}
+                  className={`flex-1 cursor-pointer ${
+                    isDisabled ? "text-neutral-400 cursor-not-allowed" : ""
+                  }`}
+                  onClick={(e) => e.stopPropagation()}
                 >
                   {formatLabel(feature)}
                 </Label>
                 <span
-                  className={`text-sm ${isDisabled ? "text-neutral-400" : "text-neutral-500"}`}
+                  className={`text-sm ${
+                    isDisabled ? "text-neutral-400" : "text-neutral-500"
+                  }`}
                 >
                   ({count})
                 </span>
@@ -482,11 +615,7 @@ export default function FilterControls({
       </Collapsible>
 
       {totalActiveFilters > 0 && (
-        <Button
-          variant="outline"
-          onClick={onClearAll}
-          className="w-full mt-4"
-        >
+        <Button variant="outline" onClick={onClearAll} className="w-full mt-4">
           Clear All Filters
         </Button>
       )}

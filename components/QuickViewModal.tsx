@@ -72,14 +72,16 @@ export default function QuickViewModal({
               </div>
             </div>
 
-            <div>
-              <p className="text-2xl font-semibold text-neutral-950">
-                AED {product.price}{" "}
-                <span className="text-base font-normal text-neutral-600">
-                  / {product.unit}
-                </span>
-              </p>
-            </div>
+            {product.price != null && (
+              <div>
+                <p className="text-2xl font-semibold text-neutral-950">
+                  AED {product.price.toFixed(2)}{" "}
+                  <span className="text-base font-normal text-neutral-600">
+                    / {product.unit || "unit"}
+                  </span>
+                </p>
+              </div>
+            )}
 
             <p className="text-sm text-neutral-600">
               {product.description || `Premium quality ${formatLabel(product.designStyle)} ${formatLabel(product.mainCategory)} with ${product.finish} finish. Perfect for interior and exterior applications.`}

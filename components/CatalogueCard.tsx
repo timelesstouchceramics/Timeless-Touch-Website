@@ -19,7 +19,7 @@ export default function CatalogueCard({
   fileSize,
 }: CatalogueCardProps) {
   return (
-    <div className="bg-white rounded-md shadow-xs hover:shadow-sm transition-shadow overflow-hidden group">
+    <div className="bg-white rounded-md shadow-xs hover:shadow-sm transition-shadow overflow-hidden group h-full">
       <div className="relative aspect-[3/4] bg-neutral-100 overflow-hidden">
         {thumbnail ? (
           <Image
@@ -42,13 +42,13 @@ export default function CatalogueCard({
         {fileSize && (
           <p className="text-xs text-neutral-500 mb-3">{fileSize}</p>
         )}
-        <Button
-          variant="outlineDark"
-          className="w-full"
-          size="sm"
-          asChild
-        >
-          <Link href={fileUrl} download={title} target="_blank" rel="noopener noreferrer">
+        <Button variant="outlineDark" className="w-full" size="sm" asChild>
+          <Link
+            href={fileUrl}
+            download={title}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Download className="h-4 w-4 mr-2" />
             Download
           </Link>
@@ -57,4 +57,3 @@ export default function CatalogueCard({
     </div>
   );
 }
-

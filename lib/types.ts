@@ -11,7 +11,7 @@ export interface Product {
   unit: string;
   images: string[];
   code?: string;
-  size?: string;
+  sizes?: string[];
   thickness?: string;
   bookmatch?: boolean;
   sixFace?: boolean;

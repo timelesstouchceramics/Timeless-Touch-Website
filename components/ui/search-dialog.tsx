@@ -118,9 +118,11 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                       <div className="text-sm text-neutral-600 truncate">
                         {product.designStyle.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")} • {product.finish}
                       </div>
-                      <div className="text-sm text-neutral-700 mt-1">
-                        AED {product.price.toFixed(2)} / {product.unit}
-                      </div>
+                      {product.price != null && (
+                        <div className="text-sm text-neutral-700 mt-1">
+                          AED {product.price.toFixed(2)} / {product.unit || "unit"}
+                        </div>
+                      )}
                     </div>
                   </CommandItem>
                 ))}

@@ -11,32 +11,26 @@ const projects = [
   {
     title: "Modern Kitchen Renovation",
     description:
-      "A stunning transformation featuring premium Statuario porcelain countertops and Concept Light Gray tile flooring from our Modern Look Collection. This contemporary kitchen combines elegance with functionality, showcasing our Full Body Technology in a residential setting.",
+      "A stunning contemporary kitchen featuring our premium large format tiles in sophisticated light gray from our Modern Look Collection. The seamless flooring creates a perfect foundation that harmonizes with natural wood cabinetry and exposed concrete ceilings. Our Full Body Technology and matt finish ensure lasting beauty and easy maintenance in this high-traffic culinary space.",
     image: "/images/showcase/kitchen.jpg",
   },
   {
     title: "Residential Living Space",
     description:
-      "An open-plan living area featuring our signature large format slab installations up to 800x2400mm. The seamless integration of Calacatta Gold and Carrara porcelain from our Marble Look Collection creates a cohesive and luxurious environment for modern living.",
+      "A dramatic double-height entryway showcasing our premium large format marble-look porcelain slabs in warm beige tones from our Stone Look Collection. The floor-to-ceiling application creates a seamless, hotel-inspired aesthetic with authentic travertine veining and natural stone character. Strategic lighting highlights the rich texture and depth of the surface, while the polished finish adds timeless elegance to this sophisticated residential space.",
     image: "/images/showcase/residential.jpg",
   },
   {
     title: "Luxury Swimming Pool Design",
     description:
-      "An elegant outdoor pool area featuring our premium Starwave Series Crystalline Glazed Porcelain tiles. This stunning installation demonstrates the perfect blend of aesthetics and functionality, showcasing how our specialized pool tiles can transform any aquatic space into a luxurious retreat.",
+      "An elegant aquatic retreat featuring our premium Starwave Series Crystalline Glazed Porcelain mosaic tiles in mesmerizing ocean blue tones. The shimmering underwater surface captures and reflects light beautifully, creating the poetic blend of starlight and sea that defines our pool collection. This stunning application demonstrates how our specialized mosaic tiles transform ordinary pools into luxurious sanctuaries with lasting beauty and performance.",
     image: "/images/showcase/swimmingpool.jpg",
   },
   {
-    title: "Contemporary Bathroom Design",
+    title: "Zen Bathroom Sanctuary",
     description:
-      "A serene bathroom retreat showcasing our premium porcelain collections including Black Marquina feature walls and Emerald series accents. The carefully selected materials create a spa-like atmosphere, blending modern aesthetics with natural beauty.",
+      "A tranquil sanctuary featuring our premium textured stone-look porcelain in sophisticated gray-green tones from our Stone Look Collection. The dramatic three-dimensional feature wall creates depth and visual interest, complemented by smooth large format tiles in warm beige throughout the space. This serene bathroom demonstrates how thoughtful material selection and texture contrast can transform a functional space into a luxurious wellness retreat with spa-like ambiance.",
     image: "/images/showcase/bathroom.jpg",
-  },
-  {
-    title: "Commercial Excellence",
-    description:
-      "A high-end retail space demonstrating the versatility of our porcelain collections. The design showcases Monocolor and Concept series tiles, highlighting how premium Full Body Technology materials can elevate any commercial environment with elegance and durability.",
-    image: "/images/showcase/commercial.jpg",
   },
 ];
 

@@ -1,14 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import {
-  Home,
-  Building2,
-  Waves,
-  Palette,
-  Users,
-  Layout,
-} from "lucide-react";
+import { Home, Building2, Waves, Palette, Users, Layout } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
@@ -42,9 +35,9 @@ export default function ServiceFeatures() {
     },
     {
       icon: Users,
-      title: "Design Consultation",
+      title: "Product Guidance",
       description:
-        "Expert guidance on material selection and application from our experienced design team",
+        "Expert advice on material selection and application from our experienced product specialists",
     },
     {
       icon: Layout,
@@ -108,7 +101,8 @@ export default function ServiceFeatures() {
         >
           <h2 className="title-section">Our Services</h2>
           <p className="text-body">
-            Comprehensive porcelain solutions for residential, commercial, and specialized applications
+            Comprehensive porcelain solutions for residential, commercial, and
+            specialized applications
           </p>
         </motion.div>
 
@@ -119,7 +113,11 @@ export default function ServiceFeatures() {
           animate={isInView ? "visible" : "hidden"}
         >
           {services.map((service) => (
-            <motion.div key={service.title} variants={itemVariants} className="h-full">
+            <motion.div
+              key={service.title}
+              variants={itemVariants}
+              className="h-full"
+            >
               <FeaturesCard
                 icon={service.icon}
                 title={service.title}

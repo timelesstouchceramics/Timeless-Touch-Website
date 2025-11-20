@@ -1,6 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Card, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Eye, ArrowRight } from "lucide-react";
@@ -31,10 +36,16 @@ export default function ProductCard({
       <Link href={`/products/${product.slug}`}>
         <Card className="shadow-sm overflow-hidden transition-shadow hover:shadow-md">
           <AspectRatio ratio={1} className="relative overflow-hidden">
-            {product.images && product.images.length > 0 && product.images[0] ? (
+            {product.images &&
+            product.images.length > 0 &&
+            product.images[0] ? (
               <Image
                 src={product.images[0]}
-                alt={`${product.name} - ${formatLabel(product.designStyle)} ${formatLabel(product.mainCategory)} with ${product.finish} finish`}
+                alt={`${product.name} - ${formatLabel(
+                  product.designStyle
+                )} ${formatLabel(product.mainCategory)} with ${
+                  product.finish
+                } finish`}
                 fill
                 className="object-cover transition-transform group-hover:scale-105 duration-500"
               />

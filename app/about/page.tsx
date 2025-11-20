@@ -24,7 +24,7 @@ export default function About() {
       icon: Users,
       title: "Expert Team",
       description:
-        "Our experienced professionals guide you through every step of your project, from design consultation to installation.",
+        "Our experienced professionals guide you through product selection and provide expert advice on material applications.",
     },
     {
       icon: Factory,
@@ -36,7 +36,7 @@ export default function About() {
       icon: Heart,
       title: "Customer First",
       description:
-        "Your satisfaction is our priority, from material selection to final installation and project completion.",
+        "Your satisfaction is our priority, from product selection to delivery and ongoing support for your project.",
     },
   ];
 
@@ -76,9 +76,9 @@ export default function About() {
         "Absolutely! We provide samples of our porcelain collections to help you visualize your project. Our samples showcase the authentic appearance, texture, and finish of our products. Please contact us to request samples or schedule a consultation to view our full-size displays and collection catalogues.",
     },
     {
-      question: "Do you provide design consultation services?",
+      question: "Do you provide product guidance and support?",
       answer:
-        "Yes, we offer expert design consultation services to guide you through material selection and application. Our experienced team helps with everything from choosing the right collection for your space to planning custom solutions, Bookmatch patterns, and bespoke layouts. We provide free consultations for larger projects.",
+        "Yes, we offer expert product guidance to help you select the right materials for your project. Our experienced team assists with everything from choosing the right collection for your space to understanding product specifications, Bookmatch patterns, and application possibilities. We provide detailed information and support for all projects.",
     },
   ];
 
