@@ -17,9 +17,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Countertops", "Residential", "Commercial"],
     description: "Travertine-inspired porcelain with natural bone tones and authentic texture",
     images: [
-      "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/sansam-mobile-slider2.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_10.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_13.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_16.png',
     ],
   },
   {
@@ -36,9 +36,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Residential", "Commercial"],
     description: "Premium travertine look with distinctive stripe pattern in beige tones",
     images: [
-      "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
-      "/images/cottage-tile.jpg",
-      "/images/sansam-mobile-slider.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_19.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_4.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_7.png',
     ],
   },
   {
@@ -55,9 +55,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Premium travertine look with natural finish in beige tones",
     images: [
-      "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
-      "/images/cottage-tile.jpg",
-      "/images/sansam-mobile-slider.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_1.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_11.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_13.png',
     ],
   },
   {
@@ -74,9 +74,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Residential", "Commercial"],
     description: "Premium travertine look with distinctive stripe pattern in ivory tones",
     images: [
-      "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/cottage-tile.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_15.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_17.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_19.png',
     ],
   },
   {
@@ -93,9 +93,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Premium travertine look with natural finish in ivory tones",
     images: [
-      "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/cottage-tile.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_21.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_23.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_25.png',
     ],
   },
   // Stone Look Collection - Rockstone Series
@@ -113,9 +113,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Exterior", "Residential", "Commercial"],
     description: "Bold dark gray slate-inspired porcelain with natural stone texture",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/cottage.jpg",
-      "/images/slider-lava-blue.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_27.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_29.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_3.png',
     ],
   },
   {
@@ -132,9 +132,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Exterior", "Residential", "Commercial"],
     description: "Dark gray natural stone look porcelain with authentic texture",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/cottage.jpg",
-      "/images/slider-lava-blue.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_31.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_33.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_35.png',
     ],
   },
   {
@@ -151,9 +151,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Interior", "Residential", "Commercial"],
     description: "Elegant ivory slate-inspired porcelain with natural stone texture",
     images: [
-      "/images/cottage-tile.jpg",
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_37.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_39.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_41.png',
     ],
   },
   {
@@ -170,9 +170,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Interior", "Residential", "Commercial"],
     description: "Ivory natural stone look porcelain with authentic texture",
     images: [
-      "/images/cottage-tile.jpg",
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_43.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_5.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_7.png',
     ],
   },
   // Stone Look Collection - Ceppo Series
@@ -190,9 +190,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Countertops", "Residential", "Commercial"],
     description: "Contemporary light gray ceppo stone-inspired porcelain",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/cottage-tile.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_9.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_10.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_13.png',
     ],
   },
   {
@@ -209,9 +209,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Countertops", "Residential", "Commercial"],
     description: "Bold dark gray ceppo stone-inspired porcelain",
     images: [
-      "/images/cottage.jpg",
-      "/images/concept-light-gray-.jpg",
-      "/images/slider-lava-blue.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_16.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_19.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_4.png',
     ],
   },
   // Marble Look Collection - Black Collection
@@ -230,9 +230,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Countertops", "Residential", "Commercial"],
     description: "Dramatic black marble look with subtle veining, perfect for luxury spaces",
     images: [
-      "/images/blac-marquina-1.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/Prong-768x1024.webp",
+      '/images/products/60X120 15mm full body timelesstouchceramics_7.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_1.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_11.png',
     ],
   },
   {
@@ -250,9 +250,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Residential", "Commercial"],
     description: "Dramatic black marble look with matt finish for contemporary elegance",
     images: [
-      "/images/blac-marquina-1.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/Prong-768x1024.webp",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_13.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_15.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_17.png',
     ],
   },
   {
@@ -270,9 +270,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Countertops", "Residential", "Commercial"],
     description: "Classic black Marquina marble look with white veining, perfect for bookmatch installations",
     images: [
-      "/images/blac-marquina-1.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/Prong-768x1024.webp",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_19.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_21.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_23.png',
     ],
   },
   {
@@ -290,9 +290,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Residential", "Commercial"],
     description: "Classic black Marquina marble look with matt finish",
     images: [
-      "/images/blac-marquina-1.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/Prong-768x1024.webp",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_25.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_27.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_29.png',
     ],
   },
   {
@@ -310,9 +310,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Countertops", "Residential", "Commercial"],
     description: "Sophisticated gray marble look with dynamic veining patterns",
     images: [
-      "/images/slider-lava-blue.jpg",
-      "/images/lava-blue.jpg",
-      "/images/concept-light-gray-.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_3.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_31.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_33.png',
     ],
   },
   {
@@ -330,9 +330,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Residential", "Commercial"],
     description: "Sophisticated gray marble look with matt finish",
     images: [
-      "/images/slider-lava-blue.jpg",
-      "/images/lava-blue.jpg",
-      "/images/concept-light-gray-.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_35.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_37.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_39.png',
     ],
   },
   // Marble Look Collection - Luxury Range
@@ -351,9 +351,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Countertops", "Residential", "Commercial"],
     description: "Striking blue marble look with dramatic veining, ideal for luxury installations",
     images: [
-      "/images/lava-blue.jpg",
-      "/images/slider-lava-blue.jpg",
-      "/images/Prong-768x1024.webp",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_41.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_43.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_5.png',
     ],
   },
   {
@@ -371,9 +371,9 @@ export const products: Product[] = [
     applications: ["Walls", "Feature Walls", "Backsplashes", "Residential", "Commercial"],
     description: "Exotic blue onyx marble look with translucent qualities and unique patterns",
     images: [
-      "/images/lava-blue.jpg",
-      "/images/slider-lava-blue.jpg",
-      "/images/Prong-768x1024.webp",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_7.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_9.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_10.png',
     ],
   },
   {
@@ -390,9 +390,9 @@ export const products: Product[] = [
     applications: ["Walls", "Feature Walls", "Backsplashes", "Residential", "Commercial"],
     description: "Elegant white onyx marble look with subtle veining and translucency",
     images: [
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/cottage.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_13.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_16.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_19.png',
     ],
   },
   // Marble Look Collection - Classic Marbles
@@ -410,9 +410,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Countertops", "Feature Walls", "Residential", "Commercial"],
     description: "Timeless white Statuario marble look with elegant gray veining",
     images: [
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/sansam-mobile-slider.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_4.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_7.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_1.png',
     ],
   },
   {
@@ -429,9 +429,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Residential", "Commercial"],
     description: "Timeless white Statuario marble look with matt finish",
     images: [
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/sansam-mobile-slider.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_11.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_13.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_15.png',
     ],
   },
   {
@@ -448,9 +448,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Countertops", "Residential", "Commercial"],
     description: "Light Statuario marble variant with subtle veining in large format",
     images: [
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/sansam-mobile-slider.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_17.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_19.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_21.png',
     ],
   },
   {
@@ -467,9 +467,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Countertops", "Residential", "Commercial"],
     description: "Classic Carrara white marble look with soft gray veining",
     images: [
-      "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/cottage.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_23.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_25.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_27.png',
     ],
   },
   {
@@ -486,9 +486,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Classic Carrara white marble look with matt finish",
     images: [
-      "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/cottage.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_29.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_3.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_31.png',
     ],
   },
   {
@@ -505,9 +505,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Countertops", "Feature Walls", "Residential", "Commercial"],
     description: "Luxurious Calacatta Gold marble look with distinctive gold veining",
     images: [
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
-      "/images/cottage-tile.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_33.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_35.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_37.png',
     ],
   },
   {
@@ -524,9 +524,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Residential", "Commercial"],
     description: "Luxurious Calacatta Gold marble look with matt finish",
     images: [
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
-      "/images/cottage-tile.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_39.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_41.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_43.png',
     ],
   },
   {
@@ -543,9 +543,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Countertops", "Residential", "Commercial"],
     description: "Elegant Arabescato marble look with characteristic gray and white patterns",
     images: [
-      "/images/sansam-mobile-slider.jpg",
-      "/images/cottage-tile.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_5.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_7.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_9.png',
     ],
   },
   {
@@ -562,9 +562,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Elegant Arabescato marble look with matt finish",
     images: [
-      "/images/sansam-mobile-slider.jpg",
-      "/images/cottage-tile.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_10.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_13.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_16.png',
     ],
   },
   // Marble Look Collection - Designer Marbles
@@ -583,9 +583,9 @@ export const products: Product[] = [
     applications: ["Walls", "Feature Walls", "Backsplashes", "Residential", "Commercial"],
     description: "Designer marble look with unique patterns, perfect for bookmatch installations",
     images: [
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/cottage.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_19.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_4.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_7.png',
     ],
   },
   {
@@ -603,9 +603,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Residential", "Commercial"],
     description: "Premium Ariston marble look with elegant veining, bookmatch available",
     images: [
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider2.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_1.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_11.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_13.png',
     ],
   },
   {
@@ -623,9 +623,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Residential", "Commercial"],
     description: "Premium Ariston marble look with matt finish",
     images: [
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider2.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_15.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_17.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_19.png',
     ],
   },
   {
@@ -642,9 +642,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Countertops", "Residential", "Commercial"],
     description: "Sophisticated Gemma marble look with refined patterns",
     images: [
-      "/images/sansam-mobile-slider.jpg",
-      "/images/cottage-tile.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_21.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_23.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_25.png',
     ],
   },
   {
@@ -661,9 +661,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Sophisticated Gemma marble look with matt finish",
     images: [
-      "/images/sansam-mobile-slider.jpg",
-      "/images/cottage-tile.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_27.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_29.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_3.png',
     ],
   },
   {
@@ -680,9 +680,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Residential", "Commercial"],
     description: "Golden marble look with warm tones and elegant patterns",
     images: [
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider2.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_31.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_33.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_35.png',
     ],
   },
   {
@@ -699,9 +699,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Countertops", "Residential", "Commercial"],
     description: "Luxurious royal gold marble look with opulent veining",
     images: [
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider2.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_37.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_39.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_41.png',
     ],
   },
   {
@@ -718,9 +718,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Walls", "Residential", "Commercial"],
     description: "Luxurious royal gold marble look with matt finish",
     images: [
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider2.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_43.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_5.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_7.png',
     ],
   },
   {
@@ -737,9 +737,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Countertops", "Residential", "Commercial"],
     description: "Warm beige marble look with subtle veining and elegant appearance",
     images: [
-      "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
-      "/images/cottage.jpg",
-      "/images/cottage-tile.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_9.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_10.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_13.png',
     ],
   },
   {
@@ -756,9 +756,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Warm beige marble look with matt finish",
     images: [
-      "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
-      "/images/cottage.jpg",
-      "/images/cottage-tile.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_16.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_19.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_4.png',
     ],
   },
   {
@@ -775,9 +775,9 @@ export const products: Product[] = [
     applications: ["Walls", "Feature Walls", "Backsplashes", "Residential", "Commercial"],
     description: "Unique green marble look with distinctive veining patterns",
     images: [
-      "/images/lava-blue.jpg",
-      "/images/slider-lava-blue.jpg",
-      "/images/concept-light-gray-.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_7.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_1.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_11.png',
     ],
   },
   {
@@ -794,9 +794,9 @@ export const products: Product[] = [
     applications: ["Walls", "Feature Walls", "Backsplashes", "Residential", "Commercial"],
     description: "Exotic onyx-inspired marble look with unique patterns",
     images: [
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/cottage.jpg",
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_13.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_15.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_17.png',
     ],
   },
   {
@@ -813,9 +813,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Countertops", "Residential", "Commercial"],
     description: "Sophisticated light gray Amani marble look with refined veining",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/cottage.jpg",
-      "/images/slider-lava-blue.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_19.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_21.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_23.png',
     ],
   },
   // Modern Look Collection - Emerald Series
@@ -834,9 +834,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Contemporary ivory finish with modern aesthetics, 6-face design",
     images: [
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/cottage-tile.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_25.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_27.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_29.png',
     ],
   },
   {
@@ -854,9 +854,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Contemporary light gray finish with modern aesthetics, 6-face design",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/cottage.jpg",
-      "/images/slider-lava-blue.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_3.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_31.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_33.png',
     ],
   },
   {
@@ -873,9 +873,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Areas", "Residential", "Commercial"],
     description: "Emerald Light Gray with forest décor pattern, perfect for feature areas",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/cottage.jpg",
-      "/images/slider-lava-blue.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_35.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_37.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_39.png',
     ],
   },
   {
@@ -893,9 +893,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Vibrant green finish with modern aesthetics, 6-face design",
     images: [
-      "/images/lava-blue.jpg",
-      "/images/slider-lava-blue.jpg",
-      "/images/concept-light-gray-.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_41.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_43.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_5.png',
     ],
   },
   {
@@ -912,9 +912,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Areas", "Residential", "Commercial"],
     description: "Emerald Green with tropical décor pattern, ideal for vibrant spaces",
     images: [
-      "/images/lava-blue.jpg",
-      "/images/slider-lava-blue.jpg",
-      "/images/concept-light-gray-.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_7.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_9.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_10.png',
     ],
   },
   // Modern Look Collection - Monocolor Range
@@ -932,9 +932,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Pure white monocolor porcelain for minimalist contemporary spaces",
     images: [
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/cottage.jpg",
-      "/images/cottage-tile.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_13.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_16.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_19.png',
     ],
   },
   {
@@ -951,9 +951,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Light gray monocolor porcelain for modern minimalist designs",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/cottage-tile.jpg",
-      "/images/sansam-mobile-slider.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_4.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_7.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_1.png',
     ],
   },
   {
@@ -970,9 +970,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Mid gray monocolor porcelain for contemporary spaces",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/cottage.jpg",
-      "/images/slider-lava-blue.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_11.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_13.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_15.png',
     ],
   },
   {
@@ -989,9 +989,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Dark gray monocolor porcelain for bold contemporary designs",
     images: [
-      "/images/cottage.jpg",
-      "/images/concept-light-gray-.jpg",
-      "/images/slider-lava-blue.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_17.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_19.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_21.png',
     ],
   },
   {
@@ -1008,9 +1008,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Deep anthracite monocolor porcelain for dramatic modern spaces",
     images: [
-      "/images/cottage.jpg",
-      "/images/concept-light-gray-.jpg",
-      "/images/slider-lava-blue.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_23.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_25.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_27.png',
     ],
   },
   // Modern Look Collection - Tattoo Series
@@ -1029,9 +1029,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Light gray with subtle pattern texture, 6-face design",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_29.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_3.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_31.png',
     ],
   },
   {
@@ -1049,9 +1049,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Ivory with subtle pattern texture, 6-face design",
     images: [
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/cottage-tile.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_33.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_35.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_37.png',
     ],
   },
   {
@@ -1069,9 +1069,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Anthracite with subtle pattern texture, 6-face design",
     images: [
-      "/images/cottage.jpg",
-      "/images/concept-light-gray-.jpg",
-      "/images/slider-lava-blue.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_39.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_41.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_43.png',
     ],
   },
   // Modern Look Collection - Concept Series
@@ -1090,9 +1090,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Contemporary ivory concept design, 6-face finish",
     images: [
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/concept-light-gray-.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_5.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_7.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_9.png',
     ],
   },
   {
@@ -1110,9 +1110,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Contemporary light gray concept design, 6-face finish",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/cottage-tile.jpg",
-      "/images/cottage.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_10.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_13.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_16.png',
     ],
   },
   {
@@ -1130,9 +1130,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Contemporary dark gray concept design, 6-face finish",
     images: [
-      "/images/cottage.jpg",
-      "/images/concept-light-gray-.jpg",
-      "/images/slider-lava-blue.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_19.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_4.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_7.png',
     ],
   },
   // Concept Stripe Designs
@@ -1150,9 +1150,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Areas", "Residential", "Commercial"],
     description: "Concept Light Gray with stripe pattern for contemporary feature areas",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/cottage-tile.jpg",
-      "/images/cottage.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_1.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_11.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_13.png',
     ],
   },
   {
@@ -1169,9 +1169,9 @@ export const products: Product[] = [
     applications: ["Walls", "Feature Areas", "Residential", "Commercial"],
     description: "Contemporary pink stripe pattern for vibrant feature areas",
     images: [
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/concept-light-gray-.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_15.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_17.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_19.png',
     ],
   },
   {
@@ -1188,9 +1188,9 @@ export const products: Product[] = [
     applications: ["Walls", "Feature Areas", "Residential", "Commercial"],
     description: "Contemporary blue stripe pattern for modern feature areas",
     images: [
-      "/images/lava-blue.jpg",
-      "/images/slider-lava-blue.jpg",
-      "/images/concept-light-gray-.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_21.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_23.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_25.png',
     ],
   },
   {
@@ -1207,9 +1207,9 @@ export const products: Product[] = [
     applications: ["Walls", "Feature Areas", "Residential", "Commercial"],
     description: "Contemporary green stripe pattern for vibrant feature areas",
     images: [
-      "/images/lava-blue.jpg",
-      "/images/slider-lava-blue.jpg",
-      "/images/concept-light-gray-.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_27.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_29.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_3.png',
     ],
   },
   {
@@ -1226,9 +1226,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Feature Areas", "Residential", "Commercial"],
     description: "Concept Ivory with stripe pattern for contemporary feature areas",
     images: [
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/concept-light-gray-.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_31.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_33.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_35.png',
     ],
   },
   // Decorative Designs - Evo Dry Technology
@@ -1246,9 +1246,9 @@ export const products: Product[] = [
     applications: ["Walls", "Feature Areas", "Bathrooms", "Wet Areas", "Residential", "Commercial"],
     description: "Ocean-inspired decorative design with Evo Dry Technology for enhanced performance in wet areas",
     images: [
-      "/images/lava-blue.jpg",
-      "/images/slider-lava-blue.jpg",
-      "/images/Prong-768x1024.webp",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_37.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_39.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_41.png',
     ],
   },
   {
@@ -1265,9 +1265,9 @@ export const products: Product[] = [
     applications: ["Walls", "Feature Areas", "Bathrooms", "Wet Areas", "Residential", "Commercial"],
     description: "Floral azalea-inspired decorative design with Evo Dry Technology",
     images: [
-      "/images/sansam-mobile-slider.jpg",
-      "/images/cottage-tile.jpg",
-      "/images/cottage.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_43.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_5.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_7.png',
     ],
   },
   {
@@ -1284,9 +1284,9 @@ export const products: Product[] = [
     applications: ["Walls", "Feature Areas", "Bathrooms", "Wet Areas", "Residential", "Commercial"],
     description: "Bright sunshine-inspired decorative design with Evo Dry Technology",
     images: [
-      "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider2.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_9.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_10.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_13.png',
     ],
   },
   {
@@ -1303,9 +1303,9 @@ export const products: Product[] = [
     applications: ["Walls", "Feature Areas", "Bathrooms", "Wet Areas", "Residential", "Commercial"],
     description: "Garden-inspired decorative design with Evo Dry Technology",
     images: [
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/cottage-tile.jpg",
-      "/images/sansam-mobile-slider.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_16.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_19.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_4.png',
     ],
   },
   {
@@ -1322,9 +1322,9 @@ export const products: Product[] = [
     applications: ["Walls", "Feature Areas", "Bathrooms", "Wet Areas", "Residential", "Commercial"],
     description: "Historical green-inspired decorative design with Evo Dry Technology",
     images: [
-      "/images/lava-blue.jpg",
-      "/images/slider-lava-blue.jpg",
-      "/images/concept-light-gray-.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_7.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_1.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_11.png',
     ],
   },
   {
@@ -1341,9 +1341,9 @@ export const products: Product[] = [
     applications: ["Walls", "Feature Areas", "Bathrooms", "Wet Areas", "Residential", "Commercial"],
     description: "Mountain-inspired decorative design with Evo Dry Technology",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/cottage.jpg",
-      "/images/slider-lava-blue.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_13.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_15.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_17.png',
     ],
   },
   // Tiles - Wood Look (Cottage Series) - 20x120cm
@@ -1361,9 +1361,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Authentic walnut wood look porcelain tile, 6-face design for versatile installation",
     images: [
-      "/images/cottage.jpg",
-      "/images/cottage-tile.jpg",
-      "/images/concept-light-gray-.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_19.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_21.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_23.png',
     ],
   },
   {
@@ -1380,9 +1380,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Natural ash wood look porcelain tile, 6-face design",
     images: [
-      "/images/cottage.jpg",
-      "/images/concept-light-gray-.jpg",
-      "/images/cottage-tile.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_25.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_27.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_29.png',
     ],
   },
   {
@@ -1399,9 +1399,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Dark carbon wood look porcelain tile, 6-face design",
     images: [
-      "/images/cottage.jpg",
-      "/images/concept-light-gray-.jpg",
-      "/images/slider-lava-blue.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_3.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_31.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_33.png',
     ],
   },
   {
@@ -1418,9 +1418,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Classic oak wood look porcelain tile, 6-face design",
     images: [
-      "/images/cottage-tile.jpg",
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_35.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_37.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_39.png',
     ],
   },
   {
@@ -1437,9 +1437,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Warm almond wood look porcelain tile, 6-face design",
     images: [
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/cottage-tile.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_41.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_43.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_5.png',
     ],
   },
   {
@@ -1456,9 +1456,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Rich cherry wood look porcelain tile, 6-face design",
     images: [
-      "/images/cottage-tile.jpg",
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_7.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_9.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_10.png',
     ],
   },
   {
@@ -1475,9 +1475,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Light white wood look porcelain tile, 6-face design",
     images: [
-      "/images/sansam-mobile-slider2.jpg",
-      "/images/cottage.jpg",
-      "/images/cottage-tile.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_13.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_16.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_19.png',
     ],
   },
   // Tiles - Standard Formats
@@ -1494,9 +1494,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Dark gray hardstone porcelain tile for versatile applications",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/cottage.jpg",
-      "/images/cottage-tile.jpg",
+      '/images/products/60X120 15mm full body timelesstouchceramics_4.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_7.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_1.png',
     ],
   },
   {
@@ -1512,9 +1512,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Light gray hardstone porcelain tile for versatile applications",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/sansam-mobile-slider.jpg",
-      "/images/cottage-tile.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_11.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_13.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_15.png',
     ],
   },
   {
@@ -1530,9 +1530,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Light gray slate-inspired porcelain tile",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/cottage.jpg",
-      "/images/slider-lava-blue.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_17.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_19.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_21.png',
     ],
   },
   {
@@ -1548,9 +1548,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Ivory slate-inspired porcelain tile",
     images: [
-      "/images/cottage-tile.jpg",
-      "/images/cottage.jpg",
-      "/images/sansam-mobile-slider2.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_23.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_25.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_27.png',
     ],
   },
   {
@@ -1566,9 +1566,9 @@ export const products: Product[] = [
     applications: ["Floors", "Walls", "Residential", "Commercial"],
     description: "Mid gray slate-inspired porcelain tile",
     images: [
-      "/images/concept-light-gray-.jpg",
-      "/images/cottage.jpg",
-      "/images/slider-lava-blue.jpg",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_29.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_3.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_31.png',
     ],
   },
   // Swimming Pool Tiles - Starwave Series
@@ -1585,9 +1585,9 @@ export const products: Product[] = [
     applications: ["Swimming Pools", "Walls", "Floors", "Pool Surrounds", "Kitchen Backsplashes", "Bathroom Features", "Outdoor"],
     description: "Crystalline glazed porcelain capturing starlight and ocean waves. Dark blue mix pattern with varying shades reflecting shimmering light. Perfect for indoor and outdoor pool applications.",
     images: [
-      "/images/lava-blue.jpg",
-      "/images/slider-lava-blue.jpg",
-      "/images/Prong-768x1024.webp",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_33.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_35.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_37.png',
     ],
   },
   {
@@ -1603,9 +1603,9 @@ export const products: Product[] = [
     applications: ["Swimming Pools", "Walls", "Floors", "Pool Surrounds", "Kitchen Backsplashes", "Bathroom Features", "Outdoor"],
     description: "Crystalline glazed porcelain with medium blue mix pattern. Expresses harmony between nature's calm and movement.",
     images: [
-      "/images/lava-blue.jpg",
-      "/images/slider-lava-blue.jpg",
-      "/images/Prong-768x1024.webp",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_39.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_41.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_43.png',
     ],
   },
   {
@@ -1621,9 +1621,9 @@ export const products: Product[] = [
     applications: ["Swimming Pools", "Walls", "Floors", "Pool Surrounds", "Kitchen Backsplashes", "Bathroom Features", "Outdoor"],
     description: "Crystalline glazed porcelain with light blue mix pattern. Creates a sense of infinite depth and elegance.",
     images: [
-      "/images/lava-blue.jpg",
-      "/images/slider-lava-blue.jpg",
-      "/images/Prong-768x1024.webp",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_5.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_7.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_9.png',
     ],
   },
   {
@@ -1639,9 +1639,9 @@ export const products: Product[] = [
     applications: ["Swimming Pools", "Walls", "Floors", "Pool Surrounds", "Kitchen Backsplashes", "Bathroom Features", "Outdoor"],
     description: "Crystalline glazed porcelain with turquoise mix pattern. Smaller format for detailed installations.",
     images: [
-      "/images/slider-lava-blue.jpg",
-      "/images/lava-blue.jpg",
-      "/images/Prong-768x1024.webp",
+      '/images/products/60X120 15mm full body timelesstouchceramics_10.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_13.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_16.png',
     ],
   },
   {
@@ -1657,9 +1657,9 @@ export const products: Product[] = [
     applications: ["Swimming Pools", "Walls", "Floors", "Pool Surrounds", "Kitchen Backsplashes", "Bathroom Features", "Outdoor"],
     description: "Crystalline glazed porcelain with sky blue mix pattern. Like gazing into a starry sea.",
     images: [
-      "/images/slider-lava-blue.jpg",
-      "/images/lava-blue.jpg",
-      "/images/Prong-768x1024.webp",
+      '/images/products/60X120 15mm full body timelesstouchceramics_19.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_4.png',
+      '/images/products/60X120 15mm full body timelesstouchceramics_7.png',
     ],
   },
   {
@@ -1675,9 +1675,9 @@ export const products: Product[] = [
     applications: ["Swimming Pools", "Walls", "Floors", "Pool Surrounds", "Kitchen Backsplashes", "Bathroom Features", "Outdoor"],
     description: "Crystalline glazed porcelain with deep blue mix pattern. Captures the poetic blend of starlight and ocean waves.",
     images: [
-      "/images/slider-lava-blue.jpg",
-      "/images/lava-blue.jpg",
-      "/images/Prong-768x1024.webp",
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_1.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_11.png',
+      '/images/products/60x120cm 60x60cm Matt timelesstouchceramics_13.png',
     ],
   },
 ];
