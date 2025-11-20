@@ -55,7 +55,6 @@ const Navigation = () => {
           >
             <NavLink href="/">HOME</NavLink>
             <ProductsDropdown navLinksRef={navLinksRef} />
-            <NavLink href="/projects">PROJECTS</NavLink>
             <NavLink href="/services">SERVICES</NavLink>
             <CataloguesDropdown navLinksRef={navLinksRef} />
             <NavLink href="/about">ABOUT US</NavLink>
@@ -107,14 +106,6 @@ const Navigation = () => {
                 onClick={() => setIsOpen(false)}
               >
                 PRODUCTS
-              </NavLink>
-
-              <NavLink
-                href="/projects"
-                variant="mobile"
-                onClick={() => setIsOpen(false)}
-              >
-                PROJECTS
               </NavLink>
 
               <NavLink

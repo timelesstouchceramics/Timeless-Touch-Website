@@ -5,18 +5,15 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const images = [
-  "/images/cottage.jpg",
-  "/images/cottage-tile.jpg",
-  "/images/concept-light-gray-.jpg",
-  "/images/lava-blue.jpg",
-  "/images/slider-lava-blue.jpg",
-  "/images/Exotic-Travertine-Ivory-Stripe-qxti2zc4r56gc8v6pnujh77ae4t684kdfhln9no0w0.jpg",
-  "/images/sansam-mobile-slider.jpg",
-  "/images/sansam-mobile-slider2.jpg",
-  "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-  "/images/Prong-768x1024.webp",
-  "/images/cottage.jpg",
-  "/images/lava-blue.jpg",
+  "/images/skiper/aalo-lens-XhMzBZrpQT4-unsplash.jpg",
+  "/images/skiper/adriana-macias-1TnBLt1KXSg-unsplash.jpg",
+  "/images/skiper/alef-morais-l864GKi_dRM-unsplash.jpg",
+  "/images/skiper/ela-de-pure-wK2nvKuHv18-unsplash.jpg",
+  "/images/skiper/lotus-design-n-print-BrS3Atdfek0-unsplash.jpg",
+  "/images/skiper/luigi-estuye-lucreative-uEqlyGxup5I-unsplash.jpg",
+  "/images/skiper/peter-muniz-d3lWY5P9sws-unsplash.jpg",
+  "/images/skiper/prydumano-design-mqlKz6qnafk-unsplash.jpg",
+  "/images/skiper/reisetopia-nxtnUlotYr8-unsplash.jpg",
 ];
 
 const PhotoGallerySkiper = () => {
