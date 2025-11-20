@@ -33,6 +33,13 @@ export default function QuickViewModal({
   const capitalize = (str: string) =>
     str.charAt(0).toUpperCase() + str.slice(1);
 
+  const formatLabel = (str: string) => {
+    return str
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-2xl rounded-xl">
@@ -49,8 +56,9 @@ export default function QuickViewModal({
           <div className="space-y-4">
             <div>
               <h2 className="text-2xl font-semibold text-neutral-950">{product.name}</h2>
-              <div className="flex gap-2 mt-2">
-                <Badge variant="secondary">{capitalize(product.category)}</Badge>
+              <div className="flex gap-2 mt-2 flex-wrap">
+                <Badge variant="secondary">{formatLabel(product.mainCategory)}</Badge>
+                <Badge variant="secondary">{formatLabel(product.designStyle)}</Badge>
                 <Badge variant="secondary">{capitalize(product.finish)}</Badge>
               </div>
             </div>
@@ -65,8 +73,7 @@ export default function QuickViewModal({
             </div>
 
             <p className="text-sm text-neutral-600">
-              Premium quality {product.category} with {product.finish} finish.
-              Perfect for interior and exterior applications.
+              {product.description || `Premium quality ${formatLabel(product.designStyle)} ${formatLabel(product.mainCategory)} with ${product.finish} finish. Perfect for interior and exterior applications.`}
             </p>
 
             <Separator />

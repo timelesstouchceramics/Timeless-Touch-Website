@@ -1,5 +1,13 @@
 import { Product } from "@/lib/types";
-import { products as staticProducts, categories as staticCategories, finishes as staticFinishes } from "@/lib/products-data";
+import {
+  products as staticProducts,
+  mainCategories as staticMainCategories,
+  designStyles as staticDesignStyles,
+  finishes as staticFinishes,
+  applications as staticApplications,
+  sizes as staticSizes,
+  thicknesses as staticThicknesses,
+} from "@/lib/products-data";
 
 // Contentful configuration
 // TODO: Move to environment variables
@@ -21,12 +29,20 @@ interface ContentfulAsset {
 interface ContentfulProductFields {
   name: string;
   slug: string;
-  category: string;
+  mainCategory: string;
+  designStyle: string;
   finish: string;
   price: number;
   unit: string;
   images: ContentfulAsset[];
   description?: string;
+  code?: string;
+  size?: string;
+  thickness?: string;
+  bookmatch?: boolean;
+  sixFace?: boolean;
+  fullBody?: boolean;
+  applications?: string[];
 }
 
 interface ContentfulEntry<T> {
@@ -76,22 +92,44 @@ async function fetchContentful<T>(
 }
 
 /**
+ * Generates a numeric ID from Contentful's string ID
+ * Uses a simple hash function to convert the string ID to a number
+ */
+function generateNumericId(contentfulId: string): number {
+  let hash = 0;
+  for (let i = 0; i < contentfulId.length; i++) {
+    const char = contentfulId.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+  return Math.abs(hash);
+}
+
+/**
  * Transforms Contentful product entry to our Product type
  */
 function transformContentfulProduct(
-  entry: ContentfulEntry<ContentfulProductFields>,
-  index: number
+  entry: ContentfulEntry<ContentfulProductFields>
 ): Product {
   const { fields, sys } = entry;
   return {
-    id: index + 1, // Use index as ID since Contentful uses string IDs
+    id: generateNumericId(sys.id), // Generate stable numeric ID from Contentful ID
     slug: fields.slug,
     name: fields.name,
-    category: fields.category,
+    mainCategory: fields.mainCategory,
+    designStyle: fields.designStyle,
     finish: fields.finish,
     price: fields.price,
     unit: fields.unit,
     images: fields.images.map((asset) => `https:${asset.fields.file.url}`),
+    code: fields.code,
+    size: fields.size,
+    thickness: fields.thickness,
+    bookmatch: fields.bookmatch ?? false,
+    sixFace: fields.sixFace ?? false,
+    fullBody: fields.fullBody ?? false,
+    applications: fields.applications,
+    description: fields.description,
   };
 }
 
@@ -110,7 +148,7 @@ export async function getProducts(): Promise<Product[]> {
       limit: 100,
     });
 
-    return response.items.map(transformContentfulProduct);
+    return response.items.map((item) => transformContentfulProduct(item));
   } catch (error) {
     console.error("Failed to fetch from Contentful:", error);
     // Fallback to static data on error
@@ -140,7 +178,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
       return null;
     }
 
-    return transformContentfulProduct(response.items[0], 0);
+    return transformContentfulProduct(response.items[0]);
   } catch (error) {
     console.error("Failed to fetch product from Contentful:", error);
     // Fallback to static data on error
@@ -150,26 +188,41 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
 }
 
 /**
- * Fetches all available categories.
+ * Fetches all available main categories.
  * In Contentful, these could be stored as a separate content type or derived from products.
  */
-export async function getCategories(): Promise<string[]> {
+export async function getMainCategories(): Promise<string[]> {
   if (!USE_CONTENTFUL) {
-    return staticCategories;
+    return staticMainCategories;
   }
 
   try {
-    // Option 1: Fetch from a dedicated "category" content type
-    // const response = await fetchContentful<{ name: string }>("category");
-    // return response.items.map((item) => item.fields.name);
-
-    // Option 2: Derive from products (current approach)
+    // Derive from products
     const products = await getProducts();
-    const categories = [...new Set(products.map((p) => p.category))];
-    return categories.sort();
+    const mainCategories = [...new Set(products.map((p) => p.mainCategory))];
+    return mainCategories.sort();
   } catch (error) {
-    console.error("Failed to fetch categories:", error);
-    return staticCategories;
+    console.error("Failed to fetch main categories:", error);
+    return staticMainCategories;
+  }
+}
+
+/**
+ * Fetches all available design styles.
+ */
+export async function getDesignStyles(): Promise<string[]> {
+  if (!USE_CONTENTFUL) {
+    return staticDesignStyles;
+  }
+
+  try {
+    // Derive from products
+    const products = await getProducts();
+    const designStyles = [...new Set(products.map((p) => p.designStyle))];
+    return designStyles.sort();
+  } catch (error) {
+    console.error("Failed to fetch design styles:", error);
+    return staticDesignStyles;
   }
 }
 
@@ -193,41 +246,166 @@ export async function getFinishes(): Promise<string[]> {
 }
 
 /**
+ * Fetches all available applications.
+ */
+export async function getApplications(): Promise<string[]> {
+  if (!USE_CONTENTFUL) {
+    return staticApplications;
+  }
+
+  try {
+    // Derive from products
+    const products = await getProducts();
+    const applications = [
+      ...new Set(products.flatMap((p) => p.applications || [])),
+    ];
+    return applications.sort();
+  } catch (error) {
+    console.error("Failed to fetch applications:", error);
+    return staticApplications;
+  }
+}
+
+/**
+ * Fetches all available sizes.
+ */
+export async function getSizes(): Promise<string[]> {
+  if (!USE_CONTENTFUL) {
+    return staticSizes;
+  }
+
+  try {
+    // Derive from products
+    const products = await getProducts();
+    const sizes = [
+      ...new Set(products.map((p) => p.size).filter((s): s is string => !!s)),
+    ];
+    return sizes.sort();
+  } catch (error) {
+    console.error("Failed to fetch sizes:", error);
+    return staticSizes;
+  }
+}
+
+/**
+ * Fetches all available thicknesses.
+ */
+export async function getThicknesses(): Promise<string[]> {
+  if (!USE_CONTENTFUL) {
+    return staticThicknesses;
+  }
+
+  try {
+    // Derive from products
+    const products = await getProducts();
+    const thicknesses = [
+      ...new Set(
+        products.map((p) => p.thickness).filter((t): t is string => !!t)
+      ),
+    ];
+    return thicknesses.sort();
+  } catch (error) {
+    console.error("Failed to fetch thicknesses:", error);
+    return staticThicknesses;
+  }
+}
+
+/**
  * Fetches products with optional filters.
  * Server-side filtering for better performance with large catalogs.
  *
  * @param options - Filter and sort options
  */
 export async function getFilteredProducts(options?: {
-  categories?: string[];
+  mainCategories?: string[];
+  designStyles?: string[];
   finishes?: string[];
+  applications?: string[];
+  sizes?: string[];
+  thicknesses?: string[];
+  bookmatch?: boolean;
+  sixFace?: boolean;
+  fullBody?: boolean;
   sortBy?: string;
   page?: number;
   perPage?: number;
 }): Promise<{
   products: Product[];
   total: number;
-  categories: string[];
+  mainCategories: string[];
+  designStyles: string[];
   finishes: string[];
+  applications: string[];
+  sizes: string[];
+  thicknesses: string[];
 }> {
   // For Contentful, we could build a query with filters
   // Currently fetching all and filtering client-side for simplicity
   // TODO: Optimize with Contentful query parameters for large catalogs
 
   const allProducts = await getProducts();
-  const allCategories = await getCategories();
+  const allMainCategories = await getMainCategories();
+  const allDesignStyles = await getDesignStyles();
   const allFinishes = await getFinishes();
+  const allApplications = await getApplications();
+  const allSizes = await getSizes();
+  const allThicknesses = await getThicknesses();
 
   let filtered = [...allProducts];
 
-  // Apply category filter
-  if (options?.categories && options.categories.length > 0) {
-    filtered = filtered.filter((p) => options.categories!.includes(p.category));
+  // Apply main category filter
+  if (options?.mainCategories && options.mainCategories.length > 0) {
+    filtered = filtered.filter((p) =>
+      options.mainCategories!.includes(p.mainCategory)
+    );
+  }
+
+  // Apply design style filter
+  if (options?.designStyles && options.designStyles.length > 0) {
+    filtered = filtered.filter((p) =>
+      options.designStyles!.includes(p.designStyle)
+    );
   }
 
   // Apply finish filter
   if (options?.finishes && options.finishes.length > 0) {
     filtered = filtered.filter((p) => options.finishes!.includes(p.finish));
+  }
+
+  // Apply applications filter
+  if (options?.applications && options.applications.length > 0) {
+    filtered = filtered.filter(
+      (p) =>
+        p.applications &&
+        p.applications.some((app) => options.applications!.includes(app))
+    );
+  }
+
+  // Apply size filter
+  if (options?.sizes && options.sizes.length > 0) {
+    filtered = filtered.filter(
+      (p) => p.size && options.sizes!.includes(p.size)
+    );
+  }
+
+  // Apply thickness filter
+  if (options?.thicknesses && options.thicknesses.length > 0) {
+    filtered = filtered.filter(
+      (p) => p.thickness && options.thicknesses!.includes(p.thickness)
+    );
+  }
+
+  // Apply special features filters
+  if (options?.bookmatch === true) {
+    filtered = filtered.filter((p) => p.bookmatch === true);
+  }
+
+  if (options?.sixFace === true) {
+    filtered = filtered.filter((p) => p.sixFace === true);
+  }
+
+  if (options?.fullBody === true) {
+    filtered = filtered.filter((p) => p.fullBody === true);
   }
 
   // Apply sorting
@@ -261,13 +439,17 @@ export async function getFilteredProducts(options?: {
   return {
     products: filtered,
     total,
-    categories: allCategories,
+    mainCategories: allMainCategories,
+    designStyles: allDesignStyles,
     finishes: allFinishes,
+    applications: allApplications,
+    sizes: allSizes,
+    thicknesses: allThicknesses,
   };
 }
 
 /**
- * Fetches similar products based on category.
+ * Fetches similar products based on design style and main category.
  *
  * @param product - The current product
  * @param limit - Maximum number of similar products to return
@@ -278,22 +460,32 @@ export async function getSimilarProducts(
 ): Promise<Product[]> {
   if (!USE_CONTENTFUL) {
     return staticProducts
-      .filter((p) => p.category === product.category && p.id !== product.id)
+      .filter(
+        (p) =>
+          (p.designStyle === product.designStyle ||
+            p.mainCategory === product.mainCategory) &&
+          p.id !== product.id
+      )
       .slice(0, limit);
   }
 
   try {
     const response = await fetchContentful<ContentfulProductFields>("product", {
-      "fields.category": product.category,
+      "fields.designStyle": product.designStyle,
       "fields.slug[ne]": product.slug,
       limit,
     });
 
-    return response.items.map(transformContentfulProduct);
+    return response.items.map((item) => transformContentfulProduct(item));
   } catch (error) {
     console.error("Failed to fetch similar products:", error);
     return staticProducts
-      .filter((p) => p.category === product.category && p.id !== product.id)
+      .filter(
+        (p) =>
+          (p.designStyle === product.designStyle ||
+            p.mainCategory === product.mainCategory) &&
+          p.id !== product.id
+      )
       .slice(0, limit);
   }
 }

@@ -2,7 +2,10 @@ export interface Product {
   id: number;
   slug: string;
   name: string;
-  category: string;
+  // Main category: slabs, tiles, pool-tiles, decorative
+  mainCategory: string;
+  // Design style sub-category: stone-look, marble-look, modern-look, wood-look, decorative
+  designStyle: string;
   finish: string;
   price: number;
   unit: string;
@@ -12,13 +15,15 @@ export interface Product {
   thickness?: string;
   bookmatch?: boolean;
   sixFace?: boolean;
+  fullBody?: boolean;
   applications?: string[];
   description?: string;
 }
 
-export interface Category {
+export interface Collection {
   name: string;
   slug: string;
+  type: "mainCategory" | "designStyle";
   image: string;
   description: string;
 }

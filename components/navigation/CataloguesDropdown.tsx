@@ -1,22 +1,19 @@
 "use client";
 
 import NavigationDropdown from "./NavigationDropdown";
-import { Category } from "@/lib/types";
 import { catalogues } from "@/lib/catalogues-data";
 
 interface CataloguesDropdownProps {
   navLinksRef: React.RefObject<HTMLDivElement | null>;
 }
 
-// Convert catalogues to Category format and show only first 4
-const catalogueCategories: Category[] = catalogues
-  .slice(0, 4)
-  .map((catalogue) => ({
-    name: catalogue.title,
-    slug: catalogue.slug,
-    image: catalogue.thumbnail,
-    description: catalogue.fileSize,
-  }));
+// Convert catalogues to dropdown format, show only first 4
+const catalogueItems = catalogues.slice(0, 4).map((catalogue) => ({
+  name: catalogue.title,
+  slug: catalogue.slug,
+  image: catalogue.thumbnail,
+  description: catalogue.fileSize,
+}));
 
 export default function CataloguesDropdown({
   navLinksRef,
@@ -26,8 +23,7 @@ export default function CataloguesDropdown({
       navLinksRef={navLinksRef}
       href="/catalogues"
       label="CATALOGUES"
-      categories={catalogueCategories}
-      queryParam="category"
+      categories={catalogueItems}
       viewAllText="View All Catalogues →"
     />
   );

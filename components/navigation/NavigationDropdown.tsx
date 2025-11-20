@@ -5,13 +5,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import NavLink from "@/components/NavLink";
-import { Category } from "@/lib/types";
+
+interface DropdownItem {
+  name: string;
+  slug: string;
+  image: string;
+  description: string;
+  type?: "mainCategory" | "designStyle";
+}
 
 interface NavigationDropdownProps {
   navLinksRef: React.RefObject<HTMLDivElement | null>;
   href: string;
   label: string;
-  categories: Category[];
+  categories: DropdownItem[];
   queryParam?: string;
   viewAllText: string;
 }
@@ -21,7 +28,7 @@ export default function NavigationDropdown({
   href,
   label,
   categories,
-  queryParam = "categories",
+  queryParam,
   viewAllText,
 }: NavigationDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -163,32 +170,51 @@ export default function NavigationDropdown({
               ref={scrollContainerRef}
               className="grid grid-cols-2 gap-4 max-h-[455px] overflow-y-auto pr-2 dropdown-scroll-hide"
             >
-              {categories.map((category) => (
-                <Link
-                  key={category.slug}
-                  href={`${href}?${queryParam}=${category.slug}`}
-                  onClick={() => setIsOpen(false)}
-                  className="group relative block rounded-lg overflow-hidden border border-neutral-200 transition-all hover:shadow-sm"
-                >
-                  <div className="relative h-32 w-full">
-                    <Image
-                      src={category.image}
-                      alt={category.name}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-transform duration-300 hover:scale-105" />
-                  </div>
-                  <div className="p-4 bg-neutral-50">
-                    <h3 className="font-semibold text-neutral-900 mb-1">
-                      {category.name}
-                    </h3>
-                    <p className="text-xs text-neutral-600">
-                      {category.description}
-                    </p>
-                  </div>
-                </Link>
-              ))}
+              {categories.map((category) => {
+                // Handle dual category system for product pages: use mainCategories or designStyles based on type
+                // For catalogues and other pages, link directly without query params
+                const isProductPage = href.startsWith("/products");
+                let linkHref = href;
+
+                if (isProductPage && category.type) {
+                  // Product pages use dual category system
+                  const param =
+                    category.type === "mainCategory"
+                      ? "mainCategories"
+                      : "designStyles";
+                  linkHref = `${href}?${param}=${category.slug}`;
+                } else if (queryParam) {
+                  // Other pages can use custom query param if provided
+                  linkHref = `${href}?${queryParam}=${category.slug}`;
+                }
+                // Otherwise, just use href without query params (for catalogues)
+                return (
+                  <Link
+                    key={category.slug}
+                    href={linkHref}
+                    onClick={() => setIsOpen(false)}
+                    className="group relative block rounded-lg overflow-hidden border border-neutral-200 transition-all hover:shadow-sm"
+                  >
+                    <div className="relative h-32 w-full">
+                      <Image
+                        src={category.image}
+                        alt={category.name}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-transform duration-300 hover:scale-105" />
+                    </div>
+                    <div className="p-4 bg-neutral-50">
+                      <h3 className="font-semibold text-neutral-900 mb-1">
+                        {category.name}
+                      </h3>
+                      <p className="text-xs text-neutral-600">
+                        {category.description}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
             {/* Scroll arrows */}
             {canScrollUp && (

@@ -67,7 +67,7 @@ export default function Collections() {
                   custom={index}
                 >
                   <Link
-                    href={`/products?categories=${category.slug}`}
+                    href={`/products?${category.type === "mainCategory" ? "mainCategories" : "designStyles"}=${category.slug}`}
                     className="relative group overflow-hidden block h-[370px] md:h-[550px]"
                   >
                     <Image

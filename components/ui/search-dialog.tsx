@@ -93,7 +93,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                 {products.map((product) => (
                   <CommandItem
                     key={product.id}
-                    value={`${product.name} ${product.category} ${product.finish}`}
+                    value={`${product.name} ${product.mainCategory} ${product.designStyle} ${product.finish}`}
                     onSelect={() => handleSelect(product)}
                     className="flex gap-3 p-3 cursor-pointer aria-selected:bg-neutral-100"
                   >
@@ -110,10 +110,10 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                         {product.name}
                       </div>
                       <div className="text-sm text-neutral-600 truncate">
-                        {product.category} • {product.finish}
+                        {product.designStyle.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")} • {product.finish}
                       </div>
                       <div className="text-sm text-neutral-700 mt-1">
-                        ${product.price.toFixed(2)} / {product.unit}
+                        AED {product.price.toFixed(2)} / {product.unit}
                       </div>
                     </div>
                   </CommandItem>

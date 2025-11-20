@@ -14,6 +14,13 @@ interface ProductCardProps {
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
+const formatLabel = (str: string) => {
+  return str
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
+
 export default function ProductCard({
   product,
   onQuickView,
@@ -26,7 +33,7 @@ export default function ProductCard({
           <AspectRatio ratio={1} className="relative overflow-hidden">
             <Image
               src={product.images[0]}
-              alt={`${product.name} - ${product.category} with ${product.finish} finish`}
+              alt={`${product.name} - ${formatLabel(product.designStyle)} ${formatLabel(product.mainCategory)} with ${product.finish} finish`}
               fill
               className="object-cover transition-transform group-hover:scale-105 duration-500"
             />
@@ -49,7 +56,7 @@ export default function ProductCard({
           <CardContent className="p-4">
             <CardTitle className="text-xl">{product.name}</CardTitle>
             <CardDescription>
-              {capitalize(product.category)} • {capitalize(product.finish)}
+              {formatLabel(product.designStyle)} • {capitalize(product.finish)}
             </CardDescription>
             <Button
               variant="outline"
