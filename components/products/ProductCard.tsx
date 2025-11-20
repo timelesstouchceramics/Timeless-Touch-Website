@@ -31,12 +31,18 @@ export default function ProductCard({
       <Link href={`/products/${product.slug}`}>
         <Card className="shadow-sm overflow-hidden transition-shadow hover:shadow-md">
           <AspectRatio ratio={1} className="relative overflow-hidden">
-            <Image
-              src={product.images[0]}
-              alt={`${product.name} - ${formatLabel(product.designStyle)} ${formatLabel(product.mainCategory)} with ${product.finish} finish`}
-              fill
-              className="object-cover transition-transform group-hover:scale-105 duration-500"
-            />
+            {product.images && product.images.length > 0 && product.images[0] ? (
+              <Image
+                src={product.images[0]}
+                alt={`${product.name} - ${formatLabel(product.designStyle)} ${formatLabel(product.mainCategory)} with ${product.finish} finish`}
+                fill
+                className="object-cover transition-transform group-hover:scale-105 duration-500"
+              />
+            ) : (
+              <div className="w-full h-full bg-neutral-200 flex items-center justify-center">
+                <span className="text-neutral-400 text-sm">No Image</span>
+              </div>
+            )}
             {showActions && onQuickView && (
               <div className="absolute inset-0 bg-neutral-950/0 group-hover:bg-neutral-950/40 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-500">
                 <div className="flex gap-2">

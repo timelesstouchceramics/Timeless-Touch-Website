@@ -97,13 +97,19 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                     onSelect={() => handleSelect(product)}
                     className="flex gap-3 p-3 cursor-pointer aria-selected:bg-neutral-100"
                   >
-                    <div className="relative h-16 w-16 shrink-0 rounded overflow-hidden border border-neutral-200">
-                      <Image
-                        src={product.images[0]}
-                        alt={product.name}
-                        fill
-                        className="object-cover"
-                      />
+                    <div className="relative h-16 w-16 shrink-0 rounded overflow-hidden border border-neutral-200 bg-neutral-100">
+                      {product.images && product.images.length > 0 && product.images[0] ? (
+                        <Image
+                          src={product.images[0]}
+                          alt={product.name}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <span className="text-neutral-400 text-xs">No Image</span>
+                        </div>
+                      )}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="font-medium text-neutral-950 truncate">

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { productCategories } from "@/lib/product-categories";
+import { Collection } from "@/lib/types";
 import {
   Carousel,
   CarouselContent,
@@ -14,7 +14,11 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-export default function Collections() {
+interface CollectionsProps {
+  collections: Collection[];
+}
+
+export default function Collections({ collections }: CollectionsProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -55,7 +59,7 @@ export default function Collections() {
           className="w-full"
         >
           <CarouselContent className="-ml-2 md:-ml-4">
-            {productCategories.map((category, index) => (
+            {collections.map((category, index) => (
               <CarouselItem
                 key={category.name}
                 className="pl-2 md:pl-6 basis-full md:basis-1/3"
@@ -67,7 +71,11 @@ export default function Collections() {
                   custom={index}
                 >
                   <Link
-                    href={`/products?${category.type === "mainCategory" ? "mainCategories" : "designStyles"}=${category.slug}`}
+                    href={`/products?${
+                      category.type === "mainCategory"
+                        ? "mainCategories"
+                        : "designStyles"
+                    }=${category.slug}`}
                     className="relative group overflow-hidden block h-[370px] md:h-[550px]"
                   >
                     <Image

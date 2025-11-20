@@ -209,7 +209,9 @@ export default function NavigationDropdown({
                         {category.name}
                       </h3>
                       <p className="text-xs text-neutral-600">
-                        {category.description}
+                        {typeof category.description === "string"
+                          ? category.description
+                          : ""}
                       </p>
                     </div>
                   </Link>

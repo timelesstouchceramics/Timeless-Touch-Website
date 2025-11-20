@@ -16,8 +16,13 @@ import {
 } from "@/components/ui/sheet";
 import ProductsDropdown from "@/components/navigation/ProductsDropdown";
 import CataloguesDropdown from "@/components/navigation/CataloguesDropdown";
+import { Collection } from "@/lib/types";
 
-const Navigation = () => {
+interface NavigationProps {
+  collections: Collection[];
+}
+
+const Navigation = ({ collections }: NavigationProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,7 +59,10 @@ const Navigation = () => {
             ref={navLinksRef}
           >
             <NavLink href="/">HOME</NavLink>
-            <ProductsDropdown navLinksRef={navLinksRef} />
+            <ProductsDropdown
+              navLinksRef={navLinksRef}
+              collections={collections}
+            />
             <NavLink href="/services">SERVICES</NavLink>
             <CataloguesDropdown navLinksRef={navLinksRef} />
             <NavLink href="/about">ABOUT US</NavLink>

@@ -43,14 +43,23 @@ export default function QuickViewModal({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-2xl rounded-xl">
+        <DialogHeader>
+          <DialogTitle className="sr-only">{product.name} - Quick View</DialogTitle>
+        </DialogHeader>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <AspectRatio ratio={1} className="relative overflow-hidden rounded-lg">
-            <Image
-              src={product.images[0]}
-              alt={product.name}
-              fill
-              className="object-cover"
-            />
+            {product.images && product.images.length > 0 && product.images[0] ? (
+              <Image
+                src={product.images[0]}
+                alt={product.name}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-neutral-200 flex items-center justify-center">
+                <span className="text-neutral-400 text-sm">No Image</span>
+              </div>
+            )}
           </AspectRatio>
 
           <div className="space-y-4">

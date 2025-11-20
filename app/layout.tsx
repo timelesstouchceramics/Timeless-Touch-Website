@@ -1,4 +1,4 @@
-import Navigation from "@/components/Navigation";
+import NavigationServer from "@/components/NavigationServer";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -35,7 +35,7 @@ export default function RootLayout({
       <body
         className={`antialiased ${fontPrimary.variable} ${fontSecondary.variable}`}
       >
-        <Navigation />
+        <NavigationServer />
         <Providers>{children}</Providers>
         <Footer />
         <ScrollToTop />
