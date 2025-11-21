@@ -11,25 +11,25 @@ const projects = [
   {
     title: "Modern Kitchen Renovation",
     description:
-      "A stunning contemporary kitchen featuring our premium large format tiles in sophisticated light gray from our Modern Look Collection. The seamless flooring creates a perfect foundation that harmonizes with natural wood cabinetry and exposed concrete ceilings. Our Full Body Technology and matt finish ensure lasting beauty and easy maintenance in this high-traffic culinary space.",
+      "A stunning contemporary kitchen featuring our premium large format tiles in sophisticated light gray from our Modern Look Collection. The seamless flooring harmonizes with natural wood cabinetry and exposed concrete ceilings. Full Body Technology and matt finish ensure beauty.",
     image: "/images/showcase/kitchen.jpg",
   },
   {
     title: "Residential Living Space",
     description:
-      "A dramatic double-height entryway showcasing our premium large format marble-look porcelain slabs in warm beige tones from our Stone Look Collection. The floor-to-ceiling application creates a seamless, hotel-inspired aesthetic with authentic travertine veining and natural stone character. Strategic lighting highlights the rich texture and depth of the surface, while the polished finish adds timeless elegance to this sophisticated residential space.",
+      "A dramatic double-height entryway showcasing our premium large format marble-look porcelain slabs in warm beige tones. The floor-to-ceiling application creates a seamless, hotel-inspired aesthetic with authentic travertine veining. Strategic lighting highlights the texture.",
     image: "/images/showcase/residential.jpg",
   },
   {
     title: "Luxury Swimming Pool Design",
     description:
-      "An elegant aquatic retreat featuring our premium Starwave Series Crystalline Glazed Porcelain mosaic tiles in mesmerizing ocean blue tones. The shimmering underwater surface captures and reflects light beautifully, creating the poetic blend of starlight and sea that defines our pool collection. This stunning application demonstrates how our specialized mosaic tiles transform ordinary pools into luxurious sanctuaries with lasting beauty and performance.",
+      "An elegant aquatic retreat featuring our premium Starwave Series Crystalline Glazed Porcelain mosaic tiles in mesmerizing ocean blue tones. The shimmering underwater surface captures and reflects light beautifully, creating a poetic blend of starlight and sea. These tiles transform pools into sanctuaries.",
     image: "/images/showcase/swimmingpool.jpg",
   },
   {
     title: "Zen Bathroom Sanctuary",
     description:
-      "A tranquil sanctuary featuring our premium textured stone-look porcelain in sophisticated gray-green tones from our Stone Look Collection. The dramatic three-dimensional feature wall creates depth and visual interest, complemented by smooth large format tiles in warm beige throughout the space. This serene bathroom demonstrates how thoughtful material selection and texture contrast can transform a functional space into a luxurious wellness retreat with spa-like ambiance.",
+      "A tranquil sanctuary featuring our premium textured stone-look porcelain in sophisticated gray-green tones. The dramatic three-dimensional feature wall creates depth and visual interest, complemented by smooth large format tiles in warm beige. Thoughtful material selection transforms this space into a wellness retreat.",
     image: "/images/showcase/bathroom.jpg",
   },
 ];
@@ -59,7 +59,7 @@ export function Showcase() {
           <h2 className="title-section">Showcase</h2>
           <p className="text-body">
             Explore how our elegant porcelain surfaces transform spaces across
-            residential and commercial applications
+            residential and commercial projects
           </p>
         </motion.div>
       </div>
