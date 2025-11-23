@@ -4,7 +4,6 @@ import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Separator } from "@/components/ui/separator";
 import { Award, Users, Factory, Heart } from "lucide-react";
-import Breadcrumb from "@/components/Breadcrumb";
 import FeaturesCard from "@/components/FeaturesCard";
 import FAQ from "@/components/FAQ";
 import TechnicalSpecs from "@/components/TechnicalSpecs";
@@ -158,9 +157,6 @@ export default function About() {
 
   return (
     <div className="bg-neutral-50">
-      <div className="container pt-8">
-        <Breadcrumb items={[{ label: "About Us" }]} />
-      </div>
       <section className="section-darker" ref={heroRef}>
         <div className="container text-center">
           <motion.h1
@@ -283,8 +279,12 @@ export default function About() {
             }
             transition={{ duration: 0.9, ease: [0, 0, 0.58, 1] as const }}
           >
-            <h2 className="title-section">Our Journey</h2>
-            <p className="text-body">Milestones that shaped our story</p>
+            <div className="text-center mb-12">
+              <p className="text-xs sm:text-sm uppercase tracking-wider font-medium text-neutral-400 mb-2">
+                Milestones
+              </p>
+              <h2 className="title-section">Our Journey</h2>
+            </div>
           </motion.div>
 
           <motion.div

@@ -7,12 +7,13 @@ interface CataloguesDropdownProps {
   navLinksRef: React.RefObject<HTMLDivElement | null>;
 }
 
-// Convert catalogues to dropdown format, show only first 4
-const catalogueItems = catalogues.slice(0, 4).map((catalogue) => ({
+// Convert catalogues to dropdown format
+const catalogueItems = catalogues.map((catalogue) => ({
   name: catalogue.title,
   slug: catalogue.slug,
   image: catalogue.thumbnail,
-  description: catalogue.fileSize,
+  description: catalogue.description || "",
+  downloadUrl: catalogue.fileUrl,
 }));
 
 export default function CataloguesDropdown({

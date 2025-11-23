@@ -111,7 +111,7 @@ export default function ProductDetailClient({
                   <button
                     key={index}
                     onClick={() => api?.scrollTo(index)}
-                    className={`relative overflow-hidden rounded-md transition-all ${
+                    className={`relative overflow-hidden rounded-md transition-all cursor-pointer ${
                       currentImageIndex === index
                         ? "ring-2 ring-primary-600"
                         : "opacity-70 hover:opacity-100"

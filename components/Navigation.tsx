@@ -70,14 +70,19 @@ const Navigation = ({ collections }: NavigationProps) => {
           </div>
 
           <div className="hidden md:flex items-center gap-6">
-            <button
+            <Button
               onClick={() => setIsSearchOpen(true)}
-              className="uppercase tracking-wide text-sm flex items-center gap-2 cursor-pointer bg-neutral-100 text-neutral-800 hover:bg-neutral-200 active:ring-2 active:ring-primary-500 active:ring-offset-3 rounded-2xl py-1 px-3 transition-all duration-200"
+              variant="default"
               aria-label="Search"
+              className={
+                isScrolled || path !== "/"
+                  ? "bg-neutral-50 text-neutral-950 hover:bg-neutral-100"
+                  : ""
+              }
             >
               <Search className="h-4 w-4" />
               Search
-            </button>
+            </Button>
           </div>
 
           <button

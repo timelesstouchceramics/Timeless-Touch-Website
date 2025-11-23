@@ -1,14 +1,31 @@
 import { Product, Collection } from "@/lib/types";
-import {
-  products as staticProducts,
-  mainCategories as staticMainCategories,
-  designStyles as staticDesignStyles,
-  finishes as staticFinishes,
-  applications as staticApplications,
-  sizes as staticSizes,
-  thicknesses as staticThicknesses,
-} from "@/lib/products-data";
-import { productCategories as staticCollections } from "@/lib/product-categories";
+// Dynamic import for static data - only loaded server-side when needed
+// This prevents the data from being bundled into client JavaScript
+async function getStaticData() {
+  const {
+    products,
+    mainCategories,
+    designStyles,
+    finishes,
+    applications,
+    sizes,
+    thicknesses,
+  } = await import("@/lib/products-data");
+  return {
+    products,
+    mainCategories,
+    designStyles,
+    finishes,
+    applications,
+    sizes,
+    thicknesses,
+  };
+}
+
+async function getStaticCollections() {
+  const { productCategories } = await import("@/lib/product-categories");
+  return productCategories;
+}
 
 // Contentful configuration
 // TODO: Move to environment variables
@@ -309,7 +326,8 @@ function transformContentfulProduct(
  */
 export async function getProducts(): Promise<Product[]> {
   if (!USE_CONTENTFUL) {
-    return staticProducts;
+    const { products } = await getStaticData();
+    return products;
   }
 
   try {
@@ -324,7 +342,8 @@ export async function getProducts(): Promise<Product[]> {
   } catch (error) {
     console.error("Failed to fetch from Contentful:", error);
     // Fallback to static data on error
-    return staticProducts;
+    const { products } = await getStaticData();
+    return products;
   }
 }
 
@@ -336,13 +355,14 @@ export async function getProducts(): Promise<Product[]> {
  */
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   if (!USE_CONTENTFUL) {
-    const product = staticProducts.find((p) => p.slug === slug);
+    const { products } = await getStaticData();
+    const product = products.find((p) => p.slug === slug);
     return product || null;
   }
 
   try {
     // First try to find by slug field
-    let response = await fetchContentful<ContentfulProductFields>("product", {
+    const response = await fetchContentful<ContentfulProductFields>("product", {
       "fields.slug": slug,
       limit: 1,
     });
@@ -367,7 +387,8 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
   } catch (error) {
     console.error("Failed to fetch product from Contentful:", error);
     // Fallback to static data on error
-    const product = staticProducts.find((p) => p.slug === slug);
+    const { products } = await getStaticData();
+    const product = products.find((p) => p.slug === slug);
     return product || null;
   }
 }
@@ -378,7 +399,8 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
  */
 export async function getMainCategories(): Promise<string[]> {
   if (!USE_CONTENTFUL) {
-    return staticMainCategories;
+    const { mainCategories } = await getStaticData();
+    return mainCategories;
   }
 
   try {
@@ -390,7 +412,8 @@ export async function getMainCategories(): Promise<string[]> {
     return mainCategories.sort();
   } catch (error) {
     console.error("Failed to fetch main categories:", error);
-    return staticMainCategories;
+    const { mainCategories } = await getStaticData();
+    return mainCategories;
   }
 }
 
@@ -399,7 +422,8 @@ export async function getMainCategories(): Promise<string[]> {
  */
 export async function getDesignStyles(): Promise<string[]> {
   if (!USE_CONTENTFUL) {
-    return staticDesignStyles;
+    const { designStyles } = await getStaticData();
+    return designStyles;
   }
 
   try {
@@ -411,7 +435,8 @@ export async function getDesignStyles(): Promise<string[]> {
     return designStyles.sort();
   } catch (error) {
     console.error("Failed to fetch design styles:", error);
-    return staticDesignStyles;
+    const { designStyles } = await getStaticData();
+    return designStyles;
   }
 }
 
@@ -420,7 +445,8 @@ export async function getDesignStyles(): Promise<string[]> {
  */
 export async function getFinishes(): Promise<string[]> {
   if (!USE_CONTENTFUL) {
-    return staticFinishes;
+    const { finishes } = await getStaticData();
+    return finishes;
   }
 
   try {
@@ -432,7 +458,8 @@ export async function getFinishes(): Promise<string[]> {
     return finishes.sort();
   } catch (error) {
     console.error("Failed to fetch finishes:", error);
-    return staticFinishes;
+    const { finishes } = await getStaticData();
+    return finishes;
   }
 }
 
@@ -441,7 +468,8 @@ export async function getFinishes(): Promise<string[]> {
  */
 export async function getApplications(): Promise<string[]> {
   if (!USE_CONTENTFUL) {
-    return staticApplications;
+    const { applications } = await getStaticData();
+    return applications;
   }
 
   try {
@@ -453,7 +481,8 @@ export async function getApplications(): Promise<string[]> {
     return applications.sort();
   } catch (error) {
     console.error("Failed to fetch applications:", error);
-    return staticApplications;
+    const { applications } = await getStaticData();
+    return applications;
   }
 }
 
@@ -462,7 +491,8 @@ export async function getApplications(): Promise<string[]> {
  */
 export async function getSizes(): Promise<string[]> {
   if (!USE_CONTENTFUL) {
-    return staticSizes;
+    const { sizes } = await getStaticData();
+    return sizes;
   }
 
   try {
@@ -478,7 +508,8 @@ export async function getSizes(): Promise<string[]> {
     return sizes.sort();
   } catch (error) {
     console.error("Failed to fetch sizes:", error);
-    return staticSizes;
+    const { sizes } = await getStaticData();
+    return sizes;
   }
 }
 
@@ -487,7 +518,8 @@ export async function getSizes(): Promise<string[]> {
  */
 export async function getThicknesses(): Promise<string[]> {
   if (!USE_CONTENTFUL) {
-    return staticThicknesses;
+    const { thicknesses } = await getStaticData();
+    return thicknesses;
   }
 
   try {
@@ -503,7 +535,8 @@ export async function getThicknesses(): Promise<string[]> {
     return thicknesses.sort();
   } catch (error) {
     console.error("Failed to fetch thicknesses:", error);
-    return staticThicknesses;
+    const { thicknesses } = await getStaticData();
+    return thicknesses;
   }
 }
 
@@ -659,9 +692,10 @@ export async function getSimilarProducts(
   limit: number = 3
 ): Promise<Product[]> {
   if (!USE_CONTENTFUL) {
-    return staticProducts
+    const { products } = await getStaticData();
+    return products
       .filter(
-        (p) =>
+        (p: Product) =>
           (p.designStyle === product.designStyle ||
             p.mainCategory === product.mainCategory) &&
           p.id !== product.id
@@ -681,9 +715,10 @@ export async function getSimilarProducts(
     );
   } catch (error) {
     console.error("Failed to fetch similar products:", error);
-    return staticProducts
+    const { products } = await getStaticData();
+    return products
       .filter(
-        (p) =>
+        (p: Product) =>
           (p.designStyle === product.designStyle ||
             p.mainCategory === product.mainCategory) &&
           p.id !== product.id
@@ -795,7 +830,7 @@ function transformContentfulCollection(
  */
 export async function getCollections(): Promise<Collection[]> {
   if (!USE_CONTENTFUL) {
-    return staticCollections;
+    return await getStaticCollections();
   }
 
   try {
@@ -813,6 +848,6 @@ export async function getCollections(): Promise<Collection[]> {
   } catch (error) {
     console.error("Failed to fetch collections from Contentful:", error);
     // Fallback to static data on error
-    return staticCollections;
+    return await getStaticCollections();
   }
 }

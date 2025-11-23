@@ -1,6 +1,5 @@
 "use client";
 
-import Breadcrumb from "@/components/Breadcrumb";
 import CatalogueCard from "@/components/CatalogueCard";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
@@ -42,10 +41,7 @@ export default function Catalogues() {
 
   return (
     <div className="bg-neutral-50">
-      <div className="container pt-8">
-        <Breadcrumb items={[{ label: "Catalogues" }]} />
-      </div>
-      <section className="section pt-12" ref={headerRef}>
+      <section className="section" ref={headerRef}>
         <div className="container">
           <motion.div
             className="text-center mb-12"

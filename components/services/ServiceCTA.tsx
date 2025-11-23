@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
@@ -60,14 +59,14 @@ export default function ServiceCTA() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg" variant="secondary">
-                  <Link href="/contact">
+                  <a href={`https://wa.me/971547139032?text=${encodeURIComponent("Hello! I'd like to schedule a free consultation for my project. I'm interested in learning how you can help bring my vision to life.")}`} target="_blank" rel="noopener noreferrer">
                     Schedule Consultation <Calendar1 className="ml-2 h-4 w-4" />
-                  </Link>
+                  </a>
                 </Button>
                 <Button asChild size="lg" variant="outlineLight">
-                  <Link href="tel:+971547139032">
+                  <a href={`https://wa.me/971547139032?text=${encodeURIComponent("Hello! I'd like to speak with you about your services.")}`} target="_blank" rel="noopener noreferrer">
                     Call Us Now <Phone className="ml-2 h-4 w-4" />
-                  </Link>
+                  </a>
                 </Button>
               </div>
             </div>

@@ -72,7 +72,7 @@ export default function MapSection() {
 
             {/* CTA Button */}
             <motion.div className="mt-4" variants={itemVariants}>
-              <Button variant="outlineDark" className="rounded-md" asChild>
+              <Button asChild>
                 <a
                   href={directionsUrl}
                   target="_blank"

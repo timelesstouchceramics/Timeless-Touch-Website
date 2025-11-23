@@ -1,12 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Calendar1 } from "lucide-react";
-import Image from "next/image";
 
 export default function CTA() {
   const ref = useRef(null);
@@ -46,7 +44,7 @@ export default function CTA() {
         >
           <motion.div
             className="relative flex items-center justify-center py-20 px-6 md:px-12 overflow-hidden bg-cover bg-center"
-            style={{ backgroundImage: "url('/cta-bg.png')" }}
+            style={{ backgroundImage: "url('/cta-bg.jpg')" }}
             variants={glassVariants}
           >
             <div className="absolute inset-0 bg-neutral-900/20" />
@@ -65,9 +63,15 @@ export default function CTA() {
                   variant="secondary"
                   className="bg-neutral-50 hover:bg-white hover:shadow-xl transition-all duration-300"
                 >
-                  <Link href="/contact">
+                  <a
+                    href={`https://wa.me/971547139032?text=${encodeURIComponent(
+                      "Hello! I'm interested in scheduling a consultation to transform my space with your premium tiles and natural stone products."
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Schedule Consultation <Calendar1 className="ml-2 h-4 w-4" />
-                  </Link>
+                  </a>
                 </Button>
               </div>
             </div>

@@ -50,7 +50,7 @@ export default function Collections({ collections }: CollectionsProps) {
           </p>
         </motion.div>
       </div>
-      <div className="container-lg sm:px-4 md:px-12">
+      <div className="container">
         <Carousel
           opts={{
             loop: true,

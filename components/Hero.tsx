@@ -47,7 +47,7 @@ export default function Hero() {
         />
       </div>
       {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 z-10 bg-neutral-950/30" />
+      <div className="absolute inset-0 z-10 bg-neutral-950/40" />
       {/* Content */}
       <div className="container relative z-20 h-full flex items-center justify-center">
         <motion.div
@@ -64,14 +64,27 @@ export default function Hero() {
               {heroSlide.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button asChild size="lg">
+              <Button asChild variant="secondary" size="lg">
                 <Link href="/products">
                   Explore Products
                   <span className="ml-2">→</span>
                 </Link>
               </Button>
-              <Button asChild variant="outlineLight" size="lg">
-                <Link href="/contact">Get Consultation</Link>
+              <Button
+                asChild
+                variant="outlineLight"
+                className="backdrop bg-neutral-100/20 hover:bg-neutral-100/25 border border-neutral-100/40"
+                size="lg"
+              >
+                <a
+                  href={`https://wa.me/971547139032?text=${encodeURIComponent(
+                    "Hello! I'm interested in getting a consultation for my space. I'd like to explore your elegant porcelain surfaces."
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Get Consultation
+                </a>
               </Button>
             </div>
           </motion.div>

@@ -128,7 +128,7 @@ export default function FilterControls({
         open={mainCategoryOpen}
         onOpenChange={onMainCategoryOpenChange}
       >
-        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100">
+        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100 cursor-pointer">
           <h4 className="text-base font-semibold text-neutral-950">
             Product Type
           </h4>
@@ -200,7 +200,7 @@ export default function FilterControls({
         open={designStyleOpen}
         onOpenChange={onDesignStyleOpenChange}
       >
-        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100">
+        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100 cursor-pointer">
           <h4 className="text-base font-semibold text-neutral-950">
             Design Style
           </h4>
@@ -269,7 +269,7 @@ export default function FilterControls({
 
       {/* Finish Filter */}
       <Collapsible open={finishOpen} onOpenChange={onFinishOpenChange}>
-        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100">
+        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100 cursor-pointer">
           <h4 className="text-base font-semibold text-neutral-950">Finish</h4>
           <ChevronDown
             className={`h-4 w-4 transition-transform duration-200 ${
@@ -339,7 +339,7 @@ export default function FilterControls({
         open={applicationsOpen}
         onOpenChange={onApplicationsOpenChange}
       >
-        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100">
+        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100 cursor-pointer">
           <h4 className="text-base font-semibold text-neutral-950">
             Applications
           </h4>
@@ -408,7 +408,7 @@ export default function FilterControls({
 
       {/* Size Filter */}
       <Collapsible open={sizesOpen} onOpenChange={onSizesOpenChange}>
-        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100">
+        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100 cursor-pointer">
           <h4 className="text-base font-semibold text-neutral-950">Size</h4>
           <ChevronDown
             className={`h-4 w-4 transition-transform duration-200 ${
@@ -477,7 +477,7 @@ export default function FilterControls({
         open={thicknessesOpen}
         onOpenChange={onThicknessesOpenChange}
       >
-        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100">
+        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100 cursor-pointer">
           <h4 className="text-base font-semibold text-neutral-950">
             Thickness
           </h4>
@@ -549,7 +549,7 @@ export default function FilterControls({
         open={specialFeaturesOpen}
         onOpenChange={onSpecialFeaturesOpenChange}
       >
-        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100">
+        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100 cursor-pointer">
           <h4 className="text-base font-semibold text-neutral-950">
             Special Features
           </h4>

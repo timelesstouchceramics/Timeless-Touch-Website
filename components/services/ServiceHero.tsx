@@ -66,10 +66,10 @@ export default function ServiceHero() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button asChild size="lg">
-                <Link href="/contact">
+                <a href={`https://wa.me/971547139032?text=${encodeURIComponent("Hello! I'm interested in getting a free consultation for your premium services. I'd like to learn more about your comprehensive porcelain solutions.")}`} target="_blank" rel="noopener noreferrer">
                   Get Free Consultation
                   <span className="ml-2">→</span>
-                </Link>
+                </a>
               </Button>
               <Button asChild variant="outlineLight" size="lg">
                 <Link href="/products">View Our Products</Link>

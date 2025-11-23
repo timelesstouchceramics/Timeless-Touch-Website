@@ -8,7 +8,6 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import Breadcrumb from "@/components/Breadcrumb";
 import FeaturesCard from "@/components/FeaturesCard";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
@@ -124,10 +123,7 @@ export default function Contact() {
 
   return (
     <div className="bg-neutral-50">
-      <div className="container pt-8">
-        <Breadcrumb items={[{ label: "Contact" }]} />
-      </div>
-      <section className="section pt-12" ref={headerRef}>
+      <section className="section" ref={headerRef}>
         <div className="container">
           <motion.div
             className="text-center mb-12"

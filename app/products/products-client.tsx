@@ -141,7 +141,11 @@ export default function ProductsClient({
       // Only update if URL is different
       const currentURL = `${pathname}${window.location.search}`;
       if (newURL !== currentURL) {
-        router.replace(newURL, { scroll: false });
+        // Use window.history to update URL without triggering Next.js navigation
+        // This prevents the page from remounting and closing collapsibles
+        startTransition(() => {
+          window.history.replaceState(null, "", newURL);
+        });
       }
     },
     [pathname, router],
