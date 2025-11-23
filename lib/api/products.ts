@@ -825,8 +825,38 @@ function transformContentfulCollection(
 }
 
 /**
+ * Organizes collections by predefined order.
+ * Order: Slabs → Tiles → Marble Look → Swimming Pool Tiles → Stone Look → Modern Look → Wood Look → Decorative
+ */
+function organizeCollections(collections: Collection[]): Collection[] {
+  // Define the unified order (mixed main categories and design styles)
+  const unifiedOrder = [
+    "slabs",           // Main Category
+    "tiles",           // Main Category
+    "marble-look",     // Design Style
+    "pool-tiles",      // Main Category
+    "stone-look",      // Design Style
+    "modern-look",     // Design Style
+    "wood-look",       // Design Style
+    "decorative",      // Design Style
+  ];
+
+  // Sort all collections by the unified order
+  return collections.sort((a, b) => {
+    const indexA = unifiedOrder.indexOf(a.slug);
+    const indexB = unifiedOrder.indexOf(b.slug);
+    // If slug not in order array, put it at the end
+    if (indexA === -1 && indexB === -1) return 0;
+    if (indexA === -1) return 1;
+    if (indexB === -1) return -1;
+    return indexA - indexB;
+  });
+}
+
+/**
  * Fetches all collections from the data source.
  * Uses Contentful if configured, otherwise falls back to static data.
+ * Collections are organized: Slabs → Tiles → Marble Look → Swimming Pool Tiles → Stone Look → Modern Look → Wood Look → Decorative.
  */
 export async function getCollections(): Promise<Collection[]> {
   if (!USE_CONTENTFUL) {
@@ -842,9 +872,12 @@ export async function getCollections(): Promise<Collection[]> {
       }
     );
 
-    return response.items.map((item) =>
+    const collections = response.items.map((item) =>
       transformContentfulCollection(item, response.includes)
     );
+
+    // Organize collections by type and predefined order
+    return organizeCollections(collections);
   } catch (error) {
     console.error("Failed to fetch collections from Contentful:", error);
     // Fallback to static data on error

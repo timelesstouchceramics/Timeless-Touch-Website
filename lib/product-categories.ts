@@ -4,12 +4,10 @@ import { Collection } from "./types";
  * Centralized product categories data.
  * This is the single source of truth for product categories used across the application.
  *
- * Categories are organized by type:
- * - Main categories: Product types (slabs, tiles, pool-tiles)
- * - Design styles: Aesthetic styles (stone-look, marble-look, modern-look, wood-look, decorative)
+ * Categories are organized in the following order:
+ * Slabs → Tiles → Marble Look → Swimming Pool Tiles → Stone Look → Modern Look → Wood Look → Decorative
  */
 export const productCategories: Collection[] = [
-  // Main Categories
   {
     name: "Slabs",
     slug: "slabs",
@@ -25,20 +23,18 @@ export const productCategories: Collection[] = [
     description: "Wood Look and Standard Tiles",
   },
   {
-    name: "Swimming Pool Tiles",
-    slug: "pool-tiles",
-    type: "mainCategory",
-    image: "/images/categories/pooltile-category.jpeg",
-    description: "Starwave Series - Crystalline Glazed Porcelain",
-  },
-
-  // Design Styles
-  {
     name: "Marble Look Collection",
     slug: "marble-look",
     type: "designStyle",
     image: "/images/categories/marblelook-category.jpeg",
     description: "Black Collection, Luxury Range, Classic Marbles",
+  },
+  {
+    name: "Swimming Pool Tiles",
+    slug: "pool-tiles",
+    type: "mainCategory",
+    image: "/images/categories/pooltile-category.jpeg",
+    description: "Starwave Series - Crystalline Glazed Porcelain",
   },
   {
     name: "Stone Look Collection",

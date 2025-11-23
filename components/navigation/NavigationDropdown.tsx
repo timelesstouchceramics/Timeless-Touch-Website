@@ -37,7 +37,7 @@ export default function NavigationDropdown({
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [hoveredItem, setHoveredItem] = useState<DropdownItem | null>(
-    categories.length > 0 ? categories[categories.length - 1] : null
+    categories.length > 0 ? categories[0] : null
   );
 
   useEffect(() => {
@@ -65,9 +65,9 @@ export default function NavigationDropdown({
       closeTimeoutRef.current = null;
     }
     setIsOpen(true);
-    // Initialize hovered item to last item (first in descending order)
+    // Initialize hovered item to first item (ascending order)
     if (categories.length > 0) {
-      setHoveredItem(categories[categories.length - 1]);
+      setHoveredItem(categories[0]);
     }
   };
 
@@ -135,58 +135,55 @@ export default function NavigationDropdown({
                 ref={scrollContainerRef}
                 className="grid grid-cols-2 gap-0.5 max-h-[455px] overflow-y-auto pr-2 dropdown-scroll-hide flex-1"
               >
-                {categories
-                  .slice()
-                  .reverse()
-                  .map((category) => {
-                    // Handle dual category system for product pages: use mainCategories or designStyles based on type
-                    // For catalogues and other pages, link directly without query params
-                    const isProductPage = href.startsWith("/products");
-                    let linkHref = href;
-                    const isDownload = !!category.downloadUrl;
+                {categories.map((category) => {
+                  // Handle dual category system for product pages: use mainCategories or designStyles based on type
+                  // For catalogues and other pages, link directly without query params
+                  const isProductPage = href.startsWith("/products");
+                  let linkHref = href;
+                  const isDownload = !!category.downloadUrl;
 
-                    if (isDownload && category.downloadUrl) {
-                      // Use download URL for catalogues
-                      linkHref = category.downloadUrl;
-                    } else if (isProductPage && category.type) {
-                      // Product pages use dual category system
-                      const param =
-                        category.type === "mainCategory"
-                          ? "mainCategories"
-                          : "designStyles";
-                      linkHref = `${href}?${param}=${category.slug}`;
-                    } else if (queryParam) {
-                      // Other pages can use custom query param if provided
-                      linkHref = `${href}?${queryParam}=${category.slug}`;
-                    }
-                    // Otherwise, just use href without query params (for catalogues)
-                    const isActive = hoveredItem?.slug === category.slug;
-                    return (
-                      <Link
-                        key={category.slug}
-                        href={linkHref}
-                        download={isDownload}
-                        onClick={() => setIsOpen(false)}
-                        onMouseEnter={() => setHoveredItem(category)}
-                        className={`group block p-3 rounded-lg transition-all border ${
-                          isActive
-                            ? "bg-neutral-100 border-neutral-200"
-                            : "border-transparent hover:bg-neutral-100 hover:border-neutral-200"
-                        }`}
-                      >
-                        <h3 className="font-semibold text-neutral-900 mb-1">
-                          {category.name}
-                        </h3>
-                        {category.description && (
-                          <p className="text-xs text-neutral-600">
-                            {typeof category.description === "string"
-                              ? category.description
-                              : ""}
-                          </p>
-                        )}
-                      </Link>
-                    );
-                  })}
+                  if (isDownload && category.downloadUrl) {
+                    // Use download URL for catalogues
+                    linkHref = category.downloadUrl;
+                  } else if (isProductPage && category.type) {
+                    // Product pages use dual category system
+                    const param =
+                      category.type === "mainCategory"
+                        ? "mainCategories"
+                        : "designStyles";
+                    linkHref = `${href}?${param}=${category.slug}`;
+                  } else if (queryParam) {
+                    // Other pages can use custom query param if provided
+                    linkHref = `${href}?${queryParam}=${category.slug}`;
+                  }
+                  // Otherwise, just use href without query params (for catalogues)
+                  const isActive = hoveredItem?.slug === category.slug;
+                  return (
+                    <Link
+                      key={category.slug}
+                      href={linkHref}
+                      download={isDownload}
+                      onClick={() => setIsOpen(false)}
+                      onMouseEnter={() => setHoveredItem(category)}
+                      className={`group block p-3 rounded-lg transition-all border ${
+                        isActive
+                          ? "bg-neutral-100 border-neutral-200"
+                          : "border-transparent hover:bg-neutral-100 hover:border-neutral-200"
+                      }`}
+                    >
+                      <h3 className="font-semibold text-neutral-900 mb-1">
+                        {category.name}
+                      </h3>
+                      {category.description && (
+                        <p className="text-xs text-neutral-600">
+                          {typeof category.description === "string"
+                            ? category.description
+                            : ""}
+                        </p>
+                      )}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
 
