@@ -28,6 +28,15 @@ export interface Collection {
   description: string;
 }
 
+export interface Catalogue {
+  title: string;
+  slug: string;
+  thumbnail: string;
+  fileUrl: string;
+  fileSize?: string;
+  description?: string;
+}
+
 export type SortOption =
   | "name"
   | "name-desc"

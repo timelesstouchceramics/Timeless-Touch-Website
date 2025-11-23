@@ -163,6 +163,8 @@ export default function NavigationDropdown({
                       key={category.slug}
                       href={linkHref}
                       download={isDownload}
+                      target={isDownload ? "_blank" : undefined}
+                      rel={isDownload ? "noopener noreferrer" : undefined}
                       onClick={() => setIsOpen(false)}
                       onMouseEnter={() => setHoveredItem(category)}
                       className={`group block p-3 rounded-lg transition-all border ${

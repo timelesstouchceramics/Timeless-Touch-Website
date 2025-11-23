@@ -1,4 +1,4 @@
-import { Product, Collection } from "@/lib/types";
+import { Product, Collection, Catalogue } from "@/lib/types";
 // Dynamic import for static data - only loaded server-side when needed
 // This prevents the data from being bundled into client JavaScript
 async function getStaticData() {
@@ -71,6 +71,15 @@ interface ContentfulCollectionFields {
   designStyle?: any; // Reference - will be resolved from includes
   image?: ContentfulAsset;
   description?: any; // RichText
+}
+
+interface ContentfulCatalogueFields {
+  title: string;
+  slug: string;
+  thumbnail?: any; // Reference to Asset - will be resolved from includes
+  fileUrl?: any; // Reference to Asset - will be resolved from includes
+  fileSize?: string;
+  description?: string;
 }
 
 interface ContentfulEntry<T> {
@@ -882,5 +891,78 @@ export async function getCollections(): Promise<Collection[]> {
     console.error("Failed to fetch collections from Contentful:", error);
     // Fallback to static data on error
     return await getStaticCollections();
+  }
+}
+
+/**
+ * Transforms Contentful catalogue entry to our Catalogue type
+ */
+function transformContentfulCatalogue(
+  entry: ContentfulEntry<ContentfulCatalogueFields>,
+  includes?: ContentfulIncludes
+): Catalogue {
+  const { fields } = entry;
+
+  // Resolve thumbnail asset
+  let thumbnailUrl = "";
+  if (fields.thumbnail) {
+    const thumbnailRef = resolveReference(fields.thumbnail, includes);
+    const resolvedThumbnail = thumbnailRef || fields.thumbnail;
+    const fileUrl = resolvedThumbnail?.fields?.file?.url;
+    if (fileUrl) {
+      thumbnailUrl = `https:${fileUrl}`;
+    }
+  }
+
+  // Resolve PDF asset
+  let pdfUrl = "";
+  if (fields.fileUrl) {
+    const pdfRef = resolveReference(fields.fileUrl, includes);
+    const resolvedPdf = pdfRef || fields.fileUrl;
+    const fileUrl = resolvedPdf?.fields?.file?.url;
+    if (fileUrl) {
+      pdfUrl = `https:${fileUrl}`;
+    }
+  }
+
+  // Get description from Contentful
+  const description = fields.description || "";
+
+  return {
+    title: fields.title,
+    slug: fields.slug,
+    thumbnail: thumbnailUrl,
+    fileUrl: pdfUrl,
+    fileSize: fields.fileSize,
+    description,
+  };
+}
+
+/**
+ * Fetches all catalogues from the data source.
+ * Uses Contentful if configured, otherwise returns empty array.
+ */
+export async function getCatalogues(): Promise<Catalogue[]> {
+  if (!USE_CONTENTFUL) {
+    // No local fallback - catalogues are managed in Contentful
+    console.warn("Contentful not configured - returning empty catalogues array");
+    return [];
+  }
+
+  try {
+    const response = await fetchContentful<ContentfulCatalogueFields>("catalogue", {
+      order: "-sys.createdAt",
+      limit: 100,
+    });
+
+    const catalogues = response.items.map((item) =>
+      transformContentfulCatalogue(item, response.includes)
+    );
+
+    return catalogues;
+  } catch (error) {
+    console.error("Failed to fetch catalogues from Contentful:", error);
+    // Return empty array if Contentful fails
+    return [];
   }
 }
