@@ -40,6 +40,17 @@ export default function QuickViewModal({
       .join(" ");
   };
 
+  const getEffectiveDesignStyle = (product: Product): string => {
+    if (product.designStyle) {
+      return product.designStyle;
+    }
+    // If design style is empty and main category is pool-tiles, use pool-tiles as design style
+    if (product.mainCategory === "pool-tiles") {
+      return "pool-tiles";
+    }
+    return "";
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-2xl rounded-xl">
@@ -67,7 +78,9 @@ export default function QuickViewModal({
               <h2 className="text-2xl font-semibold text-neutral-950">{product.name}</h2>
               <div className="flex gap-2 mt-2 flex-wrap">
                 <Badge variant="secondary">{formatLabel(product.mainCategory)}</Badge>
-                <Badge variant="secondary">{formatLabel(product.designStyle)}</Badge>
+                {getEffectiveDesignStyle(product) && (
+                  <Badge variant="secondary">{formatLabel(getEffectiveDesignStyle(product))}</Badge>
+                )}
                 <Badge variant="secondary">{capitalize(product.finish)}</Badge>
               </div>
             </div>
@@ -84,7 +97,7 @@ export default function QuickViewModal({
             )}
 
             <p className="text-sm text-neutral-600">
-              {product.description || `Premium quality ${formatLabel(product.designStyle)} ${formatLabel(product.mainCategory)} with ${product.finish} finish. Perfect for interior and exterior applications.`}
+              {product.description || `Premium quality ${getEffectiveDesignStyle(product) ? formatLabel(getEffectiveDesignStyle(product)) + " " : ""}${formatLabel(product.mainCategory)} with ${product.finish} finish. Perfect for interior and exterior applications.`}
             </p>
 
             <Separator />

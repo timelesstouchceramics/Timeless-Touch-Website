@@ -16,6 +16,17 @@ import { Button } from "@/components/ui/button";
 import { Product } from "@/lib/types";
 import { Skeleton } from "@/components/ui/skeleton";
 
+const getEffectiveDesignStyle = (product: Product): string => {
+  if (product.designStyle) {
+    return product.designStyle;
+  }
+  // If design style is empty and main category is pool-tiles, use pool-tiles as design style
+  if (product.mainCategory === "pool-tiles") {
+    return "pool-tiles";
+  }
+  return "";
+};
+
 interface SearchDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -58,6 +69,20 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
     onOpenChange(false);
   };
 
+  // Build search value with aliases for better matching
+  const getSearchValue = (product: Product): string => {
+    const baseValue = `${product.name} ${product.mainCategory} ${
+      product.designStyle || ""
+    } ${product.finish}`;
+
+    // Add search aliases for pool-tiles
+    if (product.mainCategory === "pool-tiles") {
+      return `${baseValue} swimming pool pools tile tiles`;
+    }
+
+    return baseValue;
+  };
+
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
       <div className="relative [&_[cmdk-input-wrapper]]:pr-10">
@@ -93,12 +118,14 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                 {products.map((product) => (
                   <CommandItem
                     key={product.id}
-                    value={`${product.name} ${product.mainCategory} ${product.designStyle} ${product.finish}`}
+                    value={getSearchValue(product)}
                     onSelect={() => handleSelect(product)}
                     className="flex gap-3 p-3 cursor-pointer aria-selected:bg-neutral-100"
                   >
                     <div className="relative h-16 w-16 shrink-0 rounded overflow-hidden border border-neutral-200 bg-neutral-100">
-                      {product.images && product.images.length > 0 && product.images[0] ? (
+                      {product.images &&
+                      product.images.length > 0 &&
+                      product.images[0] ? (
                         <Image
                           src={product.images[0]}
                           alt={product.name}
@@ -107,7 +134,9 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
-                          <span className="text-neutral-400 text-xs">No Image</span>
+                          <span className="text-neutral-400 text-xs">
+                            No Image
+                          </span>
                         </div>
                       )}
                     </div>
@@ -116,11 +145,20 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                         {product.name}
                       </div>
                       <div className="text-sm text-neutral-600 truncate">
-                        {product.designStyle.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")} • {product.finish}
+                        {getEffectiveDesignStyle(product)
+                          ? `${getEffectiveDesignStyle(product)
+                              .split("-")
+                              .map(
+                                (w) => w.charAt(0).toUpperCase() + w.slice(1)
+                              )
+                              .join(" ")} • `
+                          : ""}
+                        {product.finish}
                       </div>
                       {product.price != null && (
                         <div className="text-sm text-neutral-700 mt-1">
-                          AED {product.price.toFixed(2)} / {product.unit || "unit"}
+                          AED {product.price.toFixed(2)} /{" "}
+                          {product.unit || "unit"}
                         </div>
                       )}
                     </div>

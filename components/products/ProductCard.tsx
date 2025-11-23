@@ -26,6 +26,17 @@ const formatLabel = (str: string) => {
     .join(" ");
 };
 
+const getEffectiveDesignStyle = (product: Product): string => {
+  if (product.designStyle) {
+    return product.designStyle;
+  }
+  // If design style is empty and main category is pool-tiles, use pool-tiles as design style
+  if (product.mainCategory === "pool-tiles") {
+    return "pool-tiles";
+  }
+  return "";
+};
+
 export default function ProductCard({
   product,
   onQuickView,
@@ -42,7 +53,7 @@ export default function ProductCard({
               <Image
                 src={product.images[0]}
                 alt={`${product.name} - ${formatLabel(
-                  product.designStyle
+                  getEffectiveDesignStyle(product)
                 )} ${formatLabel(product.mainCategory)} with ${
                   product.finish
                 } finish`}
@@ -73,7 +84,10 @@ export default function ProductCard({
           <CardContent className="p-4">
             <CardTitle className="text-xl">{product.name}</CardTitle>
             <CardDescription>
-              {formatLabel(product.designStyle)} • {capitalize(product.finish)}
+              {getEffectiveDesignStyle(product)
+                ? `${formatLabel(getEffectiveDesignStyle(product))} • `
+                : ""}
+              {capitalize(product.finish)}
             </CardDescription>
             <Button
               variant="outline"

@@ -31,6 +31,17 @@ const formatLabel = (str: string) => {
     .join(" ");
 };
 
+const getEffectiveDesignStyle = (product: Product): string => {
+  if (product.designStyle) {
+    return product.designStyle;
+  }
+  // If design style is empty and main category is pool-tiles, use pool-tiles as design style
+  if (product.mainCategory === "pool-tiles") {
+    return "pool-tiles";
+  }
+  return "";
+};
+
 interface ProductDetailClientProps {
   product: Product;
   allProducts: Product[];
@@ -139,9 +150,9 @@ export default function ProductDetailClient({
                       {formatLabel(product.mainCategory)}
                     </Badge>
                   )}
-                  {product.designStyle && (
+                  {getEffectiveDesignStyle(product) && (
                     <Badge variant="secondary">
-                      {formatLabel(product.designStyle)}
+                      {formatLabel(getEffectiveDesignStyle(product))}
                     </Badge>
                   )}
                   {product.finish && (
@@ -170,7 +181,10 @@ export default function ProductDetailClient({
                 <p className="text-body">{product.description}</p>
               ) : (
                 <p className="text-body">
-                  Premium quality {formatLabel(product.designStyle)}{" "}
+                  Premium quality{" "}
+                  {getEffectiveDesignStyle(product)
+                    ? `${formatLabel(getEffectiveDesignStyle(product))} `
+                    : ""}
                   {formatLabel(product.mainCategory)} with {product.finish}{" "}
                   finish. Perfect for interior and exterior applications.
                 </p>
@@ -217,14 +231,16 @@ export default function ProductDetailClient({
                           {formatLabel(product.mainCategory)}
                         </TableCell>
                       </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium">
-                          Design Style
-                        </TableCell>
-                        <TableCell>
-                          {formatLabel(product.designStyle)}
-                        </TableCell>
-                      </TableRow>
+                      {getEffectiveDesignStyle(product) && (
+                        <TableRow>
+                          <TableCell className="font-medium">
+                            Design Style
+                          </TableCell>
+                          <TableCell>
+                            {formatLabel(getEffectiveDesignStyle(product))}
+                          </TableCell>
+                        </TableRow>
+                      )}
                       <TableRow>
                         <TableCell className="font-medium">Finish</TableCell>
                         <TableCell>{capitalize(product.finish)}</TableCell>
