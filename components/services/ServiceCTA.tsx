@@ -44,7 +44,7 @@ export default function ServiceCTA() {
         >
           <motion.div
             className="relative flex items-center justify-center py-40 px-6 md:px-12 overflow-hidden bg-cover bg-center"
-            style={{ backgroundImage: "url('/cta-bg.png')" }}
+            style={{ backgroundImage: "url('/cta-bg.jpg')" }}
             variants={glassVariants}
           >
             <div className="absolute inset-0 bg-neutral-900/50" />
@@ -59,12 +59,24 @@ export default function ServiceCTA() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg" variant="secondary">
-                  <a href={`https://wa.me/971547139032?text=${encodeURIComponent("Hello! I'd like to schedule a free consultation for my project. I'm interested in learning how you can help bring my vision to life.")}`} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={`https://wa.me/971547139032?text=${encodeURIComponent(
+                      "Hello! I'd like to schedule a free consultation for my project. I'm interested in learning how you can help bring my vision to life."
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Schedule Consultation <Calendar1 className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
                 <Button asChild size="lg" variant="outlineLight">
-                  <a href={`https://wa.me/971547139032?text=${encodeURIComponent("Hello! I'd like to speak with you about your services.")}`} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={`https://wa.me/971547139032?text=${encodeURIComponent(
+                      "Hello! I'd like to speak with you about your services."
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Call Us Now <Phone className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
