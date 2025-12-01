@@ -17,12 +17,14 @@ export default function Logo({ className, variant = "light" }: LogoProps) {
           src={LogoImageLight}
           alt="Timeless Touch Ceramics - Logo"
           className="w-full h-full"
+          priority
         />
       ) : (
         <Image
           src={LogoImageDark}
           alt="Timeless Touch Ceramics - Logo"
           className={cn("w-full h-full")}
+          priority
         />
       )}
     </Link>

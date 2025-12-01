@@ -23,6 +23,19 @@
   }
 }
 
+.backdrop {
+  animation: blur-in 500ms 1.5s forwards;
+}
+
+@keyframes blur-in {
+  from {
+    backdrop-filter: blur(0px);
+  }
+  to {
+    backdrop-filter: blur(2px);
+  }
+}
+
 /* Animations */
 @theme {
   --animate-accordion-down: accordion-down 0.2s ease-out;

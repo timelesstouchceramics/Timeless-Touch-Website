@@ -39,27 +39,55 @@ const ITEMS_PER_PAGE = 9;
 
 interface ProductsClientProps {
   initialProducts: Product[];
-  categories: string[];
+  mainCategories: string[];
+  designStyles: string[];
   finishes: string[];
+  applications: string[];
+  sizes: string[];
+  thicknesses: string[];
 }
 
 export default function ProductsClient({
   initialProducts,
-  categories,
+  mainCategories,
+  designStyles,
   finishes,
+  applications,
+  sizes,
+  thicknesses,
 }: ProductsClientProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
 
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(() => {
-    const cats = searchParams.get("categories");
+  const [selectedMainCategories, setSelectedMainCategories] = useState<string[]>(() => {
+    const cats = searchParams.get("mainCategories");
     return cats ? cats.split(",") : [];
+  });
+  const [selectedDesignStyles, setSelectedDesignStyles] = useState<string[]>(() => {
+    const styles = searchParams.get("designStyles");
+    return styles ? styles.split(",") : [];
   });
   const [selectedFinishes, setSelectedFinishes] = useState<string[]>(() => {
     const fins = searchParams.get("finishes");
     return fins ? fins.split(",") : [];
+  });
+  const [selectedApplications, setSelectedApplications] = useState<string[]>(() => {
+    const apps = searchParams.get("applications");
+    return apps ? apps.split(",") : [];
+  });
+  const [selectedSizes, setSelectedSizes] = useState<string[]>(() => {
+    const szs = searchParams.get("sizes");
+    return szs ? szs.split(",") : [];
+  });
+  const [selectedThicknesses, setSelectedThicknesses] = useState<string[]>(() => {
+    const thks = searchParams.get("thicknesses");
+    return thks ? thks.split(",") : [];
+  });
+  const [selectedSpecialFeatures, setSelectedSpecialFeatures] = useState<string[]>(() => {
+    const feats = searchParams.get("specialFeatures");
+    return feats ? feats.split(",") : [];
   });
   const [sortBy, setSortBy] = useState<SortOption>(() => {
     return (searchParams.get("sort") as SortOption) || "name";
@@ -69,8 +97,13 @@ export default function ProductsClient({
     return page ? parseInt(page, 10) : 1;
   });
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [categoryOpen, setCategoryOpen] = useState(true);
+  const [mainCategoryOpen, setMainCategoryOpen] = useState(true);
+  const [designStyleOpen, setDesignStyleOpen] = useState(true);
   const [finishOpen, setFinishOpen] = useState(true);
+  const [applicationsOpen, setApplicationsOpen] = useState(false);
+  const [sizesOpen, setSizesOpen] = useState(false);
+  const [thicknessesOpen, setThicknessesOpen] = useState(false);
+  const [specialFeaturesOpen, setSpecialFeaturesOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(
     null,
   );
@@ -79,10 +112,25 @@ export default function ProductsClient({
 
   // URL sync - only update URL when state changes, not on mount
   const updateURL = useCallback(
-    (cats: string[], fins: string[], sort: string, page: number) => {
+    (
+      mainCats: string[],
+      designStls: string[],
+      fins: string[],
+      apps: string[],
+      szs: string[],
+      thks: string[],
+      feats: string[],
+      sort: string,
+      page: number
+    ) => {
       const params = new URLSearchParams();
-      if (cats.length > 0) params.set("categories", cats.join(","));
+      if (mainCats.length > 0) params.set("mainCategories", mainCats.join(","));
+      if (designStls.length > 0) params.set("designStyles", designStls.join(","));
       if (fins.length > 0) params.set("finishes", fins.join(","));
+      if (apps.length > 0) params.set("applications", apps.join(","));
+      if (szs.length > 0) params.set("sizes", szs.join(","));
+      if (thks.length > 0) params.set("thicknesses", thks.join(","));
+      if (feats.length > 0) params.set("specialFeatures", feats.join(","));
       if (sort !== "name") params.set("sort", sort);
       if (page > 1) params.set("page", page.toString());
 
@@ -93,7 +141,11 @@ export default function ProductsClient({
       // Only update if URL is different
       const currentURL = `${pathname}${window.location.search}`;
       if (newURL !== currentURL) {
-        router.replace(newURL, { scroll: false });
+        // Use window.history to update URL without triggering Next.js navigation
+        // This prevents the page from remounting and closing collapsibles
+        startTransition(() => {
+          window.history.replaceState(null, "", newURL);
+        });
       }
     },
     [pathname, router],
@@ -101,67 +153,414 @@ export default function ProductsClient({
 
   // Sync state changes to URL
   useEffect(() => {
-    updateURL(selectedCategories, selectedFinishes, sortBy, currentPage);
-  }, [selectedCategories, selectedFinishes, sortBy, currentPage, updateURL]);
+    updateURL(
+      selectedMainCategories,
+      selectedDesignStyles,
+      selectedFinishes,
+      selectedApplications,
+      selectedSizes,
+      selectedThicknesses,
+      selectedSpecialFeatures,
+      sortBy,
+      currentPage
+    );
+  }, [
+    selectedMainCategories,
+    selectedDesignStyles,
+    selectedFinishes,
+    selectedApplications,
+    selectedSizes,
+    selectedThicknesses,
+    selectedSpecialFeatures,
+    sortBy,
+    currentPage,
+    updateURL,
+  ]);
 
   // Reset to page 1 when filters or sort change (but not on initial mount)
   useEffect(() => {
-    const cats = searchParams.get("categories");
+    const mainCats = searchParams.get("mainCategories");
+    const designStls = searchParams.get("designStyles");
     const fins = searchParams.get("finishes");
+    const apps = searchParams.get("applications");
+    const szs = searchParams.get("sizes");
+    const thks = searchParams.get("thicknesses");
+    const feats = searchParams.get("specialFeatures");
     const sort = searchParams.get("sort") || "name";
 
     // Only reset page if this is not the initial mount (check if current state matches URL)
-    const catsArray = cats ? cats.split(",") : [];
+    const mainCatsArray = mainCats ? mainCats.split(",") : [];
+    const designStlsArray = designStls ? designStls.split(",") : [];
     const finsArray = fins ? fins.split(",") : [];
+    const appsArray = apps ? apps.split(",") : [];
+    const szsArray = szs ? szs.split(",") : [];
+    const thksArray = thks ? thks.split(",") : [];
+    const featsArray = feats ? feats.split(",") : [];
 
     const isInitialMount =
-      JSON.stringify(catsArray) === JSON.stringify(selectedCategories) &&
+      JSON.stringify(mainCatsArray) === JSON.stringify(selectedMainCategories) &&
+      JSON.stringify(designStlsArray) === JSON.stringify(selectedDesignStyles) &&
       JSON.stringify(finsArray) === JSON.stringify(selectedFinishes) &&
+      JSON.stringify(appsArray) === JSON.stringify(selectedApplications) &&
+      JSON.stringify(szsArray) === JSON.stringify(selectedSizes) &&
+      JSON.stringify(thksArray) === JSON.stringify(selectedThicknesses) &&
+      JSON.stringify(featsArray) === JSON.stringify(selectedSpecialFeatures) &&
       sort === sortBy;
 
     if (!isInitialMount && currentPage !== 1) {
       setCurrentPage(1);
     }
-  }, [selectedCategories, selectedFinishes, sortBy]);
+  }, [
+    selectedMainCategories,
+    selectedDesignStyles,
+    selectedFinishes,
+    selectedApplications,
+    selectedSizes,
+    selectedThicknesses,
+    selectedSpecialFeatures,
+    sortBy,
+  ]);
 
-  // Filter counts - now uses props instead of imported data
-  const getCategoryCount = useCallback(
-    (category: string) => {
+  // Filter counts
+  const getMainCategoryCount = useCallback(
+    (mainCategory: string) => {
       return initialProducts.filter((p) => {
-        const matchesCategory = p.category === category;
+        const matchesMainCategory = p.mainCategory === mainCategory;
+        const matchesDesignStyle =
+          selectedDesignStyles.length === 0 || selectedDesignStyles.includes(p.designStyle);
         const matchesFinish =
           selectedFinishes.length === 0 || selectedFinishes.includes(p.finish);
-        return matchesCategory && matchesFinish;
+        const matchesApplications =
+          selectedApplications.length === 0 ||
+          (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
+        const matchesSize =
+          selectedSizes.length === 0 ||
+          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
+        const matchesThickness =
+          selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
+        const matchesSpecialFeatures =
+          selectedSpecialFeatures.length === 0 ||
+          selectedSpecialFeatures.every((feat) => p[feat as keyof Product] === true);
+        return (
+          matchesMainCategory &&
+          matchesDesignStyle &&
+          matchesFinish &&
+          matchesApplications &&
+          matchesSize &&
+          matchesThickness &&
+          matchesSpecialFeatures
+        );
       }).length;
     },
-    [initialProducts, selectedFinishes],
+    [
+      initialProducts,
+      selectedDesignStyles,
+      selectedFinishes,
+      selectedApplications,
+      selectedSizes,
+      selectedThicknesses,
+      selectedSpecialFeatures,
+    ],
+  );
+
+  const getDesignStyleCount = useCallback(
+    (designStyle: string) => {
+      return initialProducts.filter((p) => {
+        const matchesDesignStyle = p.designStyle === designStyle;
+        const matchesMainCategory =
+          selectedMainCategories.length === 0 ||
+          selectedMainCategories.includes(p.mainCategory);
+        const matchesFinish =
+          selectedFinishes.length === 0 || selectedFinishes.includes(p.finish);
+        const matchesApplications =
+          selectedApplications.length === 0 ||
+          (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
+        const matchesSize =
+          selectedSizes.length === 0 ||
+          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
+        const matchesThickness =
+          selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
+        const matchesSpecialFeatures =
+          selectedSpecialFeatures.length === 0 ||
+          selectedSpecialFeatures.every((feat) => p[feat as keyof Product] === true);
+        return (
+          matchesDesignStyle &&
+          matchesMainCategory &&
+          matchesFinish &&
+          matchesApplications &&
+          matchesSize &&
+          matchesThickness &&
+          matchesSpecialFeatures
+        );
+      }).length;
+    },
+    [
+      initialProducts,
+      selectedMainCategories,
+      selectedFinishes,
+      selectedApplications,
+      selectedSizes,
+      selectedThicknesses,
+      selectedSpecialFeatures,
+    ],
   );
 
   const getFinishCount = useCallback(
     (finish: string) => {
       return initialProducts.filter((p) => {
         const matchesFinish = p.finish === finish;
-        const matchesCategory =
-          selectedCategories.length === 0 ||
-          selectedCategories.includes(p.category);
-        return matchesFinish && matchesCategory;
+        const matchesMainCategory =
+          selectedMainCategories.length === 0 ||
+          selectedMainCategories.includes(p.mainCategory);
+        const matchesDesignStyle =
+          selectedDesignStyles.length === 0 ||
+          selectedDesignStyles.includes(p.designStyle);
+        const matchesApplications =
+          selectedApplications.length === 0 ||
+          (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
+        const matchesSize =
+          selectedSizes.length === 0 ||
+          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
+        const matchesThickness =
+          selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
+        const matchesSpecialFeatures =
+          selectedSpecialFeatures.length === 0 ||
+          selectedSpecialFeatures.every((feat) => p[feat as keyof Product] === true);
+        return (
+          matchesFinish &&
+          matchesMainCategory &&
+          matchesDesignStyle &&
+          matchesApplications &&
+          matchesSize &&
+          matchesThickness &&
+          matchesSpecialFeatures
+        );
       }).length;
     },
-    [initialProducts, selectedCategories],
+    [
+      initialProducts,
+      selectedMainCategories,
+      selectedDesignStyles,
+      selectedApplications,
+      selectedSizes,
+      selectedThicknesses,
+      selectedSpecialFeatures,
+    ],
+  );
+
+  const getApplicationCount = useCallback(
+    (application: string) => {
+      return initialProducts.filter((p) => {
+        const matchesApplication =
+          p.applications && p.applications.includes(application);
+        const matchesMainCategory =
+          selectedMainCategories.length === 0 ||
+          selectedMainCategories.includes(p.mainCategory);
+        const matchesDesignStyle =
+          selectedDesignStyles.length === 0 ||
+          selectedDesignStyles.includes(p.designStyle);
+        const matchesFinish =
+          selectedFinishes.length === 0 || selectedFinishes.includes(p.finish);
+        const matchesSize =
+          selectedSizes.length === 0 ||
+          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
+        const matchesThickness =
+          selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
+        const matchesSpecialFeatures =
+          selectedSpecialFeatures.length === 0 ||
+          selectedSpecialFeatures.every((feat) => p[feat as keyof Product] === true);
+        return (
+          matchesApplication &&
+          matchesMainCategory &&
+          matchesDesignStyle &&
+          matchesFinish &&
+          matchesSize &&
+          matchesThickness &&
+          matchesSpecialFeatures
+        );
+      }).length;
+    },
+    [
+      initialProducts,
+      selectedMainCategories,
+      selectedDesignStyles,
+      selectedFinishes,
+      selectedSizes,
+      selectedThicknesses,
+      selectedSpecialFeatures,
+    ],
+  );
+
+  const getSizeCount = useCallback(
+    (size: string) => {
+      return initialProducts.filter((p) => {
+        const matchesSize = p.sizes && p.sizes.includes(size);
+        const matchesMainCategory =
+          selectedMainCategories.length === 0 ||
+          selectedMainCategories.includes(p.mainCategory);
+        const matchesDesignStyle =
+          selectedDesignStyles.length === 0 ||
+          selectedDesignStyles.includes(p.designStyle);
+        const matchesFinish =
+          selectedFinishes.length === 0 || selectedFinishes.includes(p.finish);
+        const matchesApplications =
+          selectedApplications.length === 0 ||
+          (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
+        const matchesThickness =
+          selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
+        const matchesSpecialFeatures =
+          selectedSpecialFeatures.length === 0 ||
+          selectedSpecialFeatures.every((feat) => p[feat as keyof Product] === true);
+        return (
+          matchesSize &&
+          matchesMainCategory &&
+          matchesDesignStyle &&
+          matchesFinish &&
+          matchesApplications &&
+          matchesThickness &&
+          matchesSpecialFeatures
+        );
+      }).length;
+    },
+    [
+      initialProducts,
+      selectedMainCategories,
+      selectedDesignStyles,
+      selectedFinishes,
+      selectedApplications,
+      selectedThicknesses,
+      selectedSpecialFeatures,
+    ],
+  );
+
+  const getThicknessCount = useCallback(
+    (thickness: string) => {
+      return initialProducts.filter((p) => {
+        const matchesThickness = p.thickness === thickness;
+        const matchesMainCategory =
+          selectedMainCategories.length === 0 ||
+          selectedMainCategories.includes(p.mainCategory);
+        const matchesDesignStyle =
+          selectedDesignStyles.length === 0 ||
+          selectedDesignStyles.includes(p.designStyle);
+        const matchesFinish =
+          selectedFinishes.length === 0 || selectedFinishes.includes(p.finish);
+        const matchesApplications =
+          selectedApplications.length === 0 ||
+          (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
+        const matchesSize =
+          selectedSizes.length === 0 ||
+          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
+        const matchesSpecialFeatures =
+          selectedSpecialFeatures.length === 0 ||
+          selectedSpecialFeatures.every((feat) => p[feat as keyof Product] === true);
+        return (
+          matchesThickness &&
+          matchesMainCategory &&
+          matchesDesignStyle &&
+          matchesFinish &&
+          matchesApplications &&
+          matchesSize &&
+          matchesSpecialFeatures
+        );
+      }).length;
+    },
+    [
+      initialProducts,
+      selectedMainCategories,
+      selectedDesignStyles,
+      selectedFinishes,
+      selectedApplications,
+      selectedSizes,
+      selectedSpecialFeatures,
+    ],
+  );
+
+  const getSpecialFeatureCount = useCallback(
+    (feature: string) => {
+      return initialProducts.filter((p) => {
+        const matchesFeature = p[feature as keyof Product] === true;
+        const matchesMainCategory =
+          selectedMainCategories.length === 0 ||
+          selectedMainCategories.includes(p.mainCategory);
+        const matchesDesignStyle =
+          selectedDesignStyles.length === 0 ||
+          selectedDesignStyles.includes(p.designStyle);
+        const matchesFinish =
+          selectedFinishes.length === 0 || selectedFinishes.includes(p.finish);
+        const matchesApplications =
+          selectedApplications.length === 0 ||
+          (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
+        const matchesSize =
+          selectedSizes.length === 0 ||
+          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
+        const matchesThickness =
+          selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
+        return (
+          matchesFeature &&
+          matchesMainCategory &&
+          matchesDesignStyle &&
+          matchesFinish &&
+          matchesApplications &&
+          matchesSize &&
+          matchesThickness
+        );
+      }).length;
+    },
+    [
+      initialProducts,
+      selectedMainCategories,
+      selectedDesignStyles,
+      selectedFinishes,
+      selectedApplications,
+      selectedSizes,
+      selectedThicknesses,
+    ],
   );
 
   // Filtered and sorted products
   const filteredProducts = useMemo(() => {
     let filtered = initialProducts;
 
-    if (selectedCategories.length > 0) {
+    if (selectedMainCategories.length > 0) {
       filtered = filtered.filter((p) =>
-        selectedCategories.includes(p.category),
+        selectedMainCategories.includes(p.mainCategory),
+      );
+    }
+
+    if (selectedDesignStyles.length > 0) {
+      filtered = filtered.filter((p) =>
+        selectedDesignStyles.includes(p.designStyle),
       );
     }
 
     if (selectedFinishes.length > 0) {
       filtered = filtered.filter((p) => selectedFinishes.includes(p.finish));
+    }
+
+    if (selectedApplications.length > 0) {
+      filtered = filtered.filter((p) =>
+        p.applications && p.applications.some((app) => selectedApplications.includes(app))
+      );
+    }
+
+    if (selectedSizes.length > 0) {
+      filtered = filtered.filter(
+        (p) =>
+          p.sizes &&
+          p.sizes.length > 0 &&
+          p.sizes.some((size) => selectedSizes.includes(size))
+      );
+    }
+
+    if (selectedThicknesses.length > 0) {
+      filtered = filtered.filter((p) => p.thickness && selectedThicknesses.includes(p.thickness));
+    }
+
+    if (selectedSpecialFeatures.length > 0) {
+      filtered = filtered.filter((p) =>
+        selectedSpecialFeatures.every((feat) => p[feat as keyof Product] === true)
+      );
     }
 
     const sorted = [...filtered].sort((a, b) => {
@@ -174,7 +573,17 @@ export default function ProductsClient({
     });
 
     return sorted;
-  }, [initialProducts, selectedCategories, selectedFinishes, sortBy]);
+  }, [
+    initialProducts,
+    selectedMainCategories,
+    selectedDesignStyles,
+    selectedFinishes,
+    selectedApplications,
+    selectedSizes,
+    selectedThicknesses,
+    selectedSpecialFeatures,
+    sortBy,
+  ]);
 
   // Pagination
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
@@ -184,11 +593,19 @@ export default function ProductsClient({
   }, [filteredProducts, currentPage]);
 
   // Actions
-  const toggleCategory = (category: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((c) => c !== category)
-        : [...prev, category],
+  const toggleMainCategory = (mainCategory: string) => {
+    setSelectedMainCategories((prev) =>
+      prev.includes(mainCategory)
+        ? prev.filter((c) => c !== mainCategory)
+        : [...prev, mainCategory],
+    );
+  };
+
+  const toggleDesignStyle = (designStyle: string) => {
+    setSelectedDesignStyles((prev) =>
+      prev.includes(designStyle)
+        ? prev.filter((s) => s !== designStyle)
+        : [...prev, designStyle],
     );
   };
 
@@ -200,9 +617,46 @@ export default function ProductsClient({
     );
   };
 
+  const toggleApplication = (application: string) => {
+    setSelectedApplications((prev) =>
+      prev.includes(application)
+        ? prev.filter((a) => a !== application)
+        : [...prev, application],
+    );
+  };
+
+  const toggleSize = (size: string) => {
+    setSelectedSizes((prev) =>
+      prev.includes(size)
+        ? prev.filter((s) => s !== size)
+        : [...prev, size],
+    );
+  };
+
+  const toggleThickness = (thickness: string) => {
+    setSelectedThicknesses((prev) =>
+      prev.includes(thickness)
+        ? prev.filter((t) => t !== thickness)
+        : [...prev, thickness],
+    );
+  };
+
+  const toggleSpecialFeature = (feature: string) => {
+    setSelectedSpecialFeatures((prev) =>
+      prev.includes(feature)
+        ? prev.filter((f) => f !== feature)
+        : [...prev, feature],
+    );
+  };
+
   const clearAllFilters = () => {
-    setSelectedCategories([]);
+    setSelectedMainCategories([]);
+    setSelectedDesignStyles([]);
     setSelectedFinishes([]);
+    setSelectedApplications([]);
+    setSelectedSizes([]);
+    setSelectedThicknesses([]);
+    setSelectedSpecialFeatures([]);
   };
 
   const goToPage = (page: number) => {
@@ -225,7 +679,13 @@ export default function ProductsClient({
   };
 
   const totalActiveFilters =
-    selectedCategories.length + selectedFinishes.length;
+    selectedMainCategories.length +
+    selectedDesignStyles.length +
+    selectedFinishes.length +
+    selectedApplications.length +
+    selectedSizes.length +
+    selectedThicknesses.length +
+    selectedSpecialFeatures.length;
 
   return (
     <div ref={scrollTargetRef} className="bg-neutral-50">
@@ -248,19 +708,49 @@ export default function ProductsClient({
                 <CardContent className="p-0 pr-6">
                   <CardTitle className="mb-4">Filters</CardTitle>
                   <FilterControls
-                    selectedCategories={selectedCategories}
+                    selectedMainCategories={selectedMainCategories}
+                    selectedDesignStyles={selectedDesignStyles}
                     selectedFinishes={selectedFinishes}
-                    categoryOpen={categoryOpen}
+                    selectedApplications={selectedApplications}
+                    selectedSizes={selectedSizes}
+                    selectedThicknesses={selectedThicknesses}
+                    selectedSpecialFeatures={selectedSpecialFeatures}
+                    mainCategoryOpen={mainCategoryOpen}
+                    designStyleOpen={designStyleOpen}
                     finishOpen={finishOpen}
-                    onCategoryOpenChange={setCategoryOpen}
+                    applicationsOpen={applicationsOpen}
+                    sizesOpen={sizesOpen}
+                    thicknessesOpen={thicknessesOpen}
+                    specialFeaturesOpen={specialFeaturesOpen}
+                    onMainCategoryOpenChange={setMainCategoryOpen}
+                    onDesignStyleOpenChange={setDesignStyleOpen}
                     onFinishOpenChange={setFinishOpen}
-                    onToggleCategory={toggleCategory}
+                    onApplicationsOpenChange={setApplicationsOpen}
+                    onSizesOpenChange={setSizesOpen}
+                    onThicknessesOpenChange={setThicknessesOpen}
+                    onSpecialFeaturesOpenChange={setSpecialFeaturesOpen}
+                    onToggleMainCategory={toggleMainCategory}
+                    onToggleDesignStyle={toggleDesignStyle}
                     onToggleFinish={toggleFinish}
+                    onToggleApplication={toggleApplication}
+                    onToggleSize={toggleSize}
+                    onToggleThickness={toggleThickness}
+                    onToggleSpecialFeature={toggleSpecialFeature}
                     onClearAll={clearAllFilters}
-                    getCategoryCount={getCategoryCount}
+                    getMainCategoryCount={getMainCategoryCount}
+                    getDesignStyleCount={getDesignStyleCount}
                     getFinishCount={getFinishCount}
-                    categories={categories}
+                    getApplicationCount={getApplicationCount}
+                    getSizeCount={getSizeCount}
+                    getThicknessCount={getThicknessCount}
+                    getSpecialFeatureCount={getSpecialFeatureCount}
+                    mainCategories={mainCategories}
+                    designStyles={designStyles}
                     finishes={finishes}
+                    applications={applications}
+                    sizes={sizes}
+                    thicknesses={thicknesses}
+                    specialFeatures={["bookmatch", "sixFace", "fullBody"]}
                   />
                 </CardContent>
               </Card>
@@ -290,19 +780,49 @@ export default function ProductsClient({
                     </SheetHeader>
                     <div className="mt-6">
                       <FilterControls
-                        selectedCategories={selectedCategories}
+                        selectedMainCategories={selectedMainCategories}
+                        selectedDesignStyles={selectedDesignStyles}
                         selectedFinishes={selectedFinishes}
-                        categoryOpen={categoryOpen}
+                        selectedApplications={selectedApplications}
+                        selectedSizes={selectedSizes}
+                        selectedThicknesses={selectedThicknesses}
+                        selectedSpecialFeatures={selectedSpecialFeatures}
+                        mainCategoryOpen={mainCategoryOpen}
+                        designStyleOpen={designStyleOpen}
                         finishOpen={finishOpen}
-                        onCategoryOpenChange={setCategoryOpen}
+                        applicationsOpen={applicationsOpen}
+                        sizesOpen={sizesOpen}
+                        thicknessesOpen={thicknessesOpen}
+                        specialFeaturesOpen={specialFeaturesOpen}
+                        onMainCategoryOpenChange={setMainCategoryOpen}
+                        onDesignStyleOpenChange={setDesignStyleOpen}
                         onFinishOpenChange={setFinishOpen}
-                        onToggleCategory={toggleCategory}
+                        onApplicationsOpenChange={setApplicationsOpen}
+                        onSizesOpenChange={setSizesOpen}
+                        onThicknessesOpenChange={setThicknessesOpen}
+                        onSpecialFeaturesOpenChange={setSpecialFeaturesOpen}
+                        onToggleMainCategory={toggleMainCategory}
+                        onToggleDesignStyle={toggleDesignStyle}
                         onToggleFinish={toggleFinish}
+                        onToggleApplication={toggleApplication}
+                        onToggleSize={toggleSize}
+                        onToggleThickness={toggleThickness}
+                        onToggleSpecialFeature={toggleSpecialFeature}
                         onClearAll={clearAllFilters}
-                        getCategoryCount={getCategoryCount}
+                        getMainCategoryCount={getMainCategoryCount}
+                        getDesignStyleCount={getDesignStyleCount}
                         getFinishCount={getFinishCount}
-                        categories={categories}
+                        getApplicationCount={getApplicationCount}
+                        getSizeCount={getSizeCount}
+                        getThicknessCount={getThicknessCount}
+                        getSpecialFeatureCount={getSpecialFeatureCount}
+                        mainCategories={mainCategories}
+                        designStyles={designStyles}
                         finishes={finishes}
+                        applications={applications}
+                        sizes={sizes}
+                        thicknesses={thicknesses}
+                        specialFeatures={["bookmatch", "sixFace", "fullBody"]}
                         isMobile
                       />
                     </div>

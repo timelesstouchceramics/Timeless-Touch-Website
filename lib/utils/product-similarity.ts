@@ -4,8 +4,9 @@ import { Product } from "@/lib/types";
  * Calculate similarity score between two products using weighted multi-factor approach
  *
  * Scoring breakdown:
- * - Category match: 60 points (most important - customers browsing marble want marble)
- * - Finish match: 30 points (visual consistency matters for tiles/stone)
+ * - Design Style match: 40 points (most important - customers browsing marble-look want similar styles)
+ * - Main Category match: 30 points (product type consistency - slabs, tiles, etc.)
+ * - Finish match: 20 points (visual consistency matters for tiles/stone)
  * - Random factor: 10 points (adds variety to recommendations)
  *
  * @param product - The current product being viewed
@@ -15,14 +16,19 @@ import { Product } from "@/lib/types";
 function calculateSimilarity(product: Product, candidate: Product): number {
   let score = 0;
 
-  // Category match (60 points)
-  if (product.category === candidate.category) {
-    score += 60;
+  // Design Style match (40 points) - most important for aesthetics
+  if (product.designStyle === candidate.designStyle) {
+    score += 40;
   }
 
-  // Finish match (30 points)
-  if (product.finish === candidate.finish) {
+  // Main Category match (30 points) - product type consistency
+  if (product.mainCategory === candidate.mainCategory) {
     score += 30;
+  }
+
+  // Finish match (20 points)
+  if (product.finish === candidate.finish) {
+    score += 20;
   }
 
   // Random factor (10 points) for variety

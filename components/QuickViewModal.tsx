@@ -33,40 +33,71 @@ export default function QuickViewModal({
   const capitalize = (str: string) =>
     str.charAt(0).toUpperCase() + str.slice(1);
 
+  const formatLabel = (str: string) => {
+    return str
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
+  const getEffectiveDesignStyle = (product: Product): string => {
+    if (product.designStyle) {
+      return product.designStyle;
+    }
+    // If design style is empty and main category is pool-tiles, use pool-tiles as design style
+    if (product.mainCategory === "pool-tiles") {
+      return "pool-tiles";
+    }
+    return "";
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-2xl rounded-xl">
+        <DialogHeader>
+          <DialogTitle className="sr-only">{product.name} - Quick View</DialogTitle>
+        </DialogHeader>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <AspectRatio ratio={1} className="relative overflow-hidden rounded-lg">
-            <Image
-              src={product.images[0]}
-              alt={product.name}
-              fill
-              className="object-cover"
-            />
+            {product.images && product.images.length > 0 && product.images[0] ? (
+              <Image
+                src={product.images[0]}
+                alt={product.name}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-neutral-200 flex items-center justify-center">
+                <span className="text-neutral-400 text-sm">No Image</span>
+              </div>
+            )}
           </AspectRatio>
 
           <div className="space-y-4">
             <div>
               <h2 className="text-2xl font-semibold text-neutral-950">{product.name}</h2>
-              <div className="flex gap-2 mt-2">
-                <Badge variant="secondary">{capitalize(product.category)}</Badge>
+              <div className="flex gap-2 mt-2 flex-wrap">
+                <Badge variant="secondary">{formatLabel(product.mainCategory)}</Badge>
+                {getEffectiveDesignStyle(product) && (
+                  <Badge variant="secondary">{formatLabel(getEffectiveDesignStyle(product))}</Badge>
+                )}
                 <Badge variant="secondary">{capitalize(product.finish)}</Badge>
               </div>
             </div>
 
-            <div>
-              <p className="text-2xl font-semibold text-neutral-950">
-                AED {product.price}{" "}
-                <span className="text-base font-normal text-neutral-600">
-                  / {product.unit}
-                </span>
-              </p>
-            </div>
+            {product.price != null && (
+              <div>
+                <p className="text-2xl font-semibold text-neutral-950">
+                  AED {product.price.toFixed(2)}{" "}
+                  <span className="text-base font-normal text-neutral-600">
+                    / {product.unit || "unit"}
+                  </span>
+                </p>
+              </div>
+            )}
 
             <p className="text-sm text-neutral-600">
-              Premium quality {product.category} with {product.finish} finish.
-              Perfect for interior and exterior applications.
+              {product.description || `Premium quality ${getEffectiveDesignStyle(product) ? formatLabel(getEffectiveDesignStyle(product)) + " " : ""}${formatLabel(product.mainCategory)} with ${product.finish} finish. Perfect for interior and exterior applications.`}
             </p>
 
             <Separator />

@@ -8,10 +8,10 @@ import { useRef } from "react";
 
 export default function AboutStory() {
   const features = [
-    "Premium Materials",
-    "Expert Installation",
-    "Custom Design",
-    "Sustainable Sourcing",
+    "Full Body Technology",
+    "ISO 10545 Certified",
+    "Large Format Innovation (800x2400mm)",
+    "Ultra-Low Water Absorption (0.044%)",
   ];
 
   const ref = useRef(null);
@@ -84,7 +84,7 @@ export default function AboutStory() {
           >
             <div className="relative overflow-hidden w-full aspect-square max-h-[280px] md:h-[500px] md:max-h-full">
               <Image
-                src="/images/blac-marquina-1.jpg"
+                src="/images/story-section-pic.jpeg"
                 alt="Our story"
                 fill
                 className="object-cover"
@@ -98,13 +98,14 @@ export default function AboutStory() {
             animate={isInView ? "visible" : "hidden"}
           >
             <motion.h2 className="title-section" variants={itemVariants}>
-              Excellence in Space & Time
+              Excellence in Manufacturing
             </motion.h2>
             <motion.p className="text-body" variants={itemVariants}>
-              For 3 years, we&apos;ve brought natural beauty into homes and
-              commercial spaces. Quality and sustainability drive everything we
-              do. We source the finest materials worldwide, working directly
-              with quarries to ensure every piece meets our standards.
+              For 3 years, we&apos;ve manufactured elegant porcelain surfaces
+              that grace homes and commercial spaces with timeless
+              sophistication. We create premium porcelain products with Full
+              Body Technology, ensuring superior durability and consistent color
+              throughout.
             </motion.p>
             <motion.div
               className="flex flex-col gap-3"

@@ -43,9 +43,13 @@
     @apply py-20 sm:py-24 lg:py-32;
   }
 
+  .section-darker {
+    @apply py-16 sm:py-20 lg:py-24 bg-neutral-100;
+  }
+
   /* Typography */
   .title-hero {
-    @apply text-5xl lg:text-6xl 2xl:text-7xl font-extrabold leading-tight tracking-tight text-white mb-6 font-serif;
+    @apply text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-extrabold leading-tight tracking-tight text-white mb-6 font-serif;
   }
 
   .title-section {

@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 const heroSlide = {
-  image: "/images/slider-qxbxlb1pnn7lnr37mcfhy1qfctmztsja829dgwhocg.jpg",
-  title: "Transform Your Space",
-  description: "Premium tiles and natural stones for spaces that inspire",
+  image: "/hero-bg.jpg",
+  title: "Grace Your Space With Top-Notch Products",
+  description: "Elegant Porcelain Surfaces for spaces that inspire",
 };
 
 const containerVariants = {
@@ -64,14 +64,27 @@ export default function Hero() {
               {heroSlide.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button asChild size="lg">
+              <Button asChild variant="secondary" size="lg">
                 <Link href="/products">
                   Explore Products
                   <span className="ml-2">→</span>
                 </Link>
               </Button>
-              <Button asChild variant="outlineLight" size="lg">
-                <Link href="/contact">Get Consultation</Link>
+              <Button
+                asChild
+                variant="outlineLight"
+                className="backdrop bg-neutral-100/20 hover:bg-neutral-100/25 border border-neutral-100/40"
+                size="lg"
+              >
+                <a
+                  href={`https://wa.me/971547139032?text=${encodeURIComponent(
+                    "Hello! I'm interested in getting a consultation for my space. I'd like to explore your elegant porcelain surfaces."
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Get Consultation
+                </a>
               </Button>
             </div>
           </motion.div>
