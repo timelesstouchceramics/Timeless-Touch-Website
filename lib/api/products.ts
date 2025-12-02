@@ -332,6 +332,7 @@ function transformContentfulProduct(
 /**
  * Fetches all products from the data source.
  * Uses Contentful if configured, otherwise falls back to static data.
+ * Implements pagination to fetch all products, not just the first 100.
  */
 export async function getProducts(): Promise<Product[]> {
   if (!USE_CONTENTFUL) {
@@ -340,14 +341,46 @@ export async function getProducts(): Promise<Product[]> {
   }
 
   try {
-    const response = await fetchContentful<ContentfulProductFields>("product", {
-      order: "-sys.createdAt",
-      limit: 100,
-    });
+    const allProducts: Product[] = [];
+    let skip = 0;
+    const limit = 100;
+    let totalFetched = 0;
+    let totalProducts: number | undefined = undefined;
 
-    return response.items.map((item) =>
-      transformContentfulProduct(item, response.includes)
-    );
+    while (true) {
+      const response = await fetchContentful<ContentfulProductFields>(
+        "product",
+        {
+          order: "-sys.createdAt",
+          limit,
+          skip,
+        }
+      );
+
+      // Store total count from first response
+      if (totalProducts === undefined) {
+        totalProducts = response.total;
+      }
+
+      const products = response.items.map((item) =>
+        transformContentfulProduct(item, response.includes)
+      );
+
+      allProducts.push(...products);
+      totalFetched += products.length;
+
+      // Stop if we've fetched all products or got fewer items than the limit
+      if (
+        products.length < limit ||
+        (totalProducts !== undefined && totalFetched >= totalProducts)
+      ) {
+        break;
+      }
+
+      skip += limit;
+    }
+
+    return allProducts;
   } catch (error) {
     console.error("Failed to fetch from Contentful:", error);
     // Fallback to static data on error
@@ -379,15 +412,8 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
     // If not found by slug, try to find by searching all products and matching generated slugs
     // This handles cases where products don't have slugs in Contentful
     if (response.items.length === 0) {
-      const allProductsResponse =
-        await fetchContentful<ContentfulProductFields>("product", {
-          limit: 1000, // Get all products to search locally by generated slug
-        });
-
-      const allProducts = allProductsResponse.items.map((item) =>
-        transformContentfulProduct(item, allProductsResponse.includes)
-      );
-
+      // Use getProducts() which already handles pagination properly to fetch all products
+      const allProducts = await getProducts();
       const product = allProducts.find((p) => p.slug === slug);
       return product || null;
     }
@@ -745,7 +771,7 @@ function transformContentfulCollection(
 ): Collection {
   const { fields } = entry;
 
-  // Resolve image if present
+  // Resolve image from Contentful
   let imageUrl = "";
   if (fields.image) {
     const imageRef = resolveReference(fields.image, includes);
@@ -754,23 +780,6 @@ function transformContentfulCollection(
     if (fileUrl) {
       imageUrl = `https:${fileUrl}`;
     }
-  }
-
-  // Fallback to local image if Contentful image is not available
-  // Map slug to local image path
-  const imageMap: Record<string, string> = {
-    slabs: "/images/categories/slabs-category.jpeg",
-    tiles: "/images/categories/tiles-category.jpeg",
-    "pool-tiles": "/images/categories/pooltile-category.jpeg",
-    "marble-look": "/images/categories/marblelook-category.jpeg",
-    "stone-look": "/images/categories/stonelook-category.jpeg",
-    "modern-look": "/images/categories/modernlook-category.jpeg",
-    "wood-look": "/images/categories/woodlook-category.jpeg",
-    decorative: "/images/categories/decoration-category.jpeg",
-  };
-
-  if (!imageUrl && imageMap[fields.slug]) {
-    imageUrl = imageMap[fields.slug];
   }
 
   // Extract description from RichText
@@ -840,14 +849,14 @@ function transformContentfulCollection(
 function organizeCollections(collections: Collection[]): Collection[] {
   // Define the unified order (mixed main categories and design styles)
   const unifiedOrder = [
-    "slabs",           // Main Category
-    "tiles",           // Main Category
-    "marble-look",     // Design Style
-    "pool-tiles",      // Main Category
-    "stone-look",      // Design Style
-    "modern-look",     // Design Style
-    "wood-look",       // Design Style
-    "decorative",      // Design Style
+    "slabs", // Main Category
+    "tiles", // Main Category
+    "marble-look", // Design Style
+    "pool-tiles", // Main Category
+    "stone-look", // Design Style
+    "modern-look", // Design Style
+    "wood-look", // Design Style
+    "decorative", // Design Style
   ];
 
   // Sort all collections by the unified order
@@ -873,20 +882,47 @@ export async function getCollections(): Promise<Collection[]> {
   }
 
   try {
-    const response = await fetchContentful<ContentfulCollectionFields>(
-      "collection",
-      {
-        order: "-sys.createdAt",
-        limit: 100,
-      }
-    );
+    const allCollections: Collection[] = [];
+    let skip = 0;
+    const limit = 100;
+    let totalFetched = 0;
+    let totalCollections: number | undefined = undefined;
 
-    const collections = response.items.map((item) =>
-      transformContentfulCollection(item, response.includes)
-    );
+    while (true) {
+      const response = await fetchContentful<ContentfulCollectionFields>(
+        "collection",
+        {
+          order: "-sys.createdAt",
+          limit,
+          skip,
+        }
+      );
+
+      // Store total count from first response
+      if (totalCollections === undefined) {
+        totalCollections = response.total;
+      }
+
+      const collections = response.items.map((item) =>
+        transformContentfulCollection(item, response.includes)
+      );
+
+      allCollections.push(...collections);
+      totalFetched += collections.length;
+
+      // Stop if we've fetched all collections or got fewer items than the limit
+      if (
+        collections.length < limit ||
+        (totalCollections !== undefined && totalFetched >= totalCollections)
+      ) {
+        break;
+      }
+
+      skip += limit;
+    }
 
     // Organize collections by type and predefined order
-    return organizeCollections(collections);
+    return organizeCollections(allCollections);
   } catch (error) {
     console.error("Failed to fetch collections from Contentful:", error);
     // Fallback to static data on error
@@ -945,21 +981,53 @@ function transformContentfulCatalogue(
 export async function getCatalogues(): Promise<Catalogue[]> {
   if (!USE_CONTENTFUL) {
     // No local fallback - catalogues are managed in Contentful
-    console.warn("Contentful not configured - returning empty catalogues array");
+    console.warn(
+      "Contentful not configured - returning empty catalogues array"
+    );
     return [];
   }
 
   try {
-    const response = await fetchContentful<ContentfulCatalogueFields>("catalogue", {
-      order: "-sys.createdAt",
-      limit: 100,
-    });
+    const allCatalogues: Catalogue[] = [];
+    let skip = 0;
+    const limit = 100;
+    let totalFetched = 0;
+    let totalCatalogues: number | undefined = undefined;
 
-    const catalogues = response.items.map((item) =>
-      transformContentfulCatalogue(item, response.includes)
-    );
+    while (true) {
+      const response = await fetchContentful<ContentfulCatalogueFields>(
+        "catalogue",
+        {
+          order: "-sys.createdAt",
+          limit,
+          skip,
+        }
+      );
 
-    return catalogues;
+      // Store total count from first response
+      if (totalCatalogues === undefined) {
+        totalCatalogues = response.total;
+      }
+
+      const catalogues = response.items.map((item) =>
+        transformContentfulCatalogue(item, response.includes)
+      );
+
+      allCatalogues.push(...catalogues);
+      totalFetched += catalogues.length;
+
+      // Stop if we've fetched all catalogues or got fewer items than the limit
+      if (
+        catalogues.length < limit ||
+        (totalCatalogues !== undefined && totalFetched >= totalCatalogues)
+      ) {
+        break;
+      }
+
+      skip += limit;
+    }
+
+    return allCatalogues;
   } catch (error) {
     console.error("Failed to fetch catalogues from Contentful:", error);
     // Return empty array if Contentful fails

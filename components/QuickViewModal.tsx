@@ -85,14 +85,30 @@ export default function QuickViewModal({
               </div>
             </div>
 
-            {product.price != null && (
+            {product.sizes && product.sizes.length > 0 && (
               <div>
-                <p className="text-2xl font-semibold text-neutral-950">
-                  AED {product.price.toFixed(2)}{" "}
-                  <span className="text-base font-normal text-neutral-600">
-                    / {product.unit || "unit"}
-                  </span>
-                </p>
+                <p className="text-sm font-medium text-neutral-700 mb-2">Available Sizes:</p>
+                <div className="flex flex-wrap gap-2">
+                  {product.sizes.map((size, index) => {
+                    // Format size slug for display (e.g., "60x120-cm" -> "60x120cm")
+                    const formattedSize = size
+                      .replace(/-/g, "")
+                      .replace(/\bcm\b/gi, "cm")
+                      .replace(/\bmm\b/gi, "mm");
+                    return (
+                      <Badge key={index} variant="outline" className="text-xs font-medium">
+                        {formattedSize}
+                      </Badge>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {product.thickness && (
+              <div>
+                <p className="text-sm font-medium text-neutral-700 mb-1">Thickness:</p>
+                <p className="text-sm text-neutral-600">{product.thickness}</p>
               </div>
             )}
 
