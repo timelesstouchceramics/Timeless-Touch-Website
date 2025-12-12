@@ -6,6 +6,7 @@ import {
   getApplications,
   getSizes,
   getThicknesses,
+  getCatalogues,
 } from "@/lib/api/products";
 import ProductsClient from "./products-client";
 
@@ -18,6 +19,7 @@ export default async function ProductsServer() {
     applications,
     sizes,
     thicknesses,
+    catalogues,
   ] = await Promise.all([
     getProducts(),
     getMainCategories(),
@@ -26,7 +28,11 @@ export default async function ProductsServer() {
     getApplications(),
     getSizes(),
     getThicknesses(),
+    getCatalogues(),
   ]);
+
+  // Extract catalogue slugs for the filter
+  const catalogueSlugs = catalogues.map((c) => c.slug);
 
   return (
     <ProductsClient
@@ -37,6 +43,8 @@ export default async function ProductsServer() {
       applications={applications}
       sizes={sizes}
       thicknesses={thicknesses}
+      catalogues={catalogueSlugs}
+      allCatalogues={catalogues}
     />
   );
 }

@@ -8,11 +8,11 @@ import { useRef } from "react";
 export default function MapSection() {
   // Google Maps embed URL for Dubai
   const dubaiMapUrl =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.178509744622!2d55.2708!3d25.2048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43348a67e24d%3A0xff45e502e1ceb7e2!2sDubai!5e0!3m2!1sen!2sae!4v1234567890123!5m2!1sen!2sae";
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3611.211029331109!2d55.23340321066964!3d25.1623513330189!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f697bea3b05b5%3A0x2a081fc15608ae36!2sTimeless%20Touch%20Ceramics%20L.L.C!5e0!3m2!1sen!2sfi!4v1765494192658!5m2!1sen!2sfi";
 
   // Google Maps directions URL
   const directionsUrl =
-    "https://www.google.com/maps/dir/?api=1&destination=Dubai,+United+Arab+Emirates";
+    "https://www.google.com/maps/dir/?api=1&destination=Timeless+Touch+Ceramics+L.L.C,+Office+M-45,+The+Curve+Building,+Al+Quoz+3,+Dubai,+UAE";
 
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -66,8 +66,8 @@ export default function MapSection() {
               className="flex flex-col gap-2 text-neutral-600 font-sans"
               variants={itemVariants}
             >
-              <p className="text-base">1234 Garden Boulevard</p>
-              <p className="text-base">Dubai, UAE 12345</p>
+              <p className="text-base">Office M-45, The Curve Building</p>
+              <p className="text-base">Al Quoz 3, Dubai, UAE</p>
             </motion.div>
 
             {/* CTA Button */}

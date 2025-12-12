@@ -44,7 +44,7 @@ export default function Contact() {
     {
       icon: MapPin,
       title: "Visit Us",
-      details: ["Dubai", "United Arab Emirates"],
+      details: ["Office M-45, The Curve Building", "Al Quoz 3, Dubai, UAE"],
     },
     {
       icon: Phone,
@@ -54,7 +54,7 @@ export default function Contact() {
     {
       icon: Mail,
       title: "Email Us",
-      details: ["info@timelesstouch.com", "sales@timelesstouch.com"],
+      details: ["timelesstouchceramics@hotmail.com"],
     },
     {
       icon: Clock,
@@ -236,7 +236,7 @@ export default function Contact() {
               animate={formInView ? "visible" : "hidden"}
             >
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.178509744622!2d55.2708!3d25.2048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43348a67e24d%3A0xff45e502e1ceb7e2!2sDubai!5e0!3m2!1sen!2sae!4v1234567890123!5m2!1sen!2sae"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3611.211029331109!2d55.23340321066964!3d25.1623513330189!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f697bea3b05b5%3A0x2a081fc15608ae36!2sTimeless%20Touch%20Ceramics%20L.L.C!5e0!3m2!1sen!2sfi!4v1765494192658!5m2!1sen!2sfi"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

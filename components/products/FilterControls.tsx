@@ -10,6 +10,7 @@ import {
 import { ChevronDown } from "lucide-react";
 
 interface FilterControlsProps {
+  selectedCatalogues: string[];
   selectedMainCategories: string[];
   selectedDesignStyles: string[];
   selectedFinishes: string[];
@@ -17,6 +18,7 @@ interface FilterControlsProps {
   selectedSizes: string[];
   selectedThicknesses: string[];
   selectedSpecialFeatures: string[];
+  catalogueOpen: boolean;
   mainCategoryOpen: boolean;
   designStyleOpen: boolean;
   finishOpen: boolean;
@@ -24,6 +26,7 @@ interface FilterControlsProps {
   sizesOpen: boolean;
   thicknessesOpen: boolean;
   specialFeaturesOpen: boolean;
+  onCatalogueOpenChange: (open: boolean) => void;
   onMainCategoryOpenChange: (open: boolean) => void;
   onDesignStyleOpenChange: (open: boolean) => void;
   onFinishOpenChange: (open: boolean) => void;
@@ -31,6 +34,7 @@ interface FilterControlsProps {
   onSizesOpenChange: (open: boolean) => void;
   onThicknessesOpenChange: (open: boolean) => void;
   onSpecialFeaturesOpenChange: (open: boolean) => void;
+  onToggleCatalogue: (catalogue: string) => void;
   onToggleMainCategory: (mainCategory: string) => void;
   onToggleDesignStyle: (designStyle: string) => void;
   onToggleFinish: (finish: string) => void;
@@ -39,6 +43,7 @@ interface FilterControlsProps {
   onToggleThickness: (thickness: string) => void;
   onToggleSpecialFeature: (feature: string) => void;
   onClearAll: () => void;
+  getCatalogueCount: (catalogue: string) => number;
   getMainCategoryCount: (mainCategory: string) => number;
   getDesignStyleCount: (designStyle: string) => number;
   getFinishCount: (finish: string) => number;
@@ -46,6 +51,7 @@ interface FilterControlsProps {
   getSizeCount: (size: string) => number;
   getThicknessCount: (thickness: string) => number;
   getSpecialFeatureCount: (feature: string) => number;
+  catalogues: string[];
   mainCategories: string[];
   designStyles: string[];
   finishes: string[];
@@ -67,6 +73,7 @@ const formatLabel = (str: string) => {
 };
 
 export default function FilterControls({
+  selectedCatalogues,
   selectedMainCategories,
   selectedDesignStyles,
   selectedFinishes,
@@ -74,6 +81,7 @@ export default function FilterControls({
   selectedSizes,
   selectedThicknesses,
   selectedSpecialFeatures,
+  catalogueOpen,
   mainCategoryOpen,
   designStyleOpen,
   finishOpen,
@@ -81,6 +89,7 @@ export default function FilterControls({
   sizesOpen,
   thicknessesOpen,
   specialFeaturesOpen,
+  onCatalogueOpenChange,
   onMainCategoryOpenChange,
   onDesignStyleOpenChange,
   onFinishOpenChange,
@@ -88,6 +97,7 @@ export default function FilterControls({
   onSizesOpenChange,
   onThicknessesOpenChange,
   onSpecialFeaturesOpenChange,
+  onToggleCatalogue,
   onToggleMainCategory,
   onToggleDesignStyle,
   onToggleFinish,
@@ -96,6 +106,7 @@ export default function FilterControls({
   onToggleThickness,
   onToggleSpecialFeature,
   onClearAll,
+  getCatalogueCount,
   getMainCategoryCount,
   getDesignStyleCount,
   getFinishCount,
@@ -103,6 +114,7 @@ export default function FilterControls({
   getSizeCount,
   getThicknessCount,
   getSpecialFeatureCount,
+  catalogues,
   mainCategories,
   designStyles,
   finishes,
@@ -113,6 +125,7 @@ export default function FilterControls({
   isMobile = false,
 }: FilterControlsProps) {
   const totalActiveFilters =
+    selectedCatalogues.length +
     selectedMainCategories.length +
     selectedDesignStyles.length +
     selectedFinishes.length +
@@ -123,6 +136,76 @@ export default function FilterControls({
 
   return (
     <div className={isMobile ? "" : "space-y-4"}>
+      {/* Catalogue Filter */}
+      <Collapsible open={catalogueOpen} onOpenChange={onCatalogueOpenChange}>
+        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 rounded-md transition-colors hover:bg-neutral-100 cursor-pointer">
+          <h4 className="text-base font-semibold text-neutral-950">
+            Catalogue
+          </h4>
+          <ChevronDown
+            className={`h-4 w-4 transition-transform duration-200 ${
+              catalogueOpen ? "rotate-180" : ""
+            }`}
+          />
+        </CollapsibleTrigger>
+        <CollapsibleContent className="space-y-2 pt-2">
+          {catalogues.map((catalogue) => {
+            const count = getCatalogueCount(catalogue);
+            const isDisabled =
+              count === 0 && !selectedCatalogues.includes(catalogue);
+            const isSelected = selectedCatalogues.includes(catalogue);
+            return (
+              <div
+                key={catalogue}
+                className={`flex items-center gap-2 p-2 -mx-2 rounded-md transition-colors ${
+                  isDisabled
+                    ? "opacity-50"
+                    : "hover:bg-neutral-100 cursor-pointer"
+                }`}
+                onClick={(e) => {
+                  if (
+                    e.target === e.currentTarget ||
+                    (e.target as HTMLElement).tagName === "SPAN"
+                  ) {
+                    !isDisabled && onToggleCatalogue(catalogue);
+                  }
+                }}
+              >
+                <Checkbox
+                  id={`${isMobile ? "mobile-" : ""}catalogue-${catalogue}`}
+                  checked={isSelected}
+                  onCheckedChange={(checked) => {
+                    if (!isDisabled) {
+                      onToggleCatalogue(catalogue);
+                    }
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  disabled={isDisabled}
+                />
+                <Label
+                  htmlFor={`${isMobile ? "mobile-" : ""}catalogue-${catalogue}`}
+                  className={`flex-1 cursor-pointer ${
+                    isDisabled ? "text-neutral-400 cursor-not-allowed" : ""
+                  }`}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {formatLabel(catalogue)}
+                </Label>
+                <span
+                  className={`text-sm ${
+                    isDisabled ? "text-neutral-400" : "text-neutral-500"
+                  }`}
+                >
+                  ({count})
+                </span>
+              </div>
+            );
+          })}
+        </CollapsibleContent>
+      </Collapsible>
+
+      <Separator />
+
       {/* Main Category Filter */}
       <Collapsible
         open={mainCategoryOpen}

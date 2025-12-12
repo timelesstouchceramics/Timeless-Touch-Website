@@ -61,6 +61,7 @@ interface ContentfulProductFields {
   sixFace?: boolean;
   fullBody?: boolean;
   applications?: any[]; // References - will be resolved from includes
+  catalogue?: any; // Reference to Catalogue - will be resolved from includes
 }
 
 interface ContentfulCollectionFields {
@@ -273,6 +274,7 @@ function transformContentfulProduct(
   const designStyleRef = resolveReference(fields.designStyle, includes);
   const finishRef = resolveReference(fields.finish, includes);
   const thicknessRef = resolveReference(fields.thickness, includes);
+  const catalogueRef = resolveReference(fields.catalogue, includes);
 
   // Resolve applications array
   const applicationsRefs = Array.isArray(fields.applications)
@@ -326,6 +328,7 @@ function transformContentfulProduct(
       .map((app) => app.fields?.name || "")
       .filter(Boolean),
     description: extractTextFromRichText(fields.description),
+    catalogue: catalogueRef?.fields?.slug,
   };
 }
 
@@ -523,6 +526,7 @@ export async function getApplications(): Promise<string[]> {
 
 /**
  * Fetches all available sizes.
+ * Dynamically derives sizes from products.
  */
 export async function getSizes(): Promise<string[]> {
   if (!USE_CONTENTFUL) {
