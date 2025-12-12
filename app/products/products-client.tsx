@@ -253,67 +253,33 @@ export default function ProductsClient({
     sortBy,
   ]);
 
+  // Helper function to check if product matches selected catalogues
+  const matchesSelectedCatalogues = useCallback(
+    (productCatalogues: string[] | undefined): boolean => {
+      if (selectedCatalogues.length === 0) return true;
+      if (!productCatalogues || productCatalogues.length === 0) return false;
+      return productCatalogues.some((cat) => selectedCatalogues.includes(cat));
+    },
+    [selectedCatalogues]
+  );
+
   // Filter counts
   const getCatalogueCount = useCallback(
     (catalogue: string) => {
+      // Catalogue count is standalone - it shows total products in each catalogue
+      // regardless of other filters
       return initialProducts.filter((p) => {
-        const matchesCatalogue = p.catalogue === catalogue;
-        const matchesMainCategory =
-          selectedMainCategories.length === 0 ||
-          selectedMainCategories.includes(p.mainCategory);
-        const matchesDesignStyle =
-          selectedDesignStyles.length === 0 ||
-          selectedDesignStyles.includes(p.designStyle);
-        const matchesFinish =
-          selectedFinishes.length === 0 || selectedFinishes.includes(p.finish);
-        const matchesApplications =
-          selectedApplications.length === 0 ||
-          (p.applications &&
-            p.applications.some((app) => selectedApplications.includes(app)));
-        const matchesSize =
-          selectedSizes.length === 0 ||
-          (p.sizes &&
-            p.sizes.length > 0 &&
-            p.sizes.some((size) => selectedSizes.includes(size)));
-        const matchesThickness =
-          selectedThicknesses.length === 0 ||
-          (p.thickness && selectedThicknesses.includes(p.thickness));
-        const matchesSpecialFeatures =
-          selectedSpecialFeatures.length === 0 ||
-          selectedSpecialFeatures.every(
-            (feat) => p[feat as keyof Product] === true
-          );
-        return (
-          matchesCatalogue &&
-          matchesMainCategory &&
-          matchesDesignStyle &&
-          matchesFinish &&
-          matchesApplications &&
-          matchesSize &&
-          matchesThickness &&
-          matchesSpecialFeatures
-        );
+        return p.catalogue && p.catalogue.includes(catalogue);
       }).length;
     },
-    [
-      initialProducts,
-      selectedMainCategories,
-      selectedDesignStyles,
-      selectedFinishes,
-      selectedApplications,
-      selectedSizes,
-      selectedThicknesses,
-      selectedSpecialFeatures,
-    ]
+    [initialProducts]
   );
 
   const getMainCategoryCount = useCallback(
     (mainCategory: string) => {
       return initialProducts.filter((p) => {
         const matchesMainCategory = p.mainCategory === mainCategory;
-        const matchesCatalogue =
-          selectedCatalogues.length === 0 ||
-          (p.catalogue && selectedCatalogues.includes(p.catalogue));
+        const matchesCatalogue = matchesSelectedCatalogues(p.catalogue);
         const matchesDesignStyle =
           selectedDesignStyles.length === 0 ||
           selectedDesignStyles.includes(p.designStyle);
@@ -364,9 +330,7 @@ export default function ProductsClient({
     (designStyle: string) => {
       return initialProducts.filter((p) => {
         const matchesDesignStyle = p.designStyle === designStyle;
-        const matchesCatalogue =
-          selectedCatalogues.length === 0 ||
-          (p.catalogue && selectedCatalogues.includes(p.catalogue));
+        const matchesCatalogue = matchesSelectedCatalogues(p.catalogue);
         const matchesMainCategory =
           selectedMainCategories.length === 0 ||
           selectedMainCategories.includes(p.mainCategory);
@@ -417,9 +381,7 @@ export default function ProductsClient({
     (finish: string) => {
       return initialProducts.filter((p) => {
         const matchesFinish = p.finish === finish;
-        const matchesCatalogue =
-          selectedCatalogues.length === 0 ||
-          (p.catalogue && selectedCatalogues.includes(p.catalogue));
+        const matchesCatalogue = matchesSelectedCatalogues(p.catalogue);
         const matchesMainCategory =
           selectedMainCategories.length === 0 ||
           selectedMainCategories.includes(p.mainCategory);
@@ -472,9 +434,7 @@ export default function ProductsClient({
       return initialProducts.filter((p) => {
         const matchesApplication =
           p.applications && p.applications.includes(application);
-        const matchesCatalogue =
-          selectedCatalogues.length === 0 ||
-          (p.catalogue && selectedCatalogues.includes(p.catalogue));
+        const matchesCatalogue = matchesSelectedCatalogues(p.catalogue);
         const matchesMainCategory =
           selectedMainCategories.length === 0 ||
           selectedMainCategories.includes(p.mainCategory);
@@ -524,9 +484,7 @@ export default function ProductsClient({
     (size: string) => {
       return initialProducts.filter((p) => {
         const matchesSize = p.sizes && p.sizes.includes(size);
-        const matchesCatalogue =
-          selectedCatalogues.length === 0 ||
-          (p.catalogue && selectedCatalogues.includes(p.catalogue));
+        const matchesCatalogue = matchesSelectedCatalogues(p.catalogue);
         const matchesMainCategory =
           selectedMainCategories.length === 0 ||
           selectedMainCategories.includes(p.mainCategory);
@@ -575,9 +533,7 @@ export default function ProductsClient({
     (thickness: string) => {
       return initialProducts.filter((p) => {
         const matchesThickness = p.thickness === thickness;
-        const matchesCatalogue =
-          selectedCatalogues.length === 0 ||
-          (p.catalogue && selectedCatalogues.includes(p.catalogue));
+        const matchesCatalogue = matchesSelectedCatalogues(p.catalogue);
         const matchesMainCategory =
           selectedMainCategories.length === 0 ||
           selectedMainCategories.includes(p.mainCategory);
@@ -628,9 +584,7 @@ export default function ProductsClient({
     (feature: string) => {
       return initialProducts.filter((p) => {
         const matchesFeature = p[feature as keyof Product] === true;
-        const matchesCatalogue =
-          selectedCatalogues.length === 0 ||
-          (p.catalogue && selectedCatalogues.includes(p.catalogue));
+        const matchesCatalogue = matchesSelectedCatalogues(p.catalogue);
         const matchesMainCategory =
           selectedMainCategories.length === 0 ||
           selectedMainCategories.includes(p.mainCategory);
@@ -680,9 +634,7 @@ export default function ProductsClient({
     let filtered = initialProducts;
 
     if (selectedCatalogues.length > 0) {
-      filtered = filtered.filter(
-        (p) => p.catalogue && selectedCatalogues.includes(p.catalogue)
-      );
+      filtered = filtered.filter((p) => matchesSelectedCatalogues(p.catalogue));
     }
 
     if (selectedMainCategories.length > 0) {
@@ -762,8 +714,8 @@ export default function ProductsClient({
 
     // If catalogue is selected, filter sizes to only those in products from that catalogue
     if (selectedCatalogues.length > 0) {
-      const productsInCatalogues = initialProducts.filter(
-        (p) => p.catalogue && selectedCatalogues.includes(p.catalogue)
+      const productsInCatalogues = initialProducts.filter((p) =>
+        matchesSelectedCatalogues(p.catalogue)
       );
 
       const sizesInCatalogues = new Set<string>();
@@ -794,9 +746,24 @@ export default function ProductsClient({
 
   // Actions
   const toggleCatalogue = (catalogue: string) => {
+    const isCurrentlySelected = selectedCatalogues.includes(catalogue);
+
+    if (!isCurrentlySelected) {
+      // When selecting a catalogue, clear all other filters
+      setSelectedMainCategories([]);
+      setSelectedDesignStyles([]);
+      setSelectedFinishes([]);
+      setSelectedApplications([]);
+      setSelectedSizes([]);
+      setSelectedThicknesses([]);
+      setSelectedSpecialFeatures([]);
+    }
+
     setSelectedCatalogues(
       (prev) => (prev.includes(catalogue) ? [] : [catalogue]) // Only allow one catalogue at a time
     );
+    // Scroll to top when catalogue filter changes
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const toggleMainCategory = (mainCategory: string) => {

@@ -61,7 +61,7 @@ interface ContentfulProductFields {
   sixFace?: boolean;
   fullBody?: boolean;
   applications?: any[]; // References - will be resolved from includes
-  catalogue?: any; // Reference to Catalogue - will be resolved from includes
+  catalogues?: any[]; // Array of Catalogue references
 }
 
 interface ContentfulCollectionFields {
@@ -274,7 +274,13 @@ function transformContentfulProduct(
   const designStyleRef = resolveReference(fields.designStyle, includes);
   const finishRef = resolveReference(fields.finish, includes);
   const thicknessRef = resolveReference(fields.thickness, includes);
-  const catalogueRef = resolveReference(fields.catalogue, includes);
+
+  // Resolve catalogues - array of Catalogue references
+  const catalogueRefs = Array.isArray(fields.catalogues)
+    ? fields.catalogues
+        .map((cat) => resolveReference(cat, includes))
+        .filter(Boolean)
+    : [];
 
   // Resolve applications array
   const applicationsRefs = Array.isArray(fields.applications)
@@ -328,7 +334,9 @@ function transformContentfulProduct(
       .map((app) => app.fields?.name || "")
       .filter(Boolean),
     description: extractTextFromRichText(fields.description),
-    catalogue: catalogueRef?.fields?.slug,
+    catalogue: catalogueRefs
+      .map((cat) => cat?.fields?.slug)
+      .filter((slug): slug is string => !!slug),
   };
 }
 
