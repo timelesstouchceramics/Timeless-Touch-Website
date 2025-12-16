@@ -50,23 +50,43 @@ export default function ProductCard({
             {product.images &&
             product.images.length > 0 &&
             product.images[0] ? (
-              <Image
-                src={product.images[0]}
-                alt={`${product.name} - ${formatLabel(
-                  getEffectiveDesignStyle(product)
-                )} ${formatLabel(product.mainCategory)} with ${
-                  product.finish
-                } finish`}
-                fill
-                className="object-cover transition-transform group-hover:scale-105 duration-500"
-              />
+              <>
+                {/* First image - fades out on hover only if there's a second image */}
+                <Image
+                  src={product.images[0]}
+                  alt={`${product.name} - ${formatLabel(
+                    getEffectiveDesignStyle(product)
+                  )} ${formatLabel(product.mainCategory)} with ${
+                    product.finish
+                  } finish`}
+                  fill
+                  className={`object-cover transition-opacity duration-500 ${
+                    product.images.length > 1 && product.images[1]
+                      ? "group-hover:opacity-0"
+                      : ""
+                  }`}
+                />
+                {/* Second image - visible on hover if available */}
+                {product.images.length > 1 && product.images[1] && (
+                  <Image
+                    src={product.images[1]}
+                    alt={`${product.name} - ${formatLabel(
+                      getEffectiveDesignStyle(product)
+                    )} ${formatLabel(product.mainCategory)} with ${
+                      product.finish
+                    } finish - alternate view`}
+                    fill
+                    className="object-cover absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  />
+                )}
+              </>
             ) : (
               <div className="w-full h-full bg-neutral-200 flex items-center justify-center">
                 <span className="text-neutral-400 text-sm">No Image</span>
               </div>
             )}
             {showActions && onQuickView && (
-              <div className="absolute inset-0 bg-neutral-950/0 group-hover:bg-neutral-950/40 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-500">
+              <div className="absolute inset-0 bg-neutral-950/0 group-hover:bg-neutral-950/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-500">
                 <div className="flex gap-2">
                   <Button
                     size="sm"

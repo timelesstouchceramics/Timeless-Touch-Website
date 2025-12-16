@@ -71,16 +71,38 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
 
   // Build search value with aliases for better matching
   const getSearchValue = (product: Product): string => {
-    const baseValue = `${product.name} ${product.mainCategory} ${
-      product.designStyle || ""
-    } ${product.finish}`;
+    // Start with product name and slug (always searchable)
+    const searchParts = [
+      product.name,
+      product.slug,
+    ];
+
+    // Add other fields if they exist
+    if (product.mainCategory) {
+      searchParts.push(product.mainCategory);
+    }
+    if (product.designStyle) {
+      searchParts.push(product.designStyle);
+    }
+    if (product.finish) {
+      searchParts.push(product.finish);
+    }
+    if (product.code) {
+      searchParts.push(product.code);
+    }
 
     // Add search aliases for pool-tiles
     if (product.mainCategory === "pool-tiles") {
-      return `${baseValue} swimming pool pools tile tiles`;
+      searchParts.push("swimming pool pools tile tiles");
     }
 
-    return baseValue;
+    // Join and normalize: remove extra spaces, convert to lowercase for better matching
+    return searchParts
+      .filter(Boolean) // Remove any undefined/null/empty values
+      .join(" ")
+      .toLowerCase()
+      .replace(/\s+/g, " ") // Normalize whitespace
+      .trim();
   };
 
   return (
@@ -155,10 +177,26 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                           : ""}
                         {product.finish}
                       </div>
-                      {product.price != null && (
-                        <div className="text-sm text-neutral-700 mt-1">
-                          AED {product.price.toFixed(2)} /{" "}
-                          {product.unit || "unit"}
+                      {product.sizes && product.sizes.length > 0 && (
+                        <div className="text-xs text-neutral-500 mt-1 flex flex-wrap gap-1">
+                          {product.sizes.slice(0, 3).map((size, index) => {
+                            // Format size slug for display
+                            const formattedSize = size
+                              .replace(/-/g, "")
+                              .replace(/\bcm\b/gi, "cm")
+                              .replace(/\bmm\b/gi, "mm");
+                            return (
+                              <span key={index} className="whitespace-nowrap">
+                                {formattedSize}
+                                {index < Math.min(product.sizes!.length, 3) - 1 && ","}
+                              </span>
+                            );
+                          })}
+                          {product.sizes.length > 3 && (
+                            <span className="text-neutral-400">
+                              +{product.sizes.length - 3} more
+                            </span>
+                          )}
                         </div>
                       )}
                     </div>

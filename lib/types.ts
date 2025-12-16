@@ -18,6 +18,7 @@ export interface Product {
   fullBody?: boolean;
   applications?: string[];
   description?: string;
+  catalogue?: string[]; // Catalogue slugs (array of references to Catalogues)
 }
 
 export interface Collection {

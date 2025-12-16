@@ -1,13 +1,7 @@
 import Link from "next/link";
-import {
-  Facebook,
-  Instagram,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-} from "lucide-react";
+import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
 import Logo from "@/components/Logo";
+import { productCategories } from "@/lib/product-categories";
 
 const Footer = () => {
   return (
@@ -21,14 +15,21 @@ const Footer = () => {
               craftsmanship since 2023.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="footer-icon">
+              <a
+                href="https://www.facebook.com/p/Timeless-touch-61575951395279/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-icon"
+              >
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="footer-icon">
+              <a
+                href="https://www.instagram.com/timelesstouchceramics/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-icon"
+              >
                 <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" className="footer-icon">
-                <Linkedin className="h-5 w-5" />
               </a>
             </div>
           </div>
@@ -67,29 +68,20 @@ const Footer = () => {
           <div>
             <h4 className="footer-title">Categories</h4>
             <ul className="flex flex-col gap-4 mt-4">
-              <li>
-                <Link href="/products?category=marble" className="footer-link">
-                  Marble
-                </Link>
-              </li>
-              <li>
-                <Link href="/products?category=granite" className="footer-link">
-                  Granite
-                </Link>
-              </li>
-              <li>
-                <Link href="/products?category=ceramic" className="footer-link">
-                  Ceramic Tiles
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/products?category=porcelain"
-                  className="footer-link"
-                >
-                  Porcelain Tiles
-                </Link>
-              </li>
+              {productCategories.map((category) => (
+                <li key={category.slug}>
+                  <Link
+                    href={`/products?${
+                      category.type === "mainCategory"
+                        ? "mainCategories"
+                        : "designStyles"
+                    }=${category.slug}`}
+                    className="footer-link"
+                  >
+                    {category.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -98,7 +90,7 @@ const Footer = () => {
             <ul className="flex flex-col gap-4 mt-4">
               <li className="footer-text flex items-start gap-2">
                 <MapPin className="h-5 w-5 shrink-0" />
-                Dubai, United Arab Emirates
+                Office M-45, The Curve Building, Al Quoz 3, Dubai, UAE
               </li>
               <li className="footer-text flex items-center gap-2">
                 <Phone className="h-5 w-5 shrink-0" />
@@ -106,7 +98,7 @@ const Footer = () => {
               </li>
               <li className="footer-text flex items-center gap-2">
                 <Mail className="h-5 w-5 shrink-0" />
-                info@timelesstouch.com
+                timelesstouchceramics@hotmail.com
               </li>
             </ul>
           </div>

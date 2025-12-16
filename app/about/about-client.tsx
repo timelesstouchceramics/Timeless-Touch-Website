@@ -67,7 +67,7 @@ export default function AboutClient() {
     {
       question: "What finishes are available?",
       answer:
-        "We offer both Polished and Matt finishes across our collections. Our Designer Finishes maintain the premium quality and aesthetic appeal of our porcelain surfaces, suitable for various applications including residential, commercial, indoor, outdoor, pool areas, kitchens, and bathrooms.",
+        "We offer both Glossy and Matt finishes across our collections. Our Designer Finishes maintain the premium quality and aesthetic appeal of our porcelain surfaces, suitable for various applications including residential, commercial, indoor, outdoor, pool areas, kitchens, and bathrooms.",
     },
     {
       question: "Can I get samples of your products?",

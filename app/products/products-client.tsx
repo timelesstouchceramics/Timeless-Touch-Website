@@ -33,7 +33,9 @@ import QuickViewModal from "@/components/QuickViewModal";
 import FilterControls from "@/components/products/FilterControls";
 import ProductCard from "@/components/products/ProductCard";
 import Pagination from "@/components/products/Pagination";
-import { Product, SortOption } from "@/lib/types";
+import { Product, SortOption, Catalogue } from "@/lib/types";
+import Image from "next/image";
+import { Download } from "lucide-react";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -45,6 +47,8 @@ interface ProductsClientProps {
   applications: string[];
   sizes: string[];
   thicknesses: string[];
+  catalogues: string[];
+  allCatalogues: Catalogue[];
 }
 
 export default function ProductsClient({
@@ -55,39 +59,55 @@ export default function ProductsClient({
   applications,
   sizes,
   thicknesses,
+  catalogues,
+  allCatalogues,
 }: ProductsClientProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
 
-  const [selectedMainCategories, setSelectedMainCategories] = useState<string[]>(() => {
+  const [selectedMainCategories, setSelectedMainCategories] = useState<
+    string[]
+  >(() => {
     const cats = searchParams.get("mainCategories");
     return cats ? cats.split(",") : [];
   });
-  const [selectedDesignStyles, setSelectedDesignStyles] = useState<string[]>(() => {
-    const styles = searchParams.get("designStyles");
-    return styles ? styles.split(",") : [];
-  });
+  const [selectedDesignStyles, setSelectedDesignStyles] = useState<string[]>(
+    () => {
+      const styles = searchParams.get("designStyles");
+      return styles ? styles.split(",") : [];
+    }
+  );
   const [selectedFinishes, setSelectedFinishes] = useState<string[]>(() => {
     const fins = searchParams.get("finishes");
     return fins ? fins.split(",") : [];
   });
-  const [selectedApplications, setSelectedApplications] = useState<string[]>(() => {
-    const apps = searchParams.get("applications");
-    return apps ? apps.split(",") : [];
-  });
+  const [selectedApplications, setSelectedApplications] = useState<string[]>(
+    () => {
+      const apps = searchParams.get("applications");
+      return apps ? apps.split(",") : [];
+    }
+  );
   const [selectedSizes, setSelectedSizes] = useState<string[]>(() => {
     const szs = searchParams.get("sizes");
     return szs ? szs.split(",") : [];
   });
-  const [selectedThicknesses, setSelectedThicknesses] = useState<string[]>(() => {
-    const thks = searchParams.get("thicknesses");
-    return thks ? thks.split(",") : [];
-  });
-  const [selectedSpecialFeatures, setSelectedSpecialFeatures] = useState<string[]>(() => {
+  const [selectedThicknesses, setSelectedThicknesses] = useState<string[]>(
+    () => {
+      const thks = searchParams.get("thicknesses");
+      return thks ? thks.split(",") : [];
+    }
+  );
+  const [selectedSpecialFeatures, setSelectedSpecialFeatures] = useState<
+    string[]
+  >(() => {
     const feats = searchParams.get("specialFeatures");
     return feats ? feats.split(",") : [];
+  });
+  const [selectedCatalogues, setSelectedCatalogues] = useState<string[]>(() => {
+    const cats = searchParams.get("catalogues");
+    return cats ? cats.split(",") : [];
   });
   const [sortBy, setSortBy] = useState<SortOption>(() => {
     return (searchParams.get("sort") as SortOption) || "name";
@@ -97,15 +117,16 @@ export default function ProductsClient({
     return page ? parseInt(page, 10) : 1;
   });
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [mainCategoryOpen, setMainCategoryOpen] = useState(true);
-  const [designStyleOpen, setDesignStyleOpen] = useState(true);
-  const [finishOpen, setFinishOpen] = useState(true);
+  const [catalogueOpen, setCatalogueOpen] = useState(true);
+  const [mainCategoryOpen, setMainCategoryOpen] = useState(false);
+  const [designStyleOpen, setDesignStyleOpen] = useState(false);
+  const [finishOpen, setFinishOpen] = useState(false);
   const [applicationsOpen, setApplicationsOpen] = useState(false);
   const [sizesOpen, setSizesOpen] = useState(false);
   const [thicknessesOpen, setThicknessesOpen] = useState(false);
   const [specialFeaturesOpen, setSpecialFeaturesOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(
-    null,
+    null
   );
   const [quickViewOpen, setQuickViewOpen] = useState(false);
   const scrollTargetRef = useRef<HTMLDivElement>(null);
@@ -113,6 +134,7 @@ export default function ProductsClient({
   // URL sync - only update URL when state changes, not on mount
   const updateURL = useCallback(
     (
+      catalogues: string[],
       mainCats: string[],
       designStls: string[],
       fins: string[],
@@ -124,8 +146,10 @@ export default function ProductsClient({
       page: number
     ) => {
       const params = new URLSearchParams();
+      if (catalogues.length > 0) params.set("catalogues", catalogues.join(","));
       if (mainCats.length > 0) params.set("mainCategories", mainCats.join(","));
-      if (designStls.length > 0) params.set("designStyles", designStls.join(","));
+      if (designStls.length > 0)
+        params.set("designStyles", designStls.join(","));
       if (fins.length > 0) params.set("finishes", fins.join(","));
       if (apps.length > 0) params.set("applications", apps.join(","));
       if (szs.length > 0) params.set("sizes", szs.join(","));
@@ -148,12 +172,13 @@ export default function ProductsClient({
         });
       }
     },
-    [pathname, router],
+    [pathname, router]
   );
 
   // Sync state changes to URL
   useEffect(() => {
     updateURL(
+      selectedCatalogues,
       selectedMainCategories,
       selectedDesignStyles,
       selectedFinishes,
@@ -165,6 +190,7 @@ export default function ProductsClient({
       currentPage
     );
   }, [
+    selectedCatalogues,
     selectedMainCategories,
     selectedDesignStyles,
     selectedFinishes,
@@ -179,6 +205,7 @@ export default function ProductsClient({
 
   // Reset to page 1 when filters or sort change (but not on initial mount)
   useEffect(() => {
+    const catalogues = searchParams.get("catalogues");
     const mainCats = searchParams.get("mainCategories");
     const designStls = searchParams.get("designStyles");
     const fins = searchParams.get("finishes");
@@ -189,6 +216,7 @@ export default function ProductsClient({
     const sort = searchParams.get("sort") || "name";
 
     // Only reset page if this is not the initial mount (check if current state matches URL)
+    const cataloguesArray = catalogues ? catalogues.split(",") : [];
     const mainCatsArray = mainCats ? mainCats.split(",") : [];
     const designStlsArray = designStls ? designStls.split(",") : [];
     const finsArray = fins ? fins.split(",") : [];
@@ -198,8 +226,11 @@ export default function ProductsClient({
     const featsArray = feats ? feats.split(",") : [];
 
     const isInitialMount =
-      JSON.stringify(mainCatsArray) === JSON.stringify(selectedMainCategories) &&
-      JSON.stringify(designStlsArray) === JSON.stringify(selectedDesignStyles) &&
+      JSON.stringify(cataloguesArray) === JSON.stringify(selectedCatalogues) &&
+      JSON.stringify(mainCatsArray) ===
+        JSON.stringify(selectedMainCategories) &&
+      JSON.stringify(designStlsArray) ===
+        JSON.stringify(selectedDesignStyles) &&
       JSON.stringify(finsArray) === JSON.stringify(selectedFinishes) &&
       JSON.stringify(appsArray) === JSON.stringify(selectedApplications) &&
       JSON.stringify(szsArray) === JSON.stringify(selectedSizes) &&
@@ -211,6 +242,7 @@ export default function ProductsClient({
       setCurrentPage(1);
     }
   }, [
+    selectedCatalogues,
     selectedMainCategories,
     selectedDesignStyles,
     selectedFinishes,
@@ -221,28 +253,58 @@ export default function ProductsClient({
     sortBy,
   ]);
 
+  // Helper function to check if product matches selected catalogues
+  const matchesSelectedCatalogues = useCallback(
+    (productCatalogues: string[] | undefined): boolean => {
+      if (selectedCatalogues.length === 0) return true;
+      if (!productCatalogues || productCatalogues.length === 0) return false;
+      return productCatalogues.some((cat) => selectedCatalogues.includes(cat));
+    },
+    [selectedCatalogues]
+  );
+
   // Filter counts
+  const getCatalogueCount = useCallback(
+    (catalogue: string) => {
+      // Catalogue count is standalone - it shows total products in each catalogue
+      // regardless of other filters
+      return initialProducts.filter((p) => {
+        return p.catalogue && p.catalogue.includes(catalogue);
+      }).length;
+    },
+    [initialProducts]
+  );
+
   const getMainCategoryCount = useCallback(
     (mainCategory: string) => {
       return initialProducts.filter((p) => {
         const matchesMainCategory = p.mainCategory === mainCategory;
+        const matchesCatalogue = matchesSelectedCatalogues(p.catalogue);
         const matchesDesignStyle =
-          selectedDesignStyles.length === 0 || selectedDesignStyles.includes(p.designStyle);
+          selectedDesignStyles.length === 0 ||
+          selectedDesignStyles.includes(p.designStyle);
         const matchesFinish =
           selectedFinishes.length === 0 || selectedFinishes.includes(p.finish);
         const matchesApplications =
           selectedApplications.length === 0 ||
-          (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
+          (p.applications &&
+            p.applications.some((app) => selectedApplications.includes(app)));
         const matchesSize =
           selectedSizes.length === 0 ||
-          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
+          (p.sizes &&
+            p.sizes.length > 0 &&
+            p.sizes.some((size) => selectedSizes.includes(size)));
         const matchesThickness =
-          selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
+          selectedThicknesses.length === 0 ||
+          (p.thickness && selectedThicknesses.includes(p.thickness));
         const matchesSpecialFeatures =
           selectedSpecialFeatures.length === 0 ||
-          selectedSpecialFeatures.every((feat) => p[feat as keyof Product] === true);
+          selectedSpecialFeatures.every(
+            (feat) => p[feat as keyof Product] === true
+          );
         return (
           matchesMainCategory &&
+          matchesCatalogue &&
           matchesDesignStyle &&
           matchesFinish &&
           matchesApplications &&
@@ -254,19 +316,21 @@ export default function ProductsClient({
     },
     [
       initialProducts,
+      selectedCatalogues,
       selectedDesignStyles,
       selectedFinishes,
       selectedApplications,
       selectedSizes,
       selectedThicknesses,
       selectedSpecialFeatures,
-    ],
+    ]
   );
 
   const getDesignStyleCount = useCallback(
     (designStyle: string) => {
       return initialProducts.filter((p) => {
         const matchesDesignStyle = p.designStyle === designStyle;
+        const matchesCatalogue = matchesSelectedCatalogues(p.catalogue);
         const matchesMainCategory =
           selectedMainCategories.length === 0 ||
           selectedMainCategories.includes(p.mainCategory);
@@ -274,17 +338,24 @@ export default function ProductsClient({
           selectedFinishes.length === 0 || selectedFinishes.includes(p.finish);
         const matchesApplications =
           selectedApplications.length === 0 ||
-          (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
+          (p.applications &&
+            p.applications.some((app) => selectedApplications.includes(app)));
         const matchesSize =
           selectedSizes.length === 0 ||
-          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
+          (p.sizes &&
+            p.sizes.length > 0 &&
+            p.sizes.some((size) => selectedSizes.includes(size)));
         const matchesThickness =
-          selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
+          selectedThicknesses.length === 0 ||
+          (p.thickness && selectedThicknesses.includes(p.thickness));
         const matchesSpecialFeatures =
           selectedSpecialFeatures.length === 0 ||
-          selectedSpecialFeatures.every((feat) => p[feat as keyof Product] === true);
+          selectedSpecialFeatures.every(
+            (feat) => p[feat as keyof Product] === true
+          );
         return (
           matchesDesignStyle &&
+          matchesCatalogue &&
           matchesMainCategory &&
           matchesFinish &&
           matchesApplications &&
@@ -296,19 +367,21 @@ export default function ProductsClient({
     },
     [
       initialProducts,
+      selectedCatalogues,
       selectedMainCategories,
       selectedFinishes,
       selectedApplications,
       selectedSizes,
       selectedThicknesses,
       selectedSpecialFeatures,
-    ],
+    ]
   );
 
   const getFinishCount = useCallback(
     (finish: string) => {
       return initialProducts.filter((p) => {
         const matchesFinish = p.finish === finish;
+        const matchesCatalogue = matchesSelectedCatalogues(p.catalogue);
         const matchesMainCategory =
           selectedMainCategories.length === 0 ||
           selectedMainCategories.includes(p.mainCategory);
@@ -317,17 +390,24 @@ export default function ProductsClient({
           selectedDesignStyles.includes(p.designStyle);
         const matchesApplications =
           selectedApplications.length === 0 ||
-          (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
+          (p.applications &&
+            p.applications.some((app) => selectedApplications.includes(app)));
         const matchesSize =
           selectedSizes.length === 0 ||
-          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
+          (p.sizes &&
+            p.sizes.length > 0 &&
+            p.sizes.some((size) => selectedSizes.includes(size)));
         const matchesThickness =
-          selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
+          selectedThicknesses.length === 0 ||
+          (p.thickness && selectedThicknesses.includes(p.thickness));
         const matchesSpecialFeatures =
           selectedSpecialFeatures.length === 0 ||
-          selectedSpecialFeatures.every((feat) => p[feat as keyof Product] === true);
+          selectedSpecialFeatures.every(
+            (feat) => p[feat as keyof Product] === true
+          );
         return (
           matchesFinish &&
+          matchesCatalogue &&
           matchesMainCategory &&
           matchesDesignStyle &&
           matchesApplications &&
@@ -339,13 +419,14 @@ export default function ProductsClient({
     },
     [
       initialProducts,
+      selectedCatalogues,
       selectedMainCategories,
       selectedDesignStyles,
       selectedApplications,
       selectedSizes,
       selectedThicknesses,
       selectedSpecialFeatures,
-    ],
+    ]
   );
 
   const getApplicationCount = useCallback(
@@ -353,6 +434,7 @@ export default function ProductsClient({
       return initialProducts.filter((p) => {
         const matchesApplication =
           p.applications && p.applications.includes(application);
+        const matchesCatalogue = matchesSelectedCatalogues(p.catalogue);
         const matchesMainCategory =
           selectedMainCategories.length === 0 ||
           selectedMainCategories.includes(p.mainCategory);
@@ -363,14 +445,20 @@ export default function ProductsClient({
           selectedFinishes.length === 0 || selectedFinishes.includes(p.finish);
         const matchesSize =
           selectedSizes.length === 0 ||
-          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
+          (p.sizes &&
+            p.sizes.length > 0 &&
+            p.sizes.some((size) => selectedSizes.includes(size)));
         const matchesThickness =
-          selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
+          selectedThicknesses.length === 0 ||
+          (p.thickness && selectedThicknesses.includes(p.thickness));
         const matchesSpecialFeatures =
           selectedSpecialFeatures.length === 0 ||
-          selectedSpecialFeatures.every((feat) => p[feat as keyof Product] === true);
+          selectedSpecialFeatures.every(
+            (feat) => p[feat as keyof Product] === true
+          );
         return (
           matchesApplication &&
+          matchesCatalogue &&
           matchesMainCategory &&
           matchesDesignStyle &&
           matchesFinish &&
@@ -382,19 +470,21 @@ export default function ProductsClient({
     },
     [
       initialProducts,
+      selectedCatalogues,
       selectedMainCategories,
       selectedDesignStyles,
       selectedFinishes,
       selectedSizes,
       selectedThicknesses,
       selectedSpecialFeatures,
-    ],
+    ]
   );
 
   const getSizeCount = useCallback(
     (size: string) => {
       return initialProducts.filter((p) => {
         const matchesSize = p.sizes && p.sizes.includes(size);
+        const matchesCatalogue = matchesSelectedCatalogues(p.catalogue);
         const matchesMainCategory =
           selectedMainCategories.length === 0 ||
           selectedMainCategories.includes(p.mainCategory);
@@ -405,14 +495,19 @@ export default function ProductsClient({
           selectedFinishes.length === 0 || selectedFinishes.includes(p.finish);
         const matchesApplications =
           selectedApplications.length === 0 ||
-          (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
+          (p.applications &&
+            p.applications.some((app) => selectedApplications.includes(app)));
         const matchesThickness =
-          selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
+          selectedThicknesses.length === 0 ||
+          (p.thickness && selectedThicknesses.includes(p.thickness));
         const matchesSpecialFeatures =
           selectedSpecialFeatures.length === 0 ||
-          selectedSpecialFeatures.every((feat) => p[feat as keyof Product] === true);
+          selectedSpecialFeatures.every(
+            (feat) => p[feat as keyof Product] === true
+          );
         return (
           matchesSize &&
+          matchesCatalogue &&
           matchesMainCategory &&
           matchesDesignStyle &&
           matchesFinish &&
@@ -424,19 +519,21 @@ export default function ProductsClient({
     },
     [
       initialProducts,
+      selectedCatalogues,
       selectedMainCategories,
       selectedDesignStyles,
       selectedFinishes,
       selectedApplications,
       selectedThicknesses,
       selectedSpecialFeatures,
-    ],
+    ]
   );
 
   const getThicknessCount = useCallback(
     (thickness: string) => {
       return initialProducts.filter((p) => {
         const matchesThickness = p.thickness === thickness;
+        const matchesCatalogue = matchesSelectedCatalogues(p.catalogue);
         const matchesMainCategory =
           selectedMainCategories.length === 0 ||
           selectedMainCategories.includes(p.mainCategory);
@@ -447,15 +544,21 @@ export default function ProductsClient({
           selectedFinishes.length === 0 || selectedFinishes.includes(p.finish);
         const matchesApplications =
           selectedApplications.length === 0 ||
-          (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
+          (p.applications &&
+            p.applications.some((app) => selectedApplications.includes(app)));
         const matchesSize =
           selectedSizes.length === 0 ||
-          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
+          (p.sizes &&
+            p.sizes.length > 0 &&
+            p.sizes.some((size) => selectedSizes.includes(size)));
         const matchesSpecialFeatures =
           selectedSpecialFeatures.length === 0 ||
-          selectedSpecialFeatures.every((feat) => p[feat as keyof Product] === true);
+          selectedSpecialFeatures.every(
+            (feat) => p[feat as keyof Product] === true
+          );
         return (
           matchesThickness &&
+          matchesCatalogue &&
           matchesMainCategory &&
           matchesDesignStyle &&
           matchesFinish &&
@@ -467,19 +570,21 @@ export default function ProductsClient({
     },
     [
       initialProducts,
+      selectedCatalogues,
       selectedMainCategories,
       selectedDesignStyles,
       selectedFinishes,
       selectedApplications,
       selectedSizes,
       selectedSpecialFeatures,
-    ],
+    ]
   );
 
   const getSpecialFeatureCount = useCallback(
     (feature: string) => {
       return initialProducts.filter((p) => {
         const matchesFeature = p[feature as keyof Product] === true;
+        const matchesCatalogue = matchesSelectedCatalogues(p.catalogue);
         const matchesMainCategory =
           selectedMainCategories.length === 0 ||
           selectedMainCategories.includes(p.mainCategory);
@@ -490,14 +595,19 @@ export default function ProductsClient({
           selectedFinishes.length === 0 || selectedFinishes.includes(p.finish);
         const matchesApplications =
           selectedApplications.length === 0 ||
-          (p.applications && p.applications.some((app) => selectedApplications.includes(app)));
+          (p.applications &&
+            p.applications.some((app) => selectedApplications.includes(app)));
         const matchesSize =
           selectedSizes.length === 0 ||
-          (p.sizes && p.sizes.length > 0 && p.sizes.some((size) => selectedSizes.includes(size)));
+          (p.sizes &&
+            p.sizes.length > 0 &&
+            p.sizes.some((size) => selectedSizes.includes(size)));
         const matchesThickness =
-          selectedThicknesses.length === 0 || (p.thickness && selectedThicknesses.includes(p.thickness));
+          selectedThicknesses.length === 0 ||
+          (p.thickness && selectedThicknesses.includes(p.thickness));
         return (
           matchesFeature &&
+          matchesCatalogue &&
           matchesMainCategory &&
           matchesDesignStyle &&
           matchesFinish &&
@@ -509,28 +619,33 @@ export default function ProductsClient({
     },
     [
       initialProducts,
+      selectedCatalogues,
       selectedMainCategories,
       selectedDesignStyles,
       selectedFinishes,
       selectedApplications,
       selectedSizes,
       selectedThicknesses,
-    ],
+    ]
   );
 
   // Filtered and sorted products
   const filteredProducts = useMemo(() => {
     let filtered = initialProducts;
 
+    if (selectedCatalogues.length > 0) {
+      filtered = filtered.filter((p) => matchesSelectedCatalogues(p.catalogue));
+    }
+
     if (selectedMainCategories.length > 0) {
       filtered = filtered.filter((p) =>
-        selectedMainCategories.includes(p.mainCategory),
+        selectedMainCategories.includes(p.mainCategory)
       );
     }
 
     if (selectedDesignStyles.length > 0) {
       filtered = filtered.filter((p) =>
-        selectedDesignStyles.includes(p.designStyle),
+        selectedDesignStyles.includes(p.designStyle)
       );
     }
 
@@ -539,8 +654,10 @@ export default function ProductsClient({
     }
 
     if (selectedApplications.length > 0) {
-      filtered = filtered.filter((p) =>
-        p.applications && p.applications.some((app) => selectedApplications.includes(app))
+      filtered = filtered.filter(
+        (p) =>
+          p.applications &&
+          p.applications.some((app) => selectedApplications.includes(app))
       );
     }
 
@@ -554,12 +671,16 @@ export default function ProductsClient({
     }
 
     if (selectedThicknesses.length > 0) {
-      filtered = filtered.filter((p) => p.thickness && selectedThicknesses.includes(p.thickness));
+      filtered = filtered.filter(
+        (p) => p.thickness && selectedThicknesses.includes(p.thickness)
+      );
     }
 
     if (selectedSpecialFeatures.length > 0) {
       filtered = filtered.filter((p) =>
-        selectedSpecialFeatures.every((feat) => p[feat as keyof Product] === true)
+        selectedSpecialFeatures.every(
+          (feat) => p[feat as keyof Product] === true
+        )
       );
     }
 
@@ -575,6 +696,7 @@ export default function ProductsClient({
     return sorted;
   }, [
     initialProducts,
+    selectedCatalogues,
     selectedMainCategories,
     selectedDesignStyles,
     selectedFinishes,
@@ -585,6 +707,36 @@ export default function ProductsClient({
     sortBy,
   ]);
 
+  // Compute available sizes dynamically based on selected catalogue
+  const availableSizes = useMemo(() => {
+    // Start with all hardcoded sizes
+    const allSizes = sizes;
+
+    // If catalogue is selected, filter sizes to only those in products from that catalogue
+    if (selectedCatalogues.length > 0) {
+      const productsInCatalogues = initialProducts.filter((p) =>
+        matchesSelectedCatalogues(p.catalogue)
+      );
+
+      const sizesInCatalogues = new Set<string>();
+      productsInCatalogues.forEach((p) => {
+        if (p.sizes && p.sizes.length > 0) {
+          p.sizes.forEach((size) => {
+            if (allSizes.includes(size)) {
+              sizesInCatalogues.add(size);
+            }
+          });
+        }
+      });
+
+      // Return sizes in the same order as allSizes, but only those found in the catalogue
+      return allSizes.filter((size) => sizesInCatalogues.has(size));
+    }
+
+    // If no catalogue selected, show all sizes
+    return allSizes;
+  }, [sizes, selectedCatalogues, initialProducts]);
+
   // Pagination
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
   const paginatedProducts = useMemo(() => {
@@ -593,11 +745,32 @@ export default function ProductsClient({
   }, [filteredProducts, currentPage]);
 
   // Actions
+  const toggleCatalogue = (catalogue: string) => {
+    const isCurrentlySelected = selectedCatalogues.includes(catalogue);
+
+    if (!isCurrentlySelected) {
+      // When selecting a catalogue, clear all other filters
+      setSelectedMainCategories([]);
+      setSelectedDesignStyles([]);
+      setSelectedFinishes([]);
+      setSelectedApplications([]);
+      setSelectedSizes([]);
+      setSelectedThicknesses([]);
+      setSelectedSpecialFeatures([]);
+    }
+
+    setSelectedCatalogues(
+      (prev) => (prev.includes(catalogue) ? [] : [catalogue]) // Only allow one catalogue at a time
+    );
+    // Scroll to top when catalogue filter changes
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const toggleMainCategory = (mainCategory: string) => {
     setSelectedMainCategories((prev) =>
       prev.includes(mainCategory)
         ? prev.filter((c) => c !== mainCategory)
-        : [...prev, mainCategory],
+        : [...prev, mainCategory]
     );
   };
 
@@ -605,7 +778,7 @@ export default function ProductsClient({
     setSelectedDesignStyles((prev) =>
       prev.includes(designStyle)
         ? prev.filter((s) => s !== designStyle)
-        : [...prev, designStyle],
+        : [...prev, designStyle]
     );
   };
 
@@ -613,7 +786,7 @@ export default function ProductsClient({
     setSelectedFinishes((prev) =>
       prev.includes(finish)
         ? prev.filter((f) => f !== finish)
-        : [...prev, finish],
+        : [...prev, finish]
     );
   };
 
@@ -621,15 +794,13 @@ export default function ProductsClient({
     setSelectedApplications((prev) =>
       prev.includes(application)
         ? prev.filter((a) => a !== application)
-        : [...prev, application],
+        : [...prev, application]
     );
   };
 
   const toggleSize = (size: string) => {
     setSelectedSizes((prev) =>
-      prev.includes(size)
-        ? prev.filter((s) => s !== size)
-        : [...prev, size],
+      prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]
     );
   };
 
@@ -637,7 +808,7 @@ export default function ProductsClient({
     setSelectedThicknesses((prev) =>
       prev.includes(thickness)
         ? prev.filter((t) => t !== thickness)
-        : [...prev, thickness],
+        : [...prev, thickness]
     );
   };
 
@@ -645,11 +816,12 @@ export default function ProductsClient({
     setSelectedSpecialFeatures((prev) =>
       prev.includes(feature)
         ? prev.filter((f) => f !== feature)
-        : [...prev, feature],
+        : [...prev, feature]
     );
   };
 
   const clearAllFilters = () => {
+    setSelectedCatalogues([]);
     setSelectedMainCategories([]);
     setSelectedDesignStyles([]);
     setSelectedFinishes([]);
@@ -679,6 +851,7 @@ export default function ProductsClient({
   };
 
   const totalActiveFilters =
+    selectedCatalogues.length +
     selectedMainCategories.length +
     selectedDesignStyles.length +
     selectedFinishes.length +
@@ -687,19 +860,71 @@ export default function ProductsClient({
     selectedThicknesses.length +
     selectedSpecialFeatures.length;
 
+  // Find the selected catalogue if exactly one is selected
+  const selectedCatalogue =
+    selectedCatalogues.length === 1
+      ? allCatalogues.find((c) => c.slug === selectedCatalogues[0])
+      : null;
+
   return (
     <div ref={scrollTargetRef} className="bg-neutral-50">
       <section className="section pt-12">
         <div className="container">
           <Breadcrumb items={[{ label: "Products" }]} />
 
-          <div className="mb-8">
-            <h1 className="title-section">Our Products</h1>
-            <p className="text-body">
-              Browse our extensive collection of premium tiles and natural
-              stones
-            </p>
-          </div>
+          {selectedCatalogue ? (
+            // Show catalogue header when a single catalogue is selected
+            <div className="mb-8">
+              <div className="flex flex-col md:flex-row gap-6 items-start md:items-center">
+                {selectedCatalogue.thumbnail && (
+                  <div className="relative w-full md:w-48 h-64 md:h-48 rounded-lg overflow-hidden bg-neutral-100 flex-shrink-0">
+                    <Image
+                      src={selectedCatalogue.thumbnail}
+                      alt={selectedCatalogue.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+                <div className="flex-1">
+                  <h1 className="title-section mb-2">
+                    {selectedCatalogue.title}
+                  </h1>
+                  {selectedCatalogue.description && (
+                    <p className="text-body mb-4">
+                      {selectedCatalogue.description}
+                    </p>
+                  )}
+                  {selectedCatalogue.fileUrl && (
+                    <a
+                      href={selectedCatalogue.fileUrl}
+                      download={selectedCatalogue.title}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-950 text-white rounded-md hover:bg-neutral-800 transition-colors"
+                    >
+                      <Download className="h-4 w-4" />
+                      Download Catalogue
+                      {selectedCatalogue.fileSize && (
+                        <span className="text-sm text-neutral-400 ml-1">
+                          ({selectedCatalogue.fileSize})
+                        </span>
+                      )}
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          ) : (
+            // Show default header when no catalogue or multiple catalogues selected
+            <div className="mb-8">
+              <h1 className="title-section">Our Products</h1>
+              <p className="text-body">
+                Select a catalogue to explore curated collections of premium
+                tiles and natural stones
+              </p>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Desktop Filter Sidebar */}
@@ -708,6 +933,7 @@ export default function ProductsClient({
                 <CardContent className="p-0 pr-6">
                   <CardTitle className="mb-4">Filters</CardTitle>
                   <FilterControls
+                    selectedCatalogues={selectedCatalogues}
                     selectedMainCategories={selectedMainCategories}
                     selectedDesignStyles={selectedDesignStyles}
                     selectedFinishes={selectedFinishes}
@@ -715,6 +941,7 @@ export default function ProductsClient({
                     selectedSizes={selectedSizes}
                     selectedThicknesses={selectedThicknesses}
                     selectedSpecialFeatures={selectedSpecialFeatures}
+                    catalogueOpen={catalogueOpen}
                     mainCategoryOpen={mainCategoryOpen}
                     designStyleOpen={designStyleOpen}
                     finishOpen={finishOpen}
@@ -722,6 +949,7 @@ export default function ProductsClient({
                     sizesOpen={sizesOpen}
                     thicknessesOpen={thicknessesOpen}
                     specialFeaturesOpen={specialFeaturesOpen}
+                    onCatalogueOpenChange={setCatalogueOpen}
                     onMainCategoryOpenChange={setMainCategoryOpen}
                     onDesignStyleOpenChange={setDesignStyleOpen}
                     onFinishOpenChange={setFinishOpen}
@@ -729,6 +957,7 @@ export default function ProductsClient({
                     onSizesOpenChange={setSizesOpen}
                     onThicknessesOpenChange={setThicknessesOpen}
                     onSpecialFeaturesOpenChange={setSpecialFeaturesOpen}
+                    onToggleCatalogue={toggleCatalogue}
                     onToggleMainCategory={toggleMainCategory}
                     onToggleDesignStyle={toggleDesignStyle}
                     onToggleFinish={toggleFinish}
@@ -737,6 +966,7 @@ export default function ProductsClient({
                     onToggleThickness={toggleThickness}
                     onToggleSpecialFeature={toggleSpecialFeature}
                     onClearAll={clearAllFilters}
+                    getCatalogueCount={getCatalogueCount}
                     getMainCategoryCount={getMainCategoryCount}
                     getDesignStyleCount={getDesignStyleCount}
                     getFinishCount={getFinishCount}
@@ -744,11 +974,12 @@ export default function ProductsClient({
                     getSizeCount={getSizeCount}
                     getThicknessCount={getThicknessCount}
                     getSpecialFeatureCount={getSpecialFeatureCount}
+                    catalogues={catalogues}
                     mainCategories={mainCategories}
                     designStyles={designStyles}
                     finishes={finishes}
                     applications={applications}
-                    sizes={sizes}
+                    sizes={availableSizes}
                     thicknesses={thicknesses}
                     specialFeatures={["bookmatch", "sixFace", "fullBody"]}
                   />
@@ -780,6 +1011,7 @@ export default function ProductsClient({
                     </SheetHeader>
                     <div className="mt-6">
                       <FilterControls
+                        selectedCatalogues={selectedCatalogues}
                         selectedMainCategories={selectedMainCategories}
                         selectedDesignStyles={selectedDesignStyles}
                         selectedFinishes={selectedFinishes}
@@ -787,6 +1019,7 @@ export default function ProductsClient({
                         selectedSizes={selectedSizes}
                         selectedThicknesses={selectedThicknesses}
                         selectedSpecialFeatures={selectedSpecialFeatures}
+                        catalogueOpen={catalogueOpen}
                         mainCategoryOpen={mainCategoryOpen}
                         designStyleOpen={designStyleOpen}
                         finishOpen={finishOpen}
@@ -794,6 +1027,7 @@ export default function ProductsClient({
                         sizesOpen={sizesOpen}
                         thicknessesOpen={thicknessesOpen}
                         specialFeaturesOpen={specialFeaturesOpen}
+                        onCatalogueOpenChange={setCatalogueOpen}
                         onMainCategoryOpenChange={setMainCategoryOpen}
                         onDesignStyleOpenChange={setDesignStyleOpen}
                         onFinishOpenChange={setFinishOpen}
@@ -801,6 +1035,7 @@ export default function ProductsClient({
                         onSizesOpenChange={setSizesOpen}
                         onThicknessesOpenChange={setThicknessesOpen}
                         onSpecialFeaturesOpenChange={setSpecialFeaturesOpen}
+                        onToggleCatalogue={toggleCatalogue}
                         onToggleMainCategory={toggleMainCategory}
                         onToggleDesignStyle={toggleDesignStyle}
                         onToggleFinish={toggleFinish}
@@ -809,6 +1044,7 @@ export default function ProductsClient({
                         onToggleThickness={toggleThickness}
                         onToggleSpecialFeature={toggleSpecialFeature}
                         onClearAll={clearAllFilters}
+                        getCatalogueCount={getCatalogueCount}
                         getMainCategoryCount={getMainCategoryCount}
                         getDesignStyleCount={getDesignStyleCount}
                         getFinishCount={getFinishCount}
@@ -816,11 +1052,12 @@ export default function ProductsClient({
                         getSizeCount={getSizeCount}
                         getThicknessCount={getThicknessCount}
                         getSpecialFeatureCount={getSpecialFeatureCount}
+                        catalogues={catalogues}
                         mainCategories={mainCategories}
                         designStyles={designStyles}
                         finishes={finishes}
                         applications={applications}
-                        sizes={sizes}
+                        sizes={availableSizes}
                         thicknesses={thicknesses}
                         specialFeatures={["bookmatch", "sixFace", "fullBody"]}
                         isMobile
@@ -882,7 +1119,7 @@ export default function ProductsClient({
                     Showing {(currentPage - 1) * ITEMS_PER_PAGE + 1}-
                     {Math.min(
                       currentPage * ITEMS_PER_PAGE,
-                      filteredProducts.length,
+                      filteredProducts.length
                     )}{" "}
                     of {filteredProducts.length} products
                   </p>
