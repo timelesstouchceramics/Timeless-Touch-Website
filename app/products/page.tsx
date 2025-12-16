@@ -1,8 +1,30 @@
+import { Metadata } from "next";
 import { Suspense } from "react";
 import ProductsServer from "./products-server";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent } from "@/components/ui/card";
 import ProductCardSkeleton from "@/components/ProductCardSkeleton";
+
+export const metadata: Metadata = {
+  title: "Products | Timeless Touch Ceramics",
+  description:
+    "Explore our premium collection of porcelain tiles and slabs. Stone look, marble look, modern designs, wood look, and swimming pool tiles. ISO 10545 certified quality.",
+  keywords: [
+    "porcelain tiles",
+    "ceramic tiles",
+    "marble look tiles",
+    "stone look tiles",
+    "wood look tiles",
+    "large format porcelain",
+    "swimming pool tiles",
+    "Dubai tiles",
+  ],
+  openGraph: {
+    title: "Products | Timeless Touch Ceramics",
+    description:
+      "Explore our premium collection of porcelain tiles and slabs. ISO 10545 certified quality.",
+  },
+};
 
 function ProductsPageSkeleton() {
   return (
