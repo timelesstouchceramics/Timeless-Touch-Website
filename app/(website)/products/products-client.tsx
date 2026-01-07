@@ -687,8 +687,8 @@ export default function ProductsClient({
     const sorted = [...filtered].sort((a, b) => {
       if (sortBy === "name") return a.name.localeCompare(b.name);
       if (sortBy === "name-desc") return b.name.localeCompare(a.name);
-      if (sortBy === "price-asc") return a.price - b.price;
-      if (sortBy === "price-desc") return b.price - a.price;
+      if (sortBy === "price-asc") return (a.price || 0) - (b.price || 0);
+      if (sortBy === "price-desc") return (b.price || 0) - (a.price || 0);
       if (sortBy === "newest") return b.id - a.id;
       return 0;
     });

@@ -41,10 +41,9 @@ export const products: Product[] = [
     name: "Rockstone Dark Gray",
     code: "92200",
     mainCategory: "slabs",
-    designStyle: "stone-look",
-    finish: "matt",
-    price: 48,
-    unit: "sqft",
+     designStyle: "stone-look",
+     finish: "matt",
+     unit: "sqft",
     sizes: ["1200x2400mm"],
     thickness: "9mm",
     applications: [
@@ -472,9 +471,166 @@ export const products: Product[] = [
       "/images/products/60x120cm 60x60cm Matt timelesstouchceramics_11.png",
       "/images/products/60x120cm 60x60cm Matt timelesstouchceramics_13.png",
     ],
-  },
-];
+   },
 
+   // PROCELINE TILES - Stone Look Series
+   {
+     id: 20,
+     slug: "61fb15001",
+     name: "61FB15001",
+     code: "61FB15001",
+     mainCategory: "tiles",
+     designStyle: "stone-look",
+     finish: "matt",
+     price: 0,
+     unit: "sqft",
+     sizes: ["60x120cm"],
+     thickness: "15mm",
+     fullBody: true,
+     applications: [
+       "Flooring",
+       "Wall Cladding",
+       "Indoor Applications",
+     ],
+     description:
+       "Premium full body proceline tile with natural stone texture. Ideal for residential and commercial applications with exceptional durability.",
+     images: [
+       "/pdf/61FB15001.jpg",
+       "/pdf/61FB15001-demo.jpg",
+       "/pdf/Details.jpg",
+     ],
+   },
+
+   {
+     id: 21,
+     slug: "61fb15002",
+     name: "61FB15002",
+     code: "61FB15002",
+     mainCategory: "tiles",
+     designStyle: "stone-look",
+     finish: "matt",
+     unit: "sqft",
+     sizes: ["60x120cm"],
+     thickness: "15mm",
+     fullBody: true,
+     applications: [
+       "Flooring",
+       "Wall Cladding",
+       "Indoor Applications",
+     ],
+     description:
+       "Premium full body proceline tile with natural stone texture. Ideal for residential and commercial applications with exceptional durability.",
+     images: [
+       "/pdf/61FB15002.jpg",
+       "/pdf/61FB15002-demo.jpg",
+       "/pdf/Details.jpg",
+     ],
+   },
+
+   {
+     id: 22,
+     slug: "61fb15003",
+     name: "61FB15003",
+     code: "61FB15003",
+     mainCategory: "tiles",
+     designStyle: "stone-look",
+     finish: "matt",
+     unit: "sqft",
+     sizes: ["60x120cm"],
+     thickness: "15mm",
+     fullBody: true,
+     applications: [
+       "Flooring",
+       "Wall Cladding",
+       "Indoor Applications",
+     ],
+     description:
+       "Premium full body proceline tile with natural stone texture. Ideal for residential and commercial applications with exceptional durability.",
+     images: [
+       "/pdf/61FB15003.jpg",
+       "/pdf/61FB15003-demo.jpg",
+       "/pdf/Details.jpg",
+     ],
+   },
+
+   {
+     id: 23,
+     slug: "61fb15004",
+     name: "61FB15004",
+     code: "61FB15004",
+     mainCategory: "tiles",
+     designStyle: "stone-look",
+     finish: "matt",
+     unit: "sqft",
+     sizes: ["60x120cm"],
+     thickness: "15mm",
+     fullBody: true,
+     applications: [
+       "Flooring",
+       "Wall Cladding",
+       "Indoor Applications",
+     ],
+     description:
+       "Premium full body proceline tile with natural stone texture. Ideal for residential and commercial applications with exceptional durability.",
+     images: [
+       "/pdf/61FB15004.jpg",
+       "/pdf/61FB15004-demo.jpg",
+       "/pdf/Details.jpg",
+     ],
+   },
+
+   {
+     id: 24,
+     slug: "61fb15005",
+     name: "61FB15005",
+     code: "61FB15005",
+     mainCategory: "tiles",
+     designStyle: "stone-look",
+     finish: "matt",
+     unit: "sqft",
+     sizes: ["60x120cm"],
+     thickness: "15mm",
+     fullBody: true,
+     applications: [
+       "Flooring",
+       "Wall Cladding",
+       "Indoor Applications",
+     ],
+     description:
+       "Premium full body proceline tile with natural stone texture. Ideal for residential and commercial applications with exceptional durability.",
+     images: [
+       "/pdf/61FB15005.jpg",
+       "/pdf/61FB15005-demo.jpg",
+       "/pdf/Details.jpg",
+     ],
+   },
+
+   {
+     id: 25,
+     slug: "61fb15006",
+     name: "61FB15006",
+     code: "61FB15006",
+     mainCategory: "tiles",
+     designStyle: "stone-look",
+     finish: "matt",
+     unit: "sqft",
+     sizes: ["60x120cm"],
+     thickness: "15mm",
+     fullBody: true,
+     applications: [
+       "Flooring",
+       "Wall Cladding",
+       "Indoor Applications",
+     ],
+     description:
+       "Premium full body proceline tile with natural stone texture. Ideal for residential and commercial applications with exceptional durability.",
+     images: [
+       "/pdf/61FB15006.jpg",
+       "/pdf/61FB15006-demo.jpg",
+       "/pdf/Details.jpg",
+     ],
+   },
+ ];
 // Main product categories
 export const mainCategories = ["slabs", "tiles", "pool-tiles"];
 

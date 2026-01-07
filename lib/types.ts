@@ -7,7 +7,7 @@ export interface Product {
   // Design style sub-category: stone-look, marble-look, modern-look, wood-look, decorative
   designStyle: string;
   finish: string;
-  price: number;
+  price?: number;
   unit: string;
   images: string[];
   code?: string;
