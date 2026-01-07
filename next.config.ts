@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "images.ctfassets.net",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        pathname: "/**",
+      },
     ],
   },
 };

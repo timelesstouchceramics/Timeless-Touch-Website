@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getCatalogues } from "@/lib/api/products";
+import { getCatalogues } from "@/lib/api";
 import CataloguesClient from "./catalogues-client";
 
 export const metadata: Metadata = {

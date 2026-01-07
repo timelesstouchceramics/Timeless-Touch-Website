@@ -1,4 +1,4 @@
-import { getCollections, getCatalogues } from "@/lib/api/products";
+import { getCollections, getCatalogues } from "@/lib/api";
 import Navigation from "./Navigation";
 
 export default async function NavigationServer() {

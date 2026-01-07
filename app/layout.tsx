@@ -1,12 +1,7 @@
-import NavigationServer from "@/components/NavigationServer";
 import "./globals.css";
-import { Providers } from "@/components/providers";
-import ScrollToTop from "@/components/ScrollToTop";
 import { Metadata } from "next";
 import Script from "next/script";
-
 import { Geist, Inter } from "next/font/google";
-import Footer from "@/components/Footer";
 
 const GTM_ID = "GTM-M2XN8HTP";
 
@@ -61,10 +56,7 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <NavigationServer />
-        <Providers>{children}</Providers>
-        <Footer />
-        <ScrollToTop />
+        {children}
       </body>
     </html>
   );

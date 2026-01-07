@@ -1,4 +1,4 @@
-import { getCatalogues } from "@/lib/api/products";
+import { getCatalogues } from "@/lib/api";
 import CataloguesDropdown from "./CataloguesDropdown";
 
 export default async function CataloguesDropdownServer({

@@ -7,7 +7,7 @@ import {
   getSizes,
   getThicknesses,
   getCatalogues,
-} from "@/lib/api/products";
+} from "@/lib/api";
 import ProductsClient from "./products-client";
 
 export default async function ProductsServer() {

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getProductBySlug, getProducts } from "@/lib/api/products";
+import { getProductBySlug, getProducts } from "@/lib/api";
 import ProductDetailClient from "./product-detail-client";
 
 interface ProductDetailPageProps {
