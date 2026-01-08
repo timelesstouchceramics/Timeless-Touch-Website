@@ -152,7 +152,14 @@ export const product = defineType({
     select: {
       title: "name",
       subtitle: "code",
-      media: "images.0",
+      image: "images.0.asset",
+    },
+    prepare({ title, subtitle, image }) {
+      return {
+        title,
+        subtitle,
+        media: image,
+      };
     },
   },
 });
