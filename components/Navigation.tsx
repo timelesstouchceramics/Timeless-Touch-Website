@@ -53,7 +53,7 @@ const Navigation = ({ collections, catalogues }: NavigationProps) => {
     >
       <div className="container">
         <div className="flex items-center justify-between py-4">
-          <Logo variant="light" className="w-auto h-12" />
+          <Logo variant="light" className="w-auto h-12" sizing="height" />
 
           <div
             className="hidden md:flex items-center gap-6 flex-1 justify-center relative"

@@ -7,23 +7,26 @@ import LogoImageLight from "@/public/logo/logo-light.png";
 interface LogoProps {
   className?: string;
   variant?: "light" | "dark";
+  sizing?: "width" | "height";
 }
 
-export default function Logo({ className, variant = "light" }: LogoProps) {
+export default function Logo({ className, variant = "light", sizing = "width" }: LogoProps) {
+  const imageClassName = sizing === "height" ? "h-full w-auto" : "w-full h-auto";
+
   return (
     <Link href="/" className={cn("block", className)}>
       {variant === "light" ? (
         <Image
           src={LogoImageLight}
           alt="Timeless Touch Ceramics - Logo"
-          className="h-full w-auto"
+          className={imageClassName}
           priority
         />
       ) : (
         <Image
           src={LogoImageDark}
           alt="Timeless Touch Ceramics - Logo"
-          className="h-full w-auto"
+          className={imageClassName}
           priority
         />
       )}
