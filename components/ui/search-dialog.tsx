@@ -139,7 +139,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
               <CommandGroup heading="Products">
                 {products.map((product) => (
                   <CommandItem
-                    key={product.id}
+                    key={product.slug}
                     value={getSearchValue(product)}
                     onSelect={() => handleSelect(product)}
                     className="flex gap-3 p-3 cursor-pointer aria-selected:bg-neutral-100"
@@ -151,8 +151,9 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                         <Image
                           src={product.images[0]}
                           alt={product.name}
-                          fill
-                          className="object-cover"
+                          className="object-cover absolute inset-0 w-full h-full"
+                          width={128}
+                          height={128}
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
