@@ -11,19 +11,19 @@ interface LogoProps {
 
 export default function Logo({ className, variant = "light" }: LogoProps) {
   return (
-    <Link href="/" className={cn("flex flex-col", className)}>
+    <Link href="/" className={cn("block", className)}>
       {variant === "light" ? (
         <Image
           src={LogoImageLight}
           alt="Timeless Touch Ceramics - Logo"
-          className="w-full h-full"
+          className="h-full w-auto"
           priority
         />
       ) : (
         <Image
           src={LogoImageDark}
           alt="Timeless Touch Ceramics - Logo"
-          className={cn("w-full h-full")}
+          className="h-full w-auto"
           priority
         />
       )}
